@@ -1,0 +1,262 @@
+<div class="overview-page">
+  <div class="row">
+    <div class="col-lg-12">
+      <h3 class="mb-4">Qube Protocol Analytics</h3>
+      <div class="search-bg mb-3">
+        <div class="form-group has-search mb-0">          
+          <input type="text" class="form-control" placeholder="Search" (keyup)="filterFnc($event.target.value)">
+          <span class="fa fa-search form-control-feedback"></span>
+        </div>
+      </div>
+      <div class="price-value-div mb-3">
+        <!-- <div class="trans-div">
+          <span>Transactions (24hr):</span>
+          <span class="val">12,347</span>
+        </div>
+        <div class="trans-div">
+          <span>QUBE Price:</span>
+          <span class="val">$572.07</span>
+        </div>
+        <div class="trans-div">
+          <span>Pairs:</span>
+          <span class="val">{{pairsSno.totalItems}}</span>
+        </div>
+        <div class="trans-div">
+          <span>Fees (24hr):</span>
+          <span class="val">$75,524</span>
+        </div> -->
+      </div>
+
+      <div class="row graph-div mb-3">
+        <div class="col-lg-6 pr-lg-0">
+          <div id="highcharts" style=" max-width: 450px; height: 280px; margin: 0 auto; border-radius: 5px;"></div>
+          <!-- <img src="assets/images/graph.png"> -->
+        </div>
+        <div class="col-lg-6 pl-lg-0">
+          <div id="highcharts1" style="max-width: 450px; height: 280px; margin: 0 auto; border-radius: 5px;"></div>
+          <!-- <img src="assets/images/graph1.png"> -->
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-lg-12">
+          <div class="title-div">
+            <h3>Top Tokens</h3>
+            <button class="btn see-all-btn"  [routerLink]="'/toptokens'">See All</button>
+          </div>
+          <div class="top-tokens-table">            
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <!-- <th>S.No</th> -->
+                  <th>Name</th>
+                  <th>SYMBOL</th>
+                  <th>Liquidity<img src="assets/images/arrow_down.png" class="ml-2"></th>
+                  <th>VOLUME (24hr)</th>
+                  <th>VOLUME (7D)</th>
+                  <th>price</th>
+                  <!-- <th>Price change (24hr)</th> -->
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of tokenArray | paginate: {id:'paginationToken',itemsPerPage:tokensSno.itemsPerPage,currentPage: tokensSno.currentPage,totalItems: tokensSno.totalItems};let i=index">
+                      <!-- <td>{{tokensSno.itemsPerPage *(tokensSno.currentPage-1)+i+1}}</td> -->
+                      <td><img src="{{item.currency_i}}" class="mr-2 coinimg"><span class="name cur-pointer" [routerLink]="'/coinview/'+item.currency">{{item.currency_name}}</span></td>
+                      <td>{{item.currency}}</td>
+                      <td>{{item.currency_liqudity  | number:'1.8-8'}}</td>
+                      <td>{{item.currency_liqudity  | number:'1.8-8'}}</td>
+                      <td>{{item.currency_liqudity  | number:'1.8-8'}}</td>
+                      <td>${{item.USDprice| number:'1.8-8'}}</td>
+                      <!-- <td><span class="greencol">+5.24%</span></td> -->
+                    </tr>
+                    <tr *ngIf="tokensSno.totalItems == 0">
+                      <td colspan="6" class="text-center">No records found</td>
+                    </tr>
+                </tbody>              
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-lg-12">
+          <div class="title-div">
+            <h3>Top Pairs</h3>
+            <button class="btn see-all-btn" [routerLink]="'/toppairs'">See All</button>
+          </div>
+          <div class="top-tokens-table">            
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <!-- <th>S.No</th> -->
+                  <th>Name</th>
+                  <th>Liquidity<img src="assets/images/arrow_down.png" class="ml-2"></th>
+                  <th>VOLUME (24hrs)</th>
+                  <th>VOLUME (7d)</th>
+                  <th>FEES (24hrs)</th>
+                  <!-- <th>1y Fees / Liquidity<img src="assets/images/info-big.png" class="ml-2"></th> -->
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of pairArray | paginate: {id:'paginationPair',itemsPerPage:pairsSno.itemsPerPage,currentPage: pairsSno.currentPage,totalItems: pairsSno.totalItems};let i=index">
+                      <!-- <td>{{pairsSno.itemsPerPage *(pairsSno.currentPage-1)+i+1}}</td> -->
+                      <td><img src="{{item.fromCurrency_i}}" class="coinimg"><img src="{{item.toCurrency_i}}" class="mr-2 pair-img-first coinimg"><span class="name cur-pointer"  [routerLink]="'/pairview/'+item.pair_address">{{item.pair}}</span></td>
+                     <!--  <td><img src="assets/images/xmr.png" class="mr-2"><img src="assets/images/pet.png" class="mr-2"><span class="name">{{item.pair}}</span></td> -->
+                      <td>{{item.liqudity_value | number:'1.8-8'}}</td>
+                      <td>{{item.liquidityHr | number:'1.8-8'}}</td>
+                      <td>{{item.liquidityHr | number:'1.8-8'}}</td>
+                      <td>$572.07</td>
+                      <!-- <td><span class="greencol">+5.24%</span></td> -->
+                    </tr>
+                     <tr *ngIf="pairsSno.totalItems == 0">
+                      <td colspan="4" class="text-center">No records found</td>
+                    </tr>
+                </tbody>              
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col-lg-12">
+          <div class="title-div">
+            <h3>Transactions</h3>
+            <button class="btn see-all-btn">See All</button>
+          </div>
+          <tabset class="trans-tab">
+            <tab tab1 heading="All" id="first">
+              <div class="top-tokens-table">            
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <!-- <th>S.No</th> -->
+                      <th>Name</th>
+                      <!-- <th>Total value</th> -->
+                      <th>TOKEN AMOUNT</th>
+                      <th>TOKEN AMOUNT</th>
+                      <th>Account</th>
+                      <th>TIME<img src="assets/images/arrow_down.png" class="ml-2"></th>
+                      <th>TOTAL VALUE</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of allArray | paginate:{id: 'paginationAll',itemsPerPage:allSno.itemsPerPage,currentPage: allSno.currentPage,totalItems: allSno.totalItems};let i=index">
+                        <!-- <td>{{allSno.itemsPerPage *(allSno.currentPage-1)+i+1}}</td> -->
+                        <td><span class="name">{{item.type}}</span></td>
+                        <!-- <td>$15,887</td> -->
+                        <td>{{item.from_amount}} {{item.fromCurrency}}</td>
+                        <td>{{item.to_amount}} {{item.toCurrency}}</td>
+                        <td><span class="name cur-pointer" (click)="openaddress_explorer(item.user_address)">{{item.user_address.substring(0, 6)}}...{{item.user_address.substring(item.user_address.length-4)}}</span></td>
+                        <td>{{item.created_date | timeago}}</td>
+                        <td>$15,887</td>
+                      </tr>
+                      <tr *ngIf="allSno.totalItems == 0">
+                        <td colspan="6" class="text-center">No records found</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </tab>          
+            <tab tab2 heading="Swaps" id="second">
+              <div class="top-tokens-table">            
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <!-- <th>S.No</th> -->
+                      <th>Name</th>
+                      <!-- <th>Total value</th> -->
+                      <th>TOKEN AMOUNT</th>
+                      <th>TOKEN AMOUNT</th>
+                      <th>Account</th>
+                      <th>TIME<img src="assets/images/arrow_down.png" class="ml-2"></th>
+                      <th>Total value</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of swapArray | paginate:{id: 'paginationSwap',itemsPerPage:swapSno.itemsPerPage,currentPage: swapSno.currentPage,totalItems: swapSno.totalItems};let i=index">
+                        <!-- <td>{{swapSno.itemsPerPage *(swapSno.currentPage-1)+i+1}}</td> -->
+                        <td><span class="name">Swap {{item.Records[0].fromCurrency}} for {{item.Records[0].toCurrency}}</span></td>
+                        <!-- <td>$15,887</td> -->
+                        <td>{{item.amountETH}} {{item.Records[0].fromCurrency}}</td>
+                        <td>{{item.amountToken}} {{item.Records[0].toCurrency}}</td>
+                        <td><span class="name cur-pointer" (click)="openaddress_explorer(item.user_address)">{{item.userAddress.substring(0, 6)}}...{{item.userAddress.substring(item.userAddress.length-4)}}</span></td>
+                        <td>{{item.created_date | timeago}}</td>
+                        <td>$15,887</td>
+                      </tr>
+                      <tr *ngIf="swapSno.totalItems == 0">
+                        <td colspan="6" class="text-center">No records found</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </tab>
+            <tab tab3 heading="Adds" id="third">
+              <div class="top-tokens-table">            
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <!-- <th>S.No</th> -->
+                      <th>Name</th>
+                      <!-- <th>Total value</th> -->
+                      <th>TOKEN AMOUNT</th>
+                      <th>TOKEN AMOUNT</th>
+                      <th>Account</th>
+                      <th>TIME<img src="assets/images/arrow_down.png" class="ml-2"></th>
+                      <th>Total value</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of addArray | paginate: {id: 'paginationAdds',itemsPerPage:addSno.itemsPerPage,currentPage: addSno.currentPage,totalItems: addSno.totalItems};let i=index">
+                        <!-- <td>{{addSno.itemsPerPage *(addSno.currentPage-1)+i+1}}</td> -->
+                        <td><span class="name">Add {{item.fromCurrency}} and {{item.toCurrency}}</span></td>
+                        <!-- <td>$15,887</td> -->
+                        <td>{{item.from_amount}} {{item.fromCurrency}}</td>
+                        <td>{{item.to_amount}} {{item.toCurrency}}</td>
+                        <td><span class="name cur-pointer" (click)="openaddress_explorer(item.user_address)">{{item.user_address.substring(0, 6)}}...{{item.user_address.substring(item.user_address.length-4)}}</span></td>
+                        <td>{{item.created_date | timeago}}</td>
+                        <td>$15,887</td>
+                      </tr>
+                      <tr *ngIf="addSno.totalItems == 0">
+                        <td colspan="6" class="text-center">No records found</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </tab>
+            <tab tab4 heading="Removes" id="fourth">
+              <div class="top-tokens-table">            
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <!-- <th>S.No</th> -->
+                      <th>Name</th>
+                      <!-- <th>Total value</th> -->
+                      <th>TOKEN AMOUNT</th>
+                      <th>TOKEN AMOUNT</th>
+                      <th>Account</th>
+                      <th>TIME<img src="assets/images/arrow_down.png" class="ml-2"></th>
+                      <th>Total value</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of removeArray | paginate: {_id:'paginationRemove',itemsPerPage:removeSno.itemsPerPage,currentPage: removeSno.currentPage,totalItems: removeSno.totalItems};let j=index">
+                      <!-- <td>{{removeSno.itemsPerPage *(removeSno.currentPage-1)+j+1}}</td> -->
+                      <td><span class="name">Remove {{item.fromCurrency}} and {{item.toCurrency}}</span></td>
+                      <!-- <td>$15,887</td> -->
+                      <td>{{item.from_amount}} {{item.fromCurrency}}</td>
+                      <td>{{item.to_amount}} {{item.toCurrency}}</td>
+                      <td><span class="name cur-pointer" (click)="openaddress_explorer(item.user_address)">{{item.user_address.substring(0, 6)}}...{{item.user_address.substring(item.user_address.length-4)}}</span></td>
+                      <td>{{item.created_date | timeago}}</td>
+                      <td>$15,887</td>
+                    </tr>
+                    <tr *ngIf="removeSno.totalItems == 0">
+                      <td colspan="6" class="text-center">No records found</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

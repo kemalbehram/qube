@@ -1,0 +1,284 @@
+<div class="pairview-page-div">
+  <div class="row mb-4">
+    <div class="col-lg-12">
+      <div class="title-div mb-3">
+        <div class="left-div">
+          <span>Pairs</span>
+          <img src="assets/images/right-arrow.png" class="mx-2">
+          <span>{{pairHistory.pair}} PAIR</span>
+        </div>
+        <div class="search-bg">
+          <div class="form-group has-search mb-0">          
+            <input type="text" class="form-control" placeholder="Search">
+            <span class="fa fa-search form-control-feedback"></span>
+          </div>
+        </div>
+      </div>
+      <div class="pair-val-div">
+        <div class="ldiv mb-3">
+          <h3> <img src="{{pairHistory.fromCurrency_i}}" class="coinimg"><img src="{{pairHistory.toCurrency_i}}" class="mr-2 pair-img-first coinimg">{{pairHistory.pair}} PAIR  <img *ngIf="!Favtoken" class="cur-pointer" src="assets/images/ribbon-side.png" (click)="Favsection('add')"> <img  class="cur-pointer" *ngIf="Favtoken" src="assets/images/ribbon-green.png" (click)="Favsection('remove')"></h3>
+          <div class="xmr-pet-div">
+            <div class="xmr-val mb-2">
+              <img src="{{pairHistory.fromCurrency_i}}" class="coinimg"><span class="mx-3">1 {{pairHistory.fromCurrency}} = </span><span>{{poolDetails.Equalto_amount}}{{pairHistory.toCurrency}} (${{pairHistory.Records.USDprice | number:'1.6-6'}})</span>
+            </div>
+            <div class="xmr-val ml-2 mb-2 ml-mob-0">
+              <img src="{{pairHistory.toCurrency_i}}" class="coinimg"><span class="mx-3">1 {{pairHistory.toCurrency}} = </span><span>{{poolDetails.Equalfrom_amount}} {{pairHistory.fromCurrency}} (${{pairHistory.Recordsto.USDprice | number:'1.6-6'}})</span>
+            </div>
+          </div>
+        </div>
+        <div class="rdiv mb-3">
+          <!-- <button class="btn-add-liq w50"><img src="assets/images/plus-green.png"></button> -->
+          <button class="btn-add-liq mx-2" [routerLink]="'/pool'">
+          <img src="assets/images/plus-green.png" class="mr-2">Add Liquidity</button>
+          <button class="btn-trade" [routerLink]="'/swap'">Trade</button>
+        </div>
+      </div>
+      <div class="pair-stats-div">
+        <h3>Pair Status</h3>
+        <div class="row">
+          <div class="col-lg-4 mb-3 mob-padd-0">
+            <div class="liq-div p-3">
+              <div class="liq-det-div mb-3">
+                <div class="ldiv">
+                  <p>Total Liquidity</p>
+                  <h5>{{poolDetails.totalShare | number:'1.8-8'}}</h5>
+                </div>
+                <!-- <div class="rdiv">
+                  <span class="grncol">+3.15%</span>
+                </div> -->
+              </div>
+              <div class="liq-det-div mb-3">
+                <div class="ldiv">
+                  <p>VOLUME (24Hrs)</p>
+                  <h5>{{pairHistory.liquidityHr | number:'1.8-8'}}</h5>
+                </div>
+                <!-- <div class="rdiv">
+                  <span class="grncol">+8.47%</span>
+                </div> -->
+              </div>
+              <div class="liq-det-div mb-3">
+                <div class="ldiv">
+                  <p>VOLUME (7D)</p>
+                  <h5>{{pairHistory.liquidityHr | number:'1.8-8'}}</h5>
+                </div>
+                <!-- <div class="rdiv">
+                  <span class="redcol">-2.55%</span>
+                </div> -->
+              </div>
+              <div class="liq-det-div">
+                <div class="ldiv">
+                  <p>Pooled Tokens</p>
+                  <h6><img src="{{pairHistory.fromCurrency_i}}" class="mr-2 coinimg">{{this.poolDetails.fromCurrency | number:'1.8-8'}} {{pairHistory.fromCurrency}}</h6>
+                  <h6><img src="{{pairHistory.toCurrency_i}}" class="mr-2 coinimg">{{this.poolDetails.toCurrency | number:'1.8-8'}} {{pairHistory.toCurrency}}</h6>
+                </div>                
+              </div>
+            </div>            
+          </div>
+          <div class="col-lg-8 mb-3 pl-lg-0 mob-padd-0">
+            <!-- <img src="assets/images/graph3.png" class="liq-img"> -->
+          <div id="highcharts" style=" max-width: 643px; height: 385px; margin: 0 auto; border-radius: 5px;"></div>
+          <!-- <img src="assets/images/graph.png"> -->
+          </div>
+        </div>        
+      </div>
+      <div class="row mb-4">
+        <div class="col-lg-12">        
+          <h3 class="trans">Transactions</h3>         
+          <tabset class="trans-tab">
+            <tab tab1 heading="All" id="first">
+              <div class="top-tokens-table">            
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <!-- <th>S.No</th> -->
+                      <th>Name</th>
+                      <!-- <th>Total value</th> -->
+                      <th>TOKEN AMOUNT</th>
+                      <th>TOKEN AMOUNT</th>
+                      <th>Account</th>
+                      <th>TIME<img src="assets/images/arrow_down.png" class="ml-2"></th>
+                      <th>TOTAL VALUE</th>
+                    </thead>
+                    <tbody *ngIf="allArray.length > 0">
+                    <tr *ngFor="let item of allArray | paginate:{id: 'paginationAll',itemsPerPage:allSno.itemsPerPage,currentPage: allSno.currentPage,totalItems: allSno.totalItems};let i=index">
+                        <!-- <td>{{allSno.itemsPerPage *(allSno.currentPage-1)+i+1}}</td> -->
+                        <td><span class="name">{{item.type}}</span></td>
+                        <!-- <td>$15,887</td> -->
+                        <td>{{item.from_amount}} {{item.fromCurrency}}</td>
+                        <td>{{item.to_amount}} {{item.toCurrency}}</td>
+                        <td><span class="name cur-pointer" (click)="openaddress_explorer(item.user_address)">{{item.user_address.substring(0, 6)}}...{{item.user_address.substring(item.user_address.length-4)}}</span></td>
+                        <td>{{item.created_date | timeago}}</td>
+                        <td>$15,887</td>
+                      </tr>
+                    </tbody>
+                    <tbody *ngIf="allArray.length == 0">
+                      <tr >
+                        <td colspan="6" class="text-center">No records found</td>
+                      </tr>
+                  </tbody>
+                  </table>
+                  <div class="d-flex justify-content-center my-4">
+                    <div class="pagination-div">
+                      <pagination-controls id="paginationAll" class="my-pagination" (pageChange)="allpageChanged($event)"></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>          
+            <tab tab2 heading="Swaps" id="second">
+              <div class="top-tokens-table">            
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <!-- <th>S.No</th> -->
+                      <th>Name</th>
+                      <!-- <th>Total value</th> -->
+                      <th>From amount</th>
+                      <th>To amount</th>
+                      <th>Account</th>
+                      <th>TIME<img src="assets/images/arrow_down.png" class="ml-2"></th>
+                      <th>TOTAL VALUE</th>
+                    </thead>
+                    <tbody *ngIf="swapArray.length > 0">
+                      <tr *ngFor="let item of swapArray | paginate:{id: 'paginationSwap',itemsPerPage:swapSno.itemsPerPage,currentPage: swapSno.currentPage,totalItems: swapSno.totalItems};let i=index">
+                        <!-- <td>{{swapSno.itemsPerPage *(swapSno.currentPage-1)+i+1}}</td> -->
+                        <td><span class="name">Swap {{item.Records[0].fromCurrency}} for {{item.Records[0].toCurrency}}</span></td>
+                        <!-- <td>$15,887</td> -->
+                        <td>{{item.amountETH}} {{item.Records[0].fromCurrency}}</td>
+                        <td>{{item.amountToken}} {{item.Records[0].toCurrency}}</td>
+                        <td><span class="name cur-pointer" (click)="openaddress_explorer(item.user_address)">{{item.userAddress.substring(0, 6)}}...{{item.userAddress.substring(item.userAddress.length-4)}}</span></td>
+                        <td>{{item.created_date | timeago}}</td>
+                        <td>$15,887</td>
+                      </tr>
+                    </tbody>
+                      <tbody *ngIf="swapArray.length == 0">
+                      <tr >
+                        <td colspan="5" class="text-center">No records found</td>
+                      </tr>
+                  </tbody>
+                  </table>
+                  <div class="d-flex justify-content-center my-4">
+                  <div class="pagination-div">
+                    <pagination-controls id="paginationSwap" class="my-pagination" (pageChange)="swappageChanged($event)"></pagination-controls>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </tab>
+            <tab tab3 heading="Adds" id="third">
+              <div class="top-tokens-table">            
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <!-- <th>S.No</th> -->
+                      <th>Name</th>
+                      <!-- <th>Total value</th> -->
+                      <th>From amount</th>
+                      <th>To amount</th>
+                      <th>Account</th>
+                      <th>TIME<img src="assets/images/arrow_down.png" class="ml-2"></th>
+                      <th>TOTAL VALUE</th>
+                    </thead>
+                     <tbody *ngIf="addArray.length > 0">
+                     <tr *ngFor="let item of addArray | paginate: {id: 'paginationAdds',itemsPerPage:addSno.itemsPerPage,currentPage: addSno.currentPage,totalItems: addSno.totalItems};let i=index">
+                        <!-- <td>{{addSno.itemsPerPage *(addSno.currentPage-1)+i+1}}</td> -->
+                        <td><span class="name">Add {{item.fromCurrency}} and {{item.toCurrency}}</span></td>
+                        <!-- <td>$15,887</td> -->
+                        <td>{{item.from_amount}} {{item.fromCurrency}}</td>
+                        <td>{{item.to_amount}} {{item.toCurrency}}</td>
+                        <td><span class="name cur-pointer" (click)="openaddress_explorer(item.user_address)">{{item.user_address.substring(0, 6)}}...{{item.user_address.substring(item.user_address.length-4)}}</span></td>
+                        <td>{{item.created_date | timeago}}</td>
+                        <td>$15,887</td>
+                      </tr>
+                    </tbody>
+                    <tbody *ngIf="addArray.length == 0">
+                      <tr>
+                        <td colspan="5" class="text-center">No records found</td>
+                      </tr>
+                  </tbody>
+                  </table>
+                  <div class="d-flex justify-content-center my-4">
+                    <div class="pagination-div">
+                      <pagination-controls id="paginationAdds" class="my-pagination" (pageChange)="addpageChanged($event)"></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+            <tab tab4 heading="Removes" id="fourth">
+              <div class="top-tokens-table">            
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <!-- <th>S.No</th> -->
+                      <th>Name</th>
+                      <!-- <th>Total value</th> -->
+                      <th>From amount</th>
+                      <th>To amount</th>
+                      <th>Account</th>
+                      <th>TIME<img src="assets/images/arrow_down.png" class="ml-2"></th>
+                      <th>TOTAL VALUE</th>
+                    </thead>
+                    <tbody *ngIf="removeArray.length > 0">
+                    <tr *ngFor="let item of removeArray | paginate: {id: 'paginationRemove1',itemsPerPage:removeSno.itemsPerPage,currentPage: removeSno.currentPage,totalItems: removeSno.totalItems};let i=index">
+                      <!-- <td>{{removeSno.itemsPerPage *(removeSno.currentPage-1)+j+1}}</td> -->
+                      <td><span class="name">Remove {{item.fromCurrency}} and {{item.toCurrency}}</span></td>
+                      <!-- <td>$15,887</td> -->
+                      <td>{{item.from_amount}} {{item.fromCurrency}}</td>
+                      <td>{{item.to_amount}} {{item.toCurrency}}</td>
+                      <td><span class="name cur-pointer" (click)="openaddress_explorer(item.user_address)">{{item.user_address.substring(0, 6)}}...{{item.user_address.substring(item.user_address.length-4)}}</span></td>
+                      <td>{{item.created_date | timeago}}</td>
+                      <td>$15,887</td>
+                    </tr>
+                  </tbody>
+                  <tbody *ngIf="removeArray.length == 0">
+                    <tr>
+                      <td colspan="5" class="text-center">No records found</td>
+                    </tr>
+                  </tbody>
+                  </table>
+                  <div class="d-flex justify-content-center my-4">
+                    <div class="pagination-div">
+                      <pagination-controls id="paginationRemove1" class="my-pagination1" (pageChange)="removepageChanged($event)"></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tab>
+          </tabset>
+        </div>
+       </div>
+       <div class="row mb-4">
+        <div class="col-lg-12 mob-padd-0">
+          <h3 class="pair-info">Pair Information</h3>
+          <div class="row pair-info-div p-3 mx-0">
+            <div class="col-md-3 col-6">
+              <div class="com-div">
+                <p>Pair Name</p>
+                <h4 class="grncol">{{pairHistory.pair}}</h4>
+              </div>
+            </div>
+            <div class="col-md-3 col-6" *ngIf="pairAddress">
+              <div class="com-div">
+                <p>Pair Address</p>
+                <h4>{{pairAddress.substring(0, 6)}}...{{pairAddress.substring(pairAddress.length-4)}}<img src="assets/images/copy.png" (click)="copyvalue('pair')" class="ml-2 cur-pointer"></h4>
+              </div>
+           </div>
+           <div class="col-md-3 col-6" *ngIf="pairHistory.fromCurrency_address">
+            <div class="com-div">
+              <p>{{pairHistory.fromCurrency}} Address</p>
+              <h4>{{pairHistory.fromCurrency_address.substring(0, 6)}}...{{pairHistory.fromCurrency_address.substring(pairHistory.fromCurrency_address.length-4)}}<img src="assets/images/copy.png" (click)="copyvalue('fromC')" class="ml-2 cur-pointer"></h4>
+            </div>
+           </div>
+           <div class="col-md-3 col-6" *ngIf="pairHistory.toCurrency_address">
+            <div class="com-div">
+              <p>{{pairHistory.toCurrency}} Address</p>
+              <h4>{{pairHistory.toCurrency_address.substring(0, 6)}}...{{pairHistory.toCurrency_address.substring(pairHistory.toCurrency_address.length-4)}}<img src="assets/images/copy.png" (click)="copyvalue('toC')" class="ml-2 cur-pointer"></h4>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

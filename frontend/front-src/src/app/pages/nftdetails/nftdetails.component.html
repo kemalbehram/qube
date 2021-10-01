@@ -1,0 +1,375 @@
+<div class="container">
+  <div class="nft-det-page py-3">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3>NFT Supermarket</h3>
+        <p>A market made for NFT, where everything is special!</p>
+      </div>
+    </div>
+    <div class="search-bg-mob mb-3">
+      <div class="ldiv">
+        <div class="form-group has-search mb-3">          
+          <input type="text" class="form-control" placeholder="Search NFT artwork...">
+          <span class="fa fa-search form-control-feedback"></span>
+        </div>
+        <div class="d-flex justify-content-between align-items-center pointer"  (click)="downSec()">
+          <span>874 965 artworks on market</span>
+          <img src="assets/images/down-arrow-green-big.png">
+        </div>
+        <div class="art-work-div-mob-search mt-4" *ngIf="downDrop">
+          <div class="featured-artists-div mb-4">
+            <h4>Featured Artists</h4>
+            <div class="row">
+              <div class="col-6">
+                <a href="#"><span>SWOG</span></a>
+                <a href="#"><span>CoralCorp</span></a>
+                <a href="#"><span>Cookie Munster</span></a>
+                <a href="#"><span>srnArtGallery</span></a>
+              </div>
+              <div class="col-6 pl-0">
+                <a href="#"><span>Chiara Magni</span></a>
+                <a href="#"><span>Hamid</span></a>
+                <a href="#"><span>Muwasha iProjects</span></a>
+                <a href="#"><span>Irene Cerezo</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="featured-artists-div mb-4">
+            <h4>Digital Artworks</h4>
+            <div class="row">
+              <div class="col-6">
+                <a href="#"><span>BSC Artists</span></a>
+                <a href="#"><span>Musk&Doge</span></a>
+                <a href="#"><span>1inch&BAKE</span></a>
+                <a href="#"><span>BAKE&Banana</span></a>
+              </div>
+              <div class="col-6 pl-0">
+                <a href="#"><span>BTC Artworks</span></a>
+                <a href="#"><span>Seascape</span></a>
+                <a href="#"><span>Binance NFT</span></a>
+                <a href="#"><span>TKO NFT</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="featured-artists-div">
+            <h4>Gamification NFT</h4>
+            <div class="row">
+              <div class="col-6">
+                <a href="#"><span>Bakery Combos</span></a>
+                <a href="#"><span>BakerySoccer</span></a>
+                <a href="#"><span>Battle Pets</span></a>
+                <a href="#"><span>Weapons</span></a>
+              </div>
+              <div class="col-6 pl-0">
+                <a href="#"><span>Pet Eggs</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="art-work-div-mob">
+      <button class="my-art-works-btn mb-3"><img src="assets/images/user-small.png" class="mr-2">My artworks</button>
+      <button class="mint-art-works-btn mb-4">Mint artworks</button>
+    </div>
+    <div class="row mb-3">
+      <div class="col-lg-3 pr-lg-0">
+        <div class="art-work-div px-3 py-4">
+          <button class="my-art-works-btn mb-3"><img src="assets/images/user-small.png" class="mr-2">My artworks</button>
+          <button class="mint-art-works-btn mb-4">Mint artworks</button>
+          <div class="featured-artists-div mb-4">
+            <h4>Featured Artists</h4>
+            <div class="row">
+              <div class="col-6">
+                <a href="#"><span>SWOG</span></a>
+                <a href="#"><span>CoralCorp</span></a>
+                <a href="#"><span>Cookie Munster</span></a>
+                <a href="#"><span>srnArtGallery</span></a>
+              </div>
+              <div class="col-6 pl-0">
+                <a href="#"><span>Chiara Magni</span></a>
+                <a href="#"><span>Hamid</span></a>
+                <a href="#"><span>Muwasha iProjects</span></a>
+                <a href="#"><span>Irene Cerezo</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="featured-artists-div mb-4">
+            <h4>Digital Artworks</h4>
+            <div class="row">
+              <div class="col-6">
+                <a href="#"><span>BSC Artists</span></a>
+                <a href="#"><span>Musk&Doge</span></a>
+                <a href="#"><span>1inch&BAKE</span></a>
+                <a href="#"><span>BAKE&Banana</span></a>
+              </div>
+              <div class="col-6 pl-0">
+                <a href="#"><span>BTC Artworks</span></a>
+                <a href="#"><span>Seascape</span></a>
+                <a href="#"><span>Binance NFT</span></a>
+                <a href="#"><span>TKO NFT</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="featured-artists-div">
+            <h4>Gamification NFT</h4>
+            <div class="row">
+              <div class="col-6">
+                <a href="#"><span>Bakery Combos</span></a>
+                <a href="#"><span>BakerySoccer</span></a>
+                <a href="#"><span>Battle Pets</span></a>
+                <a href="#"><span>Weapons</span></a>
+              </div>
+              <div class="col-6 pl-0">
+                <a href="#"><span>Pet Eggs</span></a>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </div>
+      <div class="col-lg-9 mob-padd-0">
+        <div class="search-bg mb-3">
+          <div class="ldiv">
+            <div class="form-group has-search mb-0">          
+              <input type="text" class="form-control" placeholder="Search NFT artwork...">
+              <span class="fa fa-search form-control-feedback"></span>
+            </div>
+            <span class="ml-3">874 965 artworks on market</span>
+          </div>
+          <div class="rdiv">
+            <div class="btn-group" dropdown>
+              <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                All <img src="assets/images/down-arrow-green.png" class="ml-2">
+              </button>
+              <ul *dropdownMenu class="dropdown-menu" role="menu">
+                <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
+            <div class="btn-group" dropdown>
+              <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                Price <img src="assets/images/down-arrow-green.png" class="ml-2"> 
+              </button>
+              <ul *dropdownMenu class="dropdown-menu" role="menu">
+                <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="nft-details-cnt-div p-4">
+          <div class="row mb-4">
+            <div class="col-lg-4 col-md-4">
+              <div class="img-div">
+                <img src="assets/images/prod-det-img.png" class="img-fluid">
+                <span class="badge badge-dark">On Sale</span>
+              </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+              <div class="details-content">
+                <h4>Oil painting</h4>
+                <p><span>Artist:</span><span class="val ml-2">Irene Cerezo</span></p>
+                <p class="mb-4">Morbi ultricies quam enim congue adipiscing leo et egestas. Cras laoreet congue egestas quisque ut enim, nunc. Facilisi lectus dolor sit sed quis. Consequat, placerat nunc pharetra, cursus amet nunc varius sit. Sit faucibus sit amet commodo enim. Phasellus vel vitae lacinia volutpat massa.</p>
+                <div class="like-det-div mb-3">
+                  <h6>8 QUBE</h6>
+                  <div class="rdiv">
+                    <img src="assets/images/heart-big.png" class="mr-2">
+                    <span>5</span>
+                  </div>
+                </div>
+                <div class="wal-rep-div mb-4">
+                  <button class="con-wal-btn">Connect Wallet</button>
+                  <span><img src="assets/images/report.png" class="mr-2">Report</span>
+                </div>
+                <div class="contract-div p-3">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span>NFT Contract ID:</span>
+                        <span class="val">-</span>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span>Token ID:</span>
+                        <span class="val">1056</span>
+                      </div>
+                    </div>
+                    <div class="col-lg-8">
+                      <div class="d-flex align-items-center justify-content-between  mb-2">
+                        <span>Creator's Address:</span>
+                        <span class="val">0x218531...E3193771</span>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between mb-2">
+                        <span>Owner's Address:</span>
+                        <span class="val">0x218531...E3193771</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="bid-table">
+                <h5>Bidding</h5>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <th>Address</th>
+                      <th>Price</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="val">0x218531...E3193771</td>
+                        <td>200 QUBE</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="bid-table">
+                <h5>Trading History</h5>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <th>Event</th>
+                      <th>Price</th>
+                      <th>From</th>
+                      <th>to</th>
+                      <th>Date</th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Trade</td>
+                        <td>200 QUBE</td>
+                        <td class="val">0x218531...E3193771</td>
+                        <td class="val">0x218531...E3193771</td>
+                        <td>23 hours ago</td>
+                      </tr>
+                      <tr>
+                        <td>List</td>
+                        <td>200 QUBE</td>
+                        <td class="val">0x218531...E3193771</td>
+                        <td class="val">0x218531...E3193771</td>
+                        <td>23 hours ago</td>
+                      </tr>
+                      <tr>
+                        <td>CancelSell</td>
+                        <td>200 QUBE</td>
+                        <td class="val">0x218531...E3193771</td>
+                        <td class="val">0x218531...E3193771</td>
+                        <td>23 hours ago</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row product-div">
+      <div class="col-lg-12">
+        <div class="title-div">
+          <h3>More Artworks</h3>
+          <div class="rdiv">
+            <div class="btn-group" dropdown>
+              <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                All <img src="assets/images/down-arrow-green.png" class="ml-2">
+              </button>
+              <ul *dropdownMenu class="dropdown-menu" role="menu">
+                <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
+            <div class="btn-group" dropdown>
+              <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                Price <img src="assets/images/down-arrow-green.png" class="ml-2"> 
+              </button>
+              <ul *dropdownMenu class="dropdown-menu" role="menu">
+                <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-3">
+        <img src="assets/images/product1.png" class="img-fluid res-img">
+        <div class="det-cnt p-3">
+          <h5>Peachy set of «Color’s original»</h5>
+          <p>Irene Cerezo</p>
+          <div class="like-div mb-3">
+            <div class="ldiv">
+              <img src="assets/images/heart.png" class="mr-2"><span>5</span>
+            </div>
+            <div class="rdiv">
+              <h6>8 QUBE</h6>
+            </div>
+          </div>
+          <button class="con-wal-btn">Connect Wallet</button>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-3">
+        <img src="assets/images/product2.png" class="img-fluid res-img">
+        <div class="det-cnt p-3">
+          <h5>Ohayo</h5>
+          <p>Irene Cerezo</p>
+          <div class="like-div mb-3">
+            <div class="ldiv">
+              <img src="assets/images/heart.png" class="mr-2"><span>5</span>
+            </div>
+            <div class="rdiv">
+              <h6>8 QUBE</h6>
+            </div>
+          </div>
+          <button class="con-wal-btn">Connect Wallet</button>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-3">
+        <img src="assets/images/product3.png" class="img-fluid res-img">
+        <div class="det-cnt p-3">
+          <h5>Lines of life</h5>
+          <p>Irene Cerezo</p>
+          <div class="like-div mb-3">
+            <div class="ldiv">
+              <img src="assets/images/heart.png" class="mr-2"><span>5</span>
+            </div>
+            <div class="rdiv">
+              <h6>8 QUBE</h6>
+            </div>
+          </div>
+          <button class="con-wal-btn">Connect Wallet</button>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-3">
+        <img src="assets/images/product4.png" class="img-fluid res-img">
+        <div class="det-cnt p-3">
+          <h5>Peachy set of «Color’s original»</h5>
+          <p>Irene Cerezo</p>
+          <div class="like-div mb-3">
+            <div class="ldiv">
+              <img src="assets/images/heart.png" class="mr-2"><span>5</span>
+            </div>
+            <div class="rdiv">
+              <h6>8 QUBE</h6>
+            </div>
+          </div>
+          <button class="con-wal-btn">Connect Wallet</button>
+        </div>
+      </div>      
+      <div class="col-lg-12 mt-3">
+        <div class="d-flex justify-content-center align-items-center">
+          <button class="more-btn">More</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,184 @@
+<div class="card">
+    <div class="card-header" style="background-color:#2f353a;color:#33adff;">
+          <i class="fa fa-align-justify"></i> IP Block Management
+        </div>
+
+
+<!-- <h4 style="padding-left: 425px;">Manage Users</h4> -->
+<div class="tabcntcls" style=" -webkit-transition: all 1s ease;transition: all 1s ease;padding: 25px;">
+  <div class="row">
+    <div class="col-md-9 align-items-center" style="display: inline-flex;padding-left: 0px;">
+      <span>Display : </span>
+      <select (change)="changeRowLimits($event)" style="width: auto;background: transparent;height: 30px;margin-left: 5px;">
+          <option *ngFor="let limit of rowLimits" [value]="limit.value">{{limit.key}}</option>
+      </select>
+
+      <div class="input-group-btn" style="margin-left: 10px;">
+        <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="resetuserlist()">
+           <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="col-md-3">
+
+        <div class="input-group">
+          <input type="text" [(ngModel)]="defsearch" class="form-control" placeholder="Search" id="txtSearch" (keyup.enter)="updateFilter()"  
+          (keyfocus)="updateFilter()"/>
+          <div class="input-group-btn">
+            <button class="btn btn-primary" style="cursor:pointer; margin-left: -2px;" type="submit" (click)="updateFilter()">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <!-- <h6 class="align-items-center">Add Ip Here:</h6> -->
+    </div>
+    <div class="col-md-9 align-items-center" style="display: inline-flex;padding-left: 0px;">
+      <span>IP address : </span>
+      <div class="col-md-5 input-group">
+        <input type="text" [(ngModel)]="ipaddress" class="form-control" placeholder="Search" id="txtSearch"/>
+        <div class="input-group-btn">
+        </div>
+      </div>
+
+      <div class=" col-md-4 input-group-btn" style="margin-left: 10px;">
+        <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="openbannermodel(addbannercontent)">Add IP
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+ 
+  <div class="table-responsive tab_top">
+    <ngx-datatable #usertable class="bootstrap table table-bordered table-striped mb-0 material"
+
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+    [rowHeight]="'auto'" [(limit)]="limit" [rows]='userrows' [externalPaging]="true"
+        [count]="page.totalElements"
+        [offset]="page.pageNumber"
+        [limit]="page.size"
+        [scrollbarH]="true"
+        (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [loadingIndicator]="loading">
+
+    <ngx-datatable-column name="S.No" [width]="50">
+      <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+        <!-- {{row.$$index + 1}} -->
+        <!-- {{rowIndex + 1}} -->
+        {{(page.pageNumber*page.size)+(rowIndex + 1)}}
+      </ng-template>
+    </ngx-datatable-column>
+  <!--    <ngx-datatable-column name="Email Id"  prop="emailid">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column> -->
+     <!-- <ngx-datatable-column name="Login Attempt"  prop="loginattempt">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column> -->
+      <ngx-datatable-column name="IP Address"  prop="user_ip">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{value}}
+      </ng-template>
+    </ngx-datatable-column>
+      <ngx-datatable-column name="Status" prop="status">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+    
+      <span class="tfadisable"  *ngIf="row.status ==1"  style="color: green;" >Active</span>
+     <span class="enable"  *ngIf="row.status==0"  style="color: red;">Deactive </span>
+        </ng-template>
+      </ngx-datatable-column>
+
+  <ngx-datatable-column name="Action" [resizeable]="false" prop="_id" >
+    <ng-template ngx-datatable-cell-template let-value="value"   let-row="row">
+  
+
+    <button class="btn btn-link mr-1 mb-1 cursorcls"  
+             (click)="changehost(statusmodel, row)"
+                 style="color:#b4b4b4;" >
+               <i  *ngIf="row.status == 1"  style="color: #1FA86D" class="ace-icon fa fa-unlock bigger-130" aria-hidden="true" ngbTooltip="Move to Deactive"></i>
+              <i  *ngIf="row.status == 0" style="color: #E51F1F" class="ace-icon fa fa-lock bigger-130" aria-hidden="true" ngbTooltip="Move to Active"></i>
+            </button>
+            <button class="btn btn-link mr-1 mb-1 cursorcls" 
+     (click)="opendeletemodel(deletecontent,row)"  ngbTooltip="View">
+      <i class="fa fa-trash" style="color:blue"></i>
+    </button>
+   </ng-template>
+ </ngx-datatable-column>
+   
+    </ngx-datatable>
+  </div>
+</div>
+</div>
+
+
+    <ng-template #addbannercontent let-c="close" let-d="dismiss">
+      
+      <div class="modal-header">
+        <h6 class="modal-title text-uppercase">Add New IPAddress</h6>
+        <button type="button" style="cursor:pointer;" class="close" aria-label="Close" (click)="d('Cross click')" ngbTooltip="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="col-md-12">
+          
+              <form name="form" (ngSubmit)="ipaddform.form.valid && addIP()" #ipaddform="ngForm"  novalidate>
+                <div class="form-group">
+                  <label for="email">IP Address</label>
+                  <input type="text" placeholder="Ip address" class="form-control" name="heading" [(ngModel)]="ipDatas.user_ip"  #user_ip="ngModel" pattern="^\S.*"  required />
+                  <div *ngIf="(user_ip.invalid && ipaddform.submitted) || user_ip.touched" class="text-danger">
+                    <span *ngIf="user_ip.errors?.required">IP Address is required</span>
+                    <span *ngIf="user_ip.errors?.pattern">Prefix space not allowed</span>
+                  </div>
+                </div>
+
+                <div class="form-group rit">
+                  <button class="btn btn-primary" style="cursor:pointer;" *ngIf="!ipFromSubmit" [disabled]="fileerr" >Add</button>
+                  <button *ngIf="ipFromSubmit" type="submit" class="btn btn-danger rit">Processing <i class="fa fa-spinner fa-spin" style="font-size:16px"></i> </button>
+                </div>
+              </form>
+            
+        </div>
+      </div>
+      
+      <div class="modal-footer"></div>
+    
+    </ng-template>
+
+<ng-template #deletecontent let-c="close" let-d="dismiss">
+    <div class="modal-body" id="actiondialog">
+      <h6>Are you sure to delete IP ?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success cursorcls"
+      (click)="delete_ip(bannersvalue);c('Close click')">Yes</button>
+      <button type="button" style="cursor: pointer;
+      background-color:#d9dce0;" class="btn cursorcls"
+      (click)="c('Close click')">No</button>
+    </div>
+    </ng-template>
+
+
+
+<ng-template #statusmodel let-c="close" let-d="dismiss">
+    <div class="modal-body" id="actiondialog">
+      <h6>Do you want to change the status of Ip Address?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success cursorcls"
+      (click)="changebannerStatus(bannersvalue);c('Close click')">Yes</button>
+      <button type="button" class="btn cursorcls"
+      (click)="c('Close click')">No</button>
+    </div>
+</ng-template>

@@ -1,0 +1,193 @@
+<!-- <div class="card">
+    <div class="card-header" style="background-color:#2f353a;color:#33adff;">
+          <i class="fa fa-align-justify"></i> Admin Profit
+        </div>
+
+
+<div class="tabcntcls" style=" -webkit-transition: all 1s ease;transition: all 1s ease;padding: 25px;">
+  <div class="row">
+    <div class="col-md-9 align-items-center" style="display: inline-flex;">
+      <span>Display : </span>
+      <select (change)="changeRowLimits($event)" style="width: auto;background: transparent;height: 30px;margin-left: 5px;">
+          <option *ngFor="let limit of rowLimits" [value]="limit.value">{{limit.key}}</option>
+      </select>
+
+      <div class="input-group-btn" style="margin-left: 10px;">
+        <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="resetuserlist()">
+           <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="col-md-3 p-2">
+
+        <div class="input-group">
+          <input type="text" [(ngModel)]="defsearch" class="form-control" placeholder="Search" id="txtSearch" (keyup.enter)="updateFilter()"  
+          (keyfocus)="updateFilter()"/>
+          <div class="input-group-btn">
+            <button class="btn btn-primary" style="cursor:pointer;margin-left: -2px;" type="submit" (click)="updateFilter()">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+ <div class="d-flex flex-row-reverse">
+          <div class="export_option">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                {{'Export Profit List'}}
+              </li>
+                           
+              <li class="list-inline-item">
+                <a (click)="exportToprofit()" class="cursorcls" title="Csv">       
+              <i class="fa fa-download"></i>
+                     </a>
+              </li>
+            </ul>
+          </div>
+        </div> -->
+  <!-- <div class="table-responsive tab_top">
+    <ngx-datatable #usertable class="bootstrap table table-bordered table-striped mb-0 material"
+
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+    [rowHeight]="'auto'" [(limit)]="limit" [rows]='userrows' [externalPaging]="true"
+        [count]="page.totalElements"
+        [offset]="page.pageNumber"
+        [limit]="page.size"
+        (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [loadingIndicator]="loading">
+
+    <ngx-datatable-column name="S.No" [width]="50">
+      <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+        {{(page.pageNumber*page.size)+(rowIndex + 1)}}
+      </ng-template>
+    </ngx-datatable-column>
+
+
+    <ngx-datatable-column name="Username">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.username}}
+      </ng-template>
+    </ngx-datatable-column>
+     <ngx-datatable-column name="Profit Type">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.profit_type}}
+      </ng-template>
+    </ngx-datatable-column>
+     <ngx-datatable-column name="Currency">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.currencyname}}
+      </ng-template>
+    </ngx-datatable-column>
+     <ngx-datatable-column name="profit Amount">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+         <i *ngIf="row.currency_type=='fiat'" >{{decimalrounds(row.profitamt,2)}}</i>
+         <i *ngIf="row.currency_type!='fiat'" >{{decimalrounds(row.profitamt,8)}}</i>
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Created Date and Time">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.created_date| date: 'medium'}}
+      </ng-template>
+    </ngx-datatable-column>
+    
+
+   
+    </ngx-datatable>
+  </div> -->
+<!-- </div>
+</div> -->
+
+
+
+
+<div class="app-body" *ngIf="!imported && !recentlyAdded">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <h2 class="title" style="text-align: center;"><img src="{{site}}" width="100px"/></h2>
+      <h4 class="form-text sub-title" style="color: #2b0c5b; text-align: center; padding-bottom: 35px;
+      ">Private key for Claim</h4>
+                <form>
+                     <div class="form-group row">
+              <label class="col-md-3 col-form-label">Key</label>
+              <div class="col-md-9">
+                <input type="text"  [(ngModel)]="privKeys" name="privke"  #privKey="ngModel" class="form-control" placeholder="Private Key"
+                 [class.form-control-danger]="privKey.invalid && privKey.touched"
+                 required>
+                <small style="color: red;" class="form-text error" *ngIf="privKey.invalid && privKey.touched && privKey.errors?.required">
+                  Key is required!
+                </small>
+              </div>
+            </div>
+            <div class="row" >
+              <div class="col-6">
+                <button  type="button" (click)="requestKey()"  *ngIf="!submitted"  
+    [disabled]="!privKey.valid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+    
+      <h6 *ngIf="submitted">Loading... <i class="fa fa-spinner fa-spin"></i> </h6>
+              </div>
+              
+            </div>
+                </form>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+
+<div class="app-body" *ngIf="imported">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <h2 class="title" style="text-align: center;"><img src="{{site}}" width="100px"/></h2>
+      <h4 class="form-text sub-title" style="color: #2b0c5b; text-align: center; padding-bottom: 35px;
+      ">Private key was already added!!!</h4>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="app-body" *ngIf="recentlyAdded">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <h2 class="title" style="text-align: center;"><img src="{{site}}" width="100px"/></h2>
+      <h4 class="form-text sub-title" style="color: #2b0c5b; text-align: center; padding-bottom: 35px;
+      ">Private key has been updated Successfully!!!</h4>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

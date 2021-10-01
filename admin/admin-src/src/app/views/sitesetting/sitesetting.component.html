@@ -1,0 +1,333 @@
+	
+
+		<div class="card">
+        <div class="card-header">
+          <strong>Site Settings</strong> 
+        </div>
+        <div class="card-body">
+          <form  #basicform="ngForm">
+                   
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Site Name</label>
+              <div class="col-md-5">
+                <input type="text" name="site_name" [(ngModel)]="site.site_name" class="form-control col-md-12" #site_name="ngModel" placeholder="Site Name" pattern="^[^-\s][a-zA-Z0-9_\s-]+$" [class.form-control-danger]="site_name.invalid && site_name.touched" required  >
+                 <small  style="color: red" class="form-text error" 
+                 *ngIf="site_name.invalid && site_name.touched && site_name.errors?.required">
+					       Site Name is required!
+				</small>
+				
+               </div>
+           </div>                     
+          
+           	   <div class="col-md-1 form-group" *ngIf="site.site_logo">
+			      		<img src="{{site.site_logo}}" width="100px" >
+			      	</div>
+			      	 	<div class="col-md-1 form-group" *ngIf="!site.site_logo">
+			      		<img src="../../../assets/images/admin.png" height="60px" width="60px" disabled/>
+			      	</div>
+			        <div class="form-group row">
+			            	<label class="col-md-3 form-control-label">site Logo</label>
+				        <div class="col-md-5">
+				            <div class="col-sm-9 currency_image">
+					          <input #sitelogo id="fileInput" name="admin_image" 
+					          type="file" (change)="fileChangeEvent($event,'site_logo')"  placeholder="Upload a file..." single accept="image/gif,image/jpeg,image/jpg,image/png,"/>
+					         </div>
+				        </div>
+                  
+			          </div>
+
+                 <div class="col-md-1 form-group" *ngIf="site.site_innerlogo">
+                <img src="{{site.site_innerlogo}}" width="100px" >
+              </div>
+                <div class="col-md-1 form-group" *ngIf="!site.site_innerlogo">
+                <img src="../../../assets/images/admin.png" height="60px" width="60px" disabled/>
+              </div>
+              <div class="form-group row">
+                    <label class="col-md-3 form-control-label">site Inner Logo</label>
+                <div class="col-md-5">
+                    <div class="col-sm-9 currency_image">
+                    <input #siteinnerlogo id="fileInput" name="admin_image" 
+                    type="file" (change)="fileChangeEvent($event,'site_innerlogo')"  placeholder="Upload a file..." single accept="image/gif,image/jpeg,image/jpg,image/png,"/>
+                   </div>
+                </div>
+                  
+                </div>
+             		<div class="col-md-1 form-group" *ngIf="site.site_favicon">
+			      		<img src="{{site.site_favicon}}" width="100px" disabled/>
+			      	</div>
+
+			      	<div class="col-md-1 form-group" *ngIf="!site.site_favicon">
+			      		<img src="../../../assets/images/admin.png" height="60px" width="60px" disabled/>
+			      	</div>
+
+
+			           <div class="form-group row col-md-12">
+			            	<label class="col-md-3 form-control-label">site favicon</label>
+				        <div class="col-md-5">
+				            <div class="col-sm-9 currency_image">
+					          <input #favicon id="fileInput" name="admin_image" type="file" (change)="fileChangeEvent($event,'site_favicon')" placeholder="Upload a file..." single accept="image/gif,image/jpeg,image/jpg,image/png,"/>
+					         </div>
+				        </div>
+			          </div>
+
+                  <!-- <div class="col-md-1 form-group" *ngIf="site.site_innerlogo">
+                <img src="{{site.site_innerlogo}}" width="100px"  style=" background-color: gray;"  disabled/>
+              </div>
+
+              <div class="col-md-1 form-group row" *ngIf="!site.site_innerlogo">
+                <img src="../../../assets/images/admin.png" height="60px" width="60px" disabled/>
+              </div>
+
+                 <div class="form-group row col-md-12">
+                    <label class="col-md-3 form-control-label">site inner logo</label>
+                <div class="col-md-5">
+                    <div class="col-sm-9 currency_image" >
+                    <input #innerlogo id="fileInput" name="admin_image" type="file" (change)="fileChangeEvent($event,'site_innerlogo')" placeholder="Upload a file..."single accept="image/gif,image/jpeg,image/jpg,image/png,"/>
+                   </div>
+                </div>
+                </div> -->
+
+			    <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Copy Rights</label>
+              <div class="col-md-5">
+                <input type="text" name="copyrights" [(ngModel)]="site.copyrights" class="form-control col-md-12" #copyrights="ngModel" placeholder="Copy Rights" [class.form-control-danger]="copyrights.invalid && copyrights.touched" required >
+                 <small  style="color: red" class="form-text error" 
+                 *ngIf="copyrights.invalid && copyrights.touched && copyrights.errors?.required">
+					       Copy Right is required!
+				      </small>
+				
+               </div>
+           </div>  
+             <!--   <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Withdraw content for crypto</label>
+              <div class="col-md-5">
+                <input type="text" name="with_crypto" [(ngModel)]="site.with_crypto" class="form-control col-md-12" #with_crypto="ngModel" placeholder="Copy Rights" [class.form-control-danger]="with_crypto.invalid && with_crypto.touched" required >
+                 <small  style="color: red" class="form-text error" 
+                 *ngIf="with_crypto.invalid && with_crypto.touched && with_crypto.errors?.required">
+                 Withdraw content for crypto is required!
+              </small>
+        
+               </div>
+           </div> 
+            
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Withdraw content for fiat</label>
+              <div class="col-md-5">
+                <input type="text" name="with_crypto" [(ngModel)]="site.with_fiat" class="form-control col-md-12" #with_crypto="ngModel" placeholder="Copy Rights" [class.form-control-danger]="with_crypto.invalid && with_crypto.touched" required >
+                 <small  style="color: red" class="form-text error" 
+                 *ngIf="with_crypto.invalid && with_crypto.touched && with_crypto.errors?.required">
+                 Withdraw content for crypto is required!
+              </small>
+        
+               </div>
+           </div> -->
+          </form>
+        </div>
+        <div class="card-footer" style="text-align: center;">
+          <button type="button" *ngIf="!isValid" [disabled]="!basicform.valid" class="btn btn-sm btn-primary" (click)="uploadimage();"><i class="fa fa-dot-circle-o" ></i> Submit
+          </button>
+          <h6 *ngIf="isValid">Loading... <i class="fa fa-spinner fa-spin"></i> </h6>
+      <!--     <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button> -->
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <strong>Site Information</strong> 
+        </div>
+        <div class="card-body">
+          <form  #siteform="ngForm">
+                   
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Address</label>
+              <div class="col-md-5">
+                <input type="text" name="site_name" [(ngModel)]="siteinfo.address" class="form-control col-md-12" #address="ngModel" placeholder="Address" pattern="^[^-\s][a-zA-Z0-9_\s-]+$" [class.form-control-danger]="address.invalid && address.touched" required >
+                 <small  style="color: red" class="form-text error" 
+                 *ngIf="address.invalid && address.touched && address.errors?.required">
+					      Address is required!
+				</small>
+				
+               </div>
+           </div>                     
+			    <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Email Address</label>
+              <div class="col-md-5">
+                <input type="text" name="mail" [(ngModel)]="siteinfo.mail" class="form-control col-md-12" #mail="ngModel" placeholder="Email Address" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" [class.form-control-danger]="mail.invalid && mail.touched" required >
+                 <small  style="color: red" class="form-text error" 
+                 *ngIf="mail.invalid && mail.touched && mail.errors?.required">
+					       Email Address is required!
+				</small>
+				 <small style="color: red" class="form-text error"
+                    *ngIf="mail.invalid && mail.touched && mail.errors?.pattern">
+                    Email should be the real one
+                   </small>
+				
+               </div>
+           </div>  
+           
+             <!-- <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Skype</label>
+              <div class="col-md-5">
+                <input type="text" name="skype" [(ngModel)]="siteinfo.skype" class="form-control col-md-12" #skype="ngModel" placeholder="Skype"  pattern="https?://.+" [class.form-control-danger]="skype.invalid && skype.touched" required  >
+                <small style="color: red" class="form-text error" *ngIf="skype.invalid && skype.touched && skype.errors?.required">
+				            	Skype ID is required!
+				         	</small> -->
+				<!-- <small class="form-text error" *ngIf="skype.invalid && skype.touched && skype.errors?.pattern">
+				        Skype ID is invalid!
+				   </small> -->
+				
+              <!--  </div>
+           </div>  -->
+           <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Contact NUmber</label>
+              <div class="col-md-5">
+                <input type="text" name="phone" [(ngModel)]="siteinfo.phone" class="form-control col-md-12" #phone="ngModel" placeholder="Contact NUmber" (keypress)="numberOnly($event)"[minlength]=6 [maxlength]=10 pattern="[0-9]+" [class.form-control-danger]="phone.invalid && phone.touched" required  >
+                  <small  style="color: red"class="form-text error" *ngIf="phone.invalid && phone.touched && phone.errors?.required">
+		                      Contact Number is required!
+		                    </small>
+		                     <small  style="color: red"class="form-text error" *ngIf="phone.invalid && phone.touched && phone.errors?.minlength">
+		                      Contact Number cannot be less than 6 numbers
+		                    </small>
+
+		                     <small style="color: red" class="form-text error"
+		                         *ngIf="phone.invalid && phone.touched && phone.errors?.maxlength">Contact Number cannot be more than 10 numbers
+
+		                    </small>
+				
+               </div>
+           </div>  
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Facebook</label>
+              <div class="col-md-5">
+                <input type="text" name="facebook" [(ngModel)]="siteinfo.facebook" class="form-control col-md-12" #facebook="ngModel" placeholder="Facebook"  pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)" [class.form-control-danger]="facebook.invalid && facebook.touched" required  >
+                 <small  style="color: red"class="form-text error" *ngIf="facebook.invalid && facebook.touched && facebook.errors?.required">
+				            	Facebook ID is required!
+				         	</small>
+				         		<small  style="color: red"class="form-text error" *ngIf="facebook.invalid && facebook.touched && facebook.errors?.pattern">
+				            	Facebook ID is invalid!
+				         	</small>
+				
+               </div>
+           </div> 
+           <!-- <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Youtube</label>
+              <div class="col-md-5">
+                <input type="text" name="youtube" [(ngModel)]="siteinfo.youtube" class="form-control col-md-12" #youtube="ngModel" placeholder="Youtube"  pattern="https?://.+" [class.form-control-danger]="youtube.invalid && youtube.touched" required  >
+                 <small style="color: red" class="form-text error" *ngIf="youtube.invalid && youtube.touched && youtube.errors?.required">
+				            	Youtube ID is required!
+				         	</small>
+				         		<small style="color: red" class="form-text error" *ngIf="youtube.invalid && youtube.touched && youtube.errors?.pattern">
+				            	Youtube ID is invalid!
+				         	</small>
+				
+               </div>
+           </div> -->
+           <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Twitter</label>
+              <div class="col-md-5">
+                <input type="text" name="twitter" [(ngModel)]="siteinfo.twitter" class="form-control col-md-12" #twitter="ngModel" placeholder="Twitter"  pattern="https?://.+" [class.form-control-danger]="twitter.invalid && twitter.touched" required  >
+                <small  style="color: red"class="form-text error" *ngIf="twitter.invalid && twitter.touched && twitter.errors?.required">
+				            	Twitter ID is required!
+				         	</small>
+				         	<small  style="color: red"class="form-text error" *ngIf="twitter.invalid && twitter.touched && twitter.errors?.pattern">
+				            	Twitter ID is invalid!
+				         	</small>
+				
+               </div>
+           </div>
+           <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Instagram</label>
+              <div class="col-md-5">
+                <input type="text" name="instagram" [(ngModel)]="siteinfo.instagram" class="form-control col-md-12" #instagram="ngModel" placeholder="Instagram"  pattern="https?://.+" [class.form-control-danger]="instagram.invalid && instagram.touched" required >
+                 <small  style="color: red"class="form-text error" *ngIf="instagram.invalid && instagram.touched && instagram.errors?.required">
+				    Instagram ID is required!
+				   </small>
+				    <small  style="color: red"class="form-text error" *ngIf="instagram.invalid && instagram.touched && instagram.errors?.pattern">
+				      Instagram ID is invalid!
+				    </small>
+				
+               </div>
+           </div>
+           <!-- <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Video Link</label>
+              <div class="col-md-5">
+                <input type="text" name="videolink" [(ngModel)]="siteinfo.videolink" class="form-control col-md-12" #videolink="ngModel" placeholder="Video Link"  pattern="https?://.+" [class.form-control-danger]="videolink.invalid && videolink.touched" required  >
+                 <small style="color: red" class="form-text error" *ngIf="videolink.invalid && videolink.touched && videolink.errors?.required">
+                      Video Link is required!
+                  </small>
+                    <small style="color: red" class="form-text error" *ngIf="videolink.invalid && videolink.touched && videolink.errors?.pattern">
+                     Video Link is invalid!
+                  </small>
+        
+               </div>
+           </div> -->
+               
+          </form>
+        </div>
+        <div class="card-footer" style="text-align: center;">
+          <button type="button" *ngIf="!isValidsite" [disabled]="!siteform.valid" class="btn btn-sm btn-primary" (click)="updatesite();"><i class="fa fa-dot-circle-o" ></i> Submit
+          </button>
+          <h6 *ngIf="isValidsite">Loading... <i class="fa fa-spinner fa-spin"></i> </h6>
+      <!--     <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button> -->
+        </div>
+      </div>
+
+
+
+      <div class="card">
+      	<div class="card-header">
+          <strong>Site Under maintenance</strong> 
+        </div>
+        	<form #sitemaintananceform="ngForm" name="f1" class="site-maintain">
+
+			          <div class="form-group row col-md-12">
+			          	<label for="currentpwdnew" class="col-md-3 form-control-label">Site Status</label>
+			          	<div class="col-md-5">
+			          		<select id="select1" class="form-control"  [(ngModel)]="sitesettings.site_maintaince" #site_maintaince="ngModel" name="select1" class="form-control">
+				            <option value="0">No</option>
+				            <option value="1">Yes</option>
+							</select>
+		             
+				        </div>
+				    </div>
+				        <div class="form-group row col-md-12" *ngIf="sitesettings.site_maintaince==1">
+			          	<label for="currentpwdnew" class="col-md-3 form-control-label">Site Status Content</label>
+				        <div class="col-md-5">
+
+				        <textarea cols="50" rows="5"  name="maintance_detail" [(ngModel)]="sitesettings.maintance_detail" id="maintance_detail" placeholder="Enter site status content.." #maintance_detail="ngModel"  required></textarea></div>
+                <small style="color: red" class="form-text error" *ngIf="maintance_detail.invalid && maintance_detail.touched && maintance_detail.errors?.required">
+                     Maintance Details is required!
+                  </small>
+    				    </div>
+
+				            <div class="col-12" style="text-align: center;">
+				            </div>
+				            <div class="col-12" style="text-align: center;">
+								<div class="tab_align">
+					              <button type="button" style="cursor:pointer;" class="btn btn-info cursorcls" 
+					              (click)="savesitemaintanance(sitesettings);">Submit</button>
+					              <h6 *ngIf="isValid2">Loading... <i class="fa fa-spinner fa-spin"></i> </h6>
+					        	</div>
+							</div>
+			      		</form>
+      </div>
+
+
+      <div class="card">
+      	<div class="card-header">
+          <strong>Pattern Setting</strong> 
+        </div>
+            <div class="input-group mb-4" style="padding-left: 544px;">
+              <div id="patternContainer"></div>
+                 <input type="hidden" name="pattern_code" id="patterncode">
+                </div>
+              <div class="col-12" style="text-align: center;">
+                
+								<div class="tab_align">
+					              <button type="button" style="cursor:pointer;" class="btn btn-info cursorcls" 
+					              (click)="savepattern();">Submit</button>
+					              <!-- <h6 *ngIf="isValid2">Loading... <i class="fa fa-spinner fa-spin"></i> </h6> -->
+					        	</div>
+							</div>
+          </div>
+      

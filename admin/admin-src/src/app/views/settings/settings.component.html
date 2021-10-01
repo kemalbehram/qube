@@ -1,0 +1,78 @@
+	
+
+		<div class="card">
+        <div class="card-header">
+          <strong>General Settings</strong> 
+        </div>
+        <div class="card-body">
+          <form  #basicform="ngForm">
+          
+           
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Admin Username</label>
+              <div class="col-md-9">
+                <input type="text" name="admin_name" [(ngModel)]="admindetails.admin_name" class="form-control col-md-12" #admin_name="ngModel" placeholder="Admin Username" pattern="^[^-\s][a-zA-Z0-9_\s-]+$" [class.form-control-danger]="admin_name.invalid && admin_name.touched" required [minlength]="3" [maxlength]="10"   style="width: 373px;" >
+                 <small  style="color: red" class="form-text error" 
+                 *ngIf="admin_name.invalid && admin_name.touched && admin_name.errors?.required">
+					       Admin Username is required!
+				</small>
+				<small style="color: red" class="form-text error" *ngIf="admin_name.invalid && admin_name.touched && admin_name.errors?.pattern">
+					       Admin Username is invalid!
+				</small>
+				<small  style="color: red" class="form-text error" *ngIf="admin_name.invalid && admin_name.touched && (admin_name.errors?.minlength || admin_name.errors?.maxlength)"> Admin Username should contains from 3 to 10 characters
+		          </small>
+<!--                 <span class="help-block">Please enter your email</span>
+ -->              </div>
+            </div>
+           
+          <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="email-input">Email Id</label>
+              <div class="col-md-9">
+                <input type="email"  name="contact_mail" class="form-control" [(ngModel)]="admindetails.admin_emailid" pattern=".+@.+\..+" class="col-md-12 fullwidth form-control" placeholder="Email address" #admin_emailid="ngModel" [class.form-control-danger]="admin_emailid.invalid && admin_emailid.touched"  required  style="width: 373px;" readonly="">
+<!--                 <span class="help-block">Please enter your email</span>
+
+
+ -->
+  				<small style="color: red" class="form-text error" *ngIf="admin_emailid.invalid && admin_emailid.touched && admin_emailid.errors?.required">
+						            Email is required!
+				</small>
+				<small  style="color: red" class="form-text error" *ngIf="admin_emailid.invalid && admin_emailid.touched && admin_emailid.errors?.pattern">
+						           Email should be the real one!
+				</small>
+               </div>
+            </div>
+           
+                      
+          
+            <div class="form-group row" >
+              <label class="col-md-3 col-form-label" for="file-input">Image file</label>
+              <div class="col-md-9" >
+                <input #fileinput id="file-input" name="file-input" type="file" 
+                (change)="fileChangeEvent($event)" placeholder="Upload a file..." single accept="image/gif,image/jpeg,image/jpg,image/png,"/>
+                </div>
+              </div>
+            <div *ngIf="!admindetails.admin_image">
+                <img src="../../../assets/images/admin.png" height="60px" width="60px" disabled/>
+              </div>
+              <div *ngIf="admindetails.admin_image">
+                <img src="{{admindetails.admin_image}}" height="100px" width="100px" disabled/>
+              </div>
+            <div>
+                <label class="col-md-3 col-form-label" >OTP Disable and Enable  </label>
+              <label class="switch">
+                <input type="checkbox" (change)="check($event)" [(ngModel)]="admindetails.otp_options" name="otp">
+                <div class="slider round">
+                  <h3><span class="on pr-4">Enable</span><span class="off pl-4">Disable</span></h3>
+                </div>
+              </label>
+            </div>
+               
+          </form>
+        </div>
+        <div class="card-footer" style="text-align: center;">
+          <button type="button" *ngIf="!isValid" [disabled]="!basicform.valid" class="btn btn-sm btn-primary" (click)="uploadimage();"><i class="fa fa-dot-circle-o" ></i> Submit
+          </button>
+          <h6 *ngIf="isValid">Loading... <i class="fa fa-spinner fa-spin"></i> </h6>
+      <!--     <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button> -->
+        </div>
+      </div>

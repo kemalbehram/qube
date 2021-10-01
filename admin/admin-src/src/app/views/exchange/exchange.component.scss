@@ -1,0 +1,14 @@
+.table-loaders:after{
+    position: absolute;
+    top: 0;
+    left: 15px;
+    right: 15px;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+   // background-image: url('https://media.tenor.com/images/1f0521020b6e6ed69896d02906e84b8e/tenor.gif');
+    background-image: url('assets/images/5.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 50px 50px;
+    content: "";
+}

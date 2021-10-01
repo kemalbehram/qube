@@ -1,0 +1,320 @@
+<div class="container pool-page">
+  <h3>Exchange</h3>
+  <div class="row justify-content-center mx-0">
+    <div class="col-lg-5 p-0">
+      <div class="pool-div">
+        <ul class="pool-swap-div mb-0">
+
+          <!-- <li class="active"><a href="swap">Swap</a></li>
+          <li><a href="pool">Pool</a></li> -->
+          <li class="active"><a [routerLink]="'/swap'">Swap</a></li>
+          <li ><a [routerLink]="'/pool'">Pool</a></li>          
+        </ul>
+        <div class="add-liq-page">  
+          <div class="row justify-content-center mx-0">
+            <div class="col-lg-12 p-0">
+              <!-- swap order -->
+                <div class="add-liq-div p-4" *ngIf="swapformorder">                
+                  <div class="row">
+                    <div class="col-6 pr-1">
+                      <div class="input-bg p-3">
+                        <label>From</label>
+                        <input type="text" class="form-control" placeholder="0.0000" name="from_amount"  [(ngModel)]="exchangeformdata.from_amount" pattern="09." #from_amount="ngModel" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" (paste)="$event.preventDefault()" (keyup)="pricecal('exchange','first')" required>
+                      </div>            
+                    </div>
+                    <div class="col-6 pl-1">
+                      <div class="input-bg p-3">
+                        <label>Balance : {{rounds(sw_first_currency_balance,4)}} {{sw_first_currency}}</label>
+                        <!-- <label>Token</label> -->
+                        
+                        <div class="coin-div" (click)="swap_tokenModal_f.show();getswappair_first('exchange')" *ngIf="!sw_first_currency_show">
+                          <div class="ldiv">
+                            <span class="mx-2">Select Token</span>
+                          </div>
+                          <img src="assets/images/down-arrow-white.png">
+                        </div>
+                        
+                        <div class="coin-div" (click)="swap_tokenModal_f.show();getswappair_first('exchange')" *ngIf="sw_first_currency_show">
+                          <div class="ldiv">
+                            <img src="{{sw_first_image}}" height="26 px" width="26 px">
+                            <span class="mx-2">{{sw_first_currency}}</span>
+                          </div>
+                          <img src="assets/images/down-arrow-white.png">
+                        </div>
+                           
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <img src="assets/images/down-arrow-big.png" class="d-block mx-auto my-3 cur-pointer" (click)="swaptextbox()">
+                  <div class="row mb-3">
+                    <div class="col-6 pr-1">
+
+                      <div class="input-bg p-3">
+                        <label>To</label>
+                        <input type="text" class="form-control" placeholder="0.0000"  name="to_amount"  [(ngModel)]="exchangeformdata.to_amount" pattern="09." #to_amount="ngModel" [class.form-control-danger]="to_amount.invalid && to_amount.touched" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57"(paste)="$event.preventDefault()"  (keyup)="pricecal('exchange','second')" required>
+                      </div>            
+                    </div>
+                    <div class="col-6 pl-1">
+                      <div class="input-bg p-3">
+                        <label>Balance : {{rounds(sw_second_currency_balance,4)}} {{sw_second_currency}}</label>
+                        <!-- <label>Token</label> -->
+
+                        <div class="coin-div" (click)="swap_tokenModal_s.show()" *ngIf="!sw_second_currency_show">
+                          <div class="ldiv">
+                            <span class="mx-2">Select Token</span>
+                          </div>
+                          <img src="assets/images/down-arrow-white.png">
+                        </div>
+                        
+                        <div class="coin-div" (click)="swap_tokenModal_s.show()" *ngIf="sw_second_currency_show">
+                          <div class="ldiv">
+                            <img src="{{sw_fullpair_data.toCurrency_i}}" height="26 px" width="26 px" >
+                            <span class="mx-2">{{sw_second_currency}}</span>
+                          </div>
+                          <img src="assets/images/down-arrow-white.png">
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="price-div">
+                    <p>Price : {{pricePoolShare.from_amount |number:'1.8-8'}} <span>{{sw_first_currency}} per {{sw_second_currency}}</span><img src="assets/images/exchange.png" class="ml-2"></p>
+                  </div>
+
+                  <!-- before login -->
+                    <button class="btn connect-wallet-btn" *ngIf="!commonservice.metaDetails.isLogin" (click)="loginmetamask();">Connect WALLET</button>
+                  <!-- before login -->
+
+                  <!-- after login -->
+                    <div *ngIf="commonservice.metaDetails.isLogin"> 
+                      <div *ngIf="sw_fullpair_data.fromCurrency_type =='token' && sw_fullpair_data.toCurrency_type =='token'"> 
+                        <button class="btn connect-wallet-btn" *ngIf="!withdrawswapsubmitted && !showsubmitbutton"  [disabled]="true">Swap t-t</button>
+                        <button class="btn connect-wallet-btn" (click)="token_to_token_submit()" *ngIf="!withdrawswapsubmitted && showsubmitbutton">Swap t-t</button>
+                        <button class="btn connect-wallet-btn" *ngIf="withdrawswapsubmitted">Loading...<i class="fa fa-spinner fa-spin"></i></button>
+                      </div>
+
+                      <div *ngIf="sw_fullpair_data.fromCurrency_type !='token' || sw_fullpair_data.toCurrency_type !='token'"> 
+                        <button class="btn connect-wallet-btn" *ngIf="!withdrawswapsubmitted && !showsubmitbutton"  [disabled]="true">Swap c-t</button>
+                        <button class="btn connect-wallet-btn" (click)="token_to_coin_submit(sw_fullpair_data.fromCurrency_address,'from')" *ngIf="!withdrawswapsubmitted && showsubmitbutton">Swap c-t</button>
+                        <button class="btn connect-wallet-btn" *ngIf="withdrawswapsubmitted">Loading...<i class="fa fa-spinner fa-spin"></i></button>
+                      </div>
+
+
+                    </div>
+                  <!-- after login -->
+
+                  <!-- <div class="swap-val-div mb-3">
+                    <div class="det-div">
+                      <span>Minimum received</span>
+                      <span class="value">25 340 DOGE</span>
+                    </div>
+                    <div class="det-div">
+                      <span>Price Impact</span>
+                      <span class="value">98.07%</span>
+                    </div>
+                    <div class="det-div">
+                      <span>Liquidity Provider Fee</span>
+                      <span class="value">0.01198 BTCB</span>
+                    </div>
+                  </div> -->
+                  <!-- <div class="route-div">
+                    <span>Route</span>
+                    <div class="coin-det-list">
+                      <div class="ldiv">
+                        <img src="assets/images/btc-small.png">
+                        <h5>BTCB</h5>
+                        <img src="assets/images/right-arrow-small.png">
+                      </div>
+                      <div class="ldiv">
+                        <img src="assets/images/info.png">
+                        <h5>WBNB</h5>
+                        <img src="assets/images/right-arrow-small.png">
+                      </div>  
+                      <div class="ldiv">
+                        <img src="assets/images/doge-small.png" class="mr-2">
+                        <h5>DOGE</h5>
+                      </div>                 
+                    </div>
+                  </div> -->
+                </div>
+              <!-- swap order -->
+              <!-- reverse swap order -->
+                <div class="add-liq-div p-4" *ngIf="!swapformorder">
+                  <!--  -->
+                  <div class="row mb-3">
+                    <div class="col-6 pr-1">
+
+                      <div class="input-bg p-3">
+                        <label>From</label>
+                        <input type="text" class="form-control" placeholder="0.0000"  name="to_amount"  [(ngModel)]="exchangeformdata.to_amount" pattern="09." #to_amount="ngModel" [class.form-control-danger]="to_amount.invalid && to_amount.touched" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57"(paste)="$event.preventDefault()"  (keyup)="pricecal('exchange','second')" required>
+                      </div>            
+                    </div>
+                    <div class="col-6 pl-1">
+                      <div class="input-bg p-3">
+                        <label>Balance : {{rounds(sw_second_currency_balance,4)}} {{sw_second_currency}}</label>
+                        <!-- <label>Token</label> -->
+
+                        <div class="coin-div" (click)="swap_tokenModal_s.show()" *ngIf="!sw_second_currency_show">
+                          <div class="ldiv">
+                            <span class="mx-2">Select Token</span>
+                          </div>
+                          <img src="assets/images/down-arrow-white.png">
+                        </div>
+                        
+                        <div class="coin-div" (click)="swap_tokenModal_s.show()" *ngIf="sw_second_currency_show">
+                          <div class="ldiv">
+                            <img src="{{sw_fullpair_data.toCurrency_i}}" height="26 px" width="26 px" >
+                            <span class="mx-2">{{sw_second_currency}}</span>
+                          </div>
+                          <img src="assets/images/down-arrow-white.png">
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+                  <!--  -->
+
+                  <img src="assets/images/down-arrow-big.png" class="d-block mx-auto my-3 cur-pointer" (click)="swaptextbox()">
+
+                  <!--  -->
+                  <div class="row">
+                    <div class="col-6 pr-1">
+                      <div class="input-bg p-3">
+                        <label>To</label>
+                        <input type="text" class="form-control" placeholder="0.0000" name="from_amount"  [(ngModel)]="exchangeformdata.from_amount" pattern="09." #from_amount="ngModel" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" (paste)="$event.preventDefault()" (keyup)="pricecal('exchange','first')" required>
+                      </div>            
+                    </div>
+                    <div class="col-6 pl-1">
+                      <div class="input-bg p-3">
+                        <label>Balance : {{rounds(sw_first_currency_balance,4)}} {{sw_first_currency}}</label>
+                        <!-- <label>Token</label> -->
+                        
+                        <div class="coin-div" (click)="swap_tokenModal_f.show();getswappair_first('exchange')" *ngIf="!sw_first_currency_show">
+                          <div class="ldiv">
+                            <span class="mx-2">Select Token</span>
+                          </div>
+                          <img src="assets/images/down-arrow-white.png">
+                        </div>
+                        
+                        <div class="coin-div" (click)="swap_tokenModal_f.show();getswappair_first('exchange')" *ngIf="sw_first_currency_show">
+                          <div class="ldiv">
+                            <img src="{{sw_first_image}}" height="26 px" width="26 px">
+                            <span class="mx-2">{{sw_first_currency}}</span>
+                          </div>
+                          <img src="assets/images/down-arrow-white.png">
+                        </div>
+                           
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <!--  -->
+                  <div class="price-div">
+                    <p>Price : {{pricePoolShare.from_amount |number:'1.8-8'}} <span>{{sw_first_currency}} per {{sw_second_currency}}</span><img src="assets/images/exchange.png" class="ml-2"></p>
+                  </div>
+
+                  <!-- before login -->
+                    <button class="btn connect-wallet-btn" *ngIf="!commonservice.metaDetails.isLogin" (click)="loginmetamask();">Connect WALLET</button>
+                  <!-- before login -->
+
+                  <!-- after login -->
+                    <div *ngIf="commonservice.metaDetails.isLogin"> 
+                      <div *ngIf="sw_fullpair_data.fromCurrency_type =='token' && sw_fullpair_data.toCurrency_type =='token'"> 
+                        <button class="btn connect-wallet-btn" *ngIf="!withdrawswapsubmitted && !showsubmitbutton"  [disabled]="true">Swap t-t</button>
+                        <button class="btn connect-wallet-btn" (click)="token_to_token_submit()" *ngIf="!withdrawswapsubmitted && showsubmitbutton">Swap t-t</button>
+                        <button class="btn connect-wallet-btn" *ngIf="withdrawswapsubmitted">Loading...<i class="fa fa-spinner fa-spin"></i></button>
+                      </div>
+
+                      <div *ngIf="sw_fullpair_data.fromCurrency_type !='token' || sw_fullpair_data.toCurrency_type !='token'"> 
+                        <button class="btn connect-wallet-btn" *ngIf="!withdrawswapsubmitted && !showsubmitbutton"  [disabled]="true">Swap c-t</button>
+                        <button class="btn connect-wallet-btn" (click)="token_to_coin_submit(sw_fullpair_data.fromCurrency_address,'from')" *ngIf="!withdrawswapsubmitted && showsubmitbutton">Swap c-t</button>
+                        <button class="btn connect-wallet-btn" *ngIf="withdrawswapsubmitted">Loading...<i class="fa fa-spinner fa-spin"></i></button>
+                      </div>
+
+
+                    </div>
+                  <!-- after login -->
+
+                  
+
+              <!-- reverse swap order -->
+
+            </div>
+          </div>
+        </div>     
+      </div>      
+    </div>
+  </div>
+  
+</div>
+
+
+<!-- model popup -->
+  <!-- first popup -->
+    <div class="modal fade select-token-modal" bsModal #swap_tokenModal_f="bs-modal" [config]="{backdrop: 'static'}"
+         tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 id="dialog-static-name" class="modal-title pull-left">Select a token</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="swap_tokenModal_f.hide()">
+              <img src="assets/images/close.png">
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="text" class="form-control" (keyup)="filterFn($event.target.value,'first')" placeholder="Search name or paste address">
+            <div class="token-list-div">
+              <div class="token-title">
+                <h6>Token name</h6>
+                <img src="assets/images/sort.png">
+              </div>
+              <div class="token-list-det-div my-3">
+                <div class="tok-list" >
+                  <div class="ldiv"  *ngFor="let data of swap_base_currency"  (click)="sw_set_currency(data,'exchange','first');">
+                    <img src="{{data.currency_image}}" (click)="sw_set_currency(data,'exchange','first');" height="26 px"  width="26 px">
+                    <h5>{{data._id}}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>        
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- second popup -->  
+    <div class="modal fade select-token-modal" bsModal #swap_tokenModal_s="bs-modal" [config]="{backdrop: 'static'}"
+         tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 id="dialog-static-name" class="modal-title pull-left">Select a token</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="swap_tokenModal_s.hide()">
+              <img src="assets/images/close.png">
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="text" class="form-control" (keyup)="filterFn($event.target.value,'second')" placeholder="Search name or paste address">
+            <div class="token-list-div">
+              <div class="token-title">
+                <h6>Token name</h6>
+                <img src="assets/images/sort.png">
+              </div>
+              <div class="token-list-det-div my-3">
+                <div class="tok-list">
+
+                  <div class="ldiv" *ngFor="let data of sw_sec_currency"  (click)="sw_set_currency(data,'exchange','second');">
+                    <img src="{{data.toCurrency_i}}" (click)="sw_set_currency(data,'exchange','second');" height="26 px"  width="26 px">
+                    <h5>{{data.toCurrency}}</h5>
+                  </div>
+
+                </div>
+              </div>
+            </div>        
+          </div>
+        </div>
+      </div>
+    </div>

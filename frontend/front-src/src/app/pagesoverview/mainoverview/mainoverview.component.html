@@ -1,0 +1,57 @@
+<div class="d-flex justify-content-center align-items-center" id="loader-cnt" style="display: none!important;">
+  <div class="loader-inner-cnt d-flex felx-column align-items-center justify-content-center" id='wait_msg' style="display: none!important;">
+    <div id="cover-spin"><h2 style="color:#259F76;">Please wait until the process being completed... </h2><i class="fa fa-spinner fa-spin" style="color:#259F76;font-size: 120px;"></i>
+    </div>
+  </div>
+</div>
+
+
+<div id="site-cnt" class="container-fluid p-0">
+  <app-overviewheader></app-overviewheader>
+  <div class="basic-layout">
+      <div class="sidenav">
+          <app-sidebar></app-sidebar>
+      </div>  
+      <div class="main-cont" [ngClass]="{'ribbon-div': secOpen}">
+        <div class="rib-side-div cur-pointer" (click)="sideSec('open');GetfromLocal();"><img src="assets/images/ribbon-side-white.png"></div>
+        <div class="rib-cont-div" *ngIf="secOpen">
+          <div class="title-div pointer"  (click)="sideSec('close');GetfromLocal;">
+            <div class="ldiv">
+              <img src="assets/images/ribbon-side.png">
+              <h6 class="ml-2">Saved</h6>
+            </div>
+            <img class="cur-pointer" src="assets/images/right-arrow.png">
+          </div>
+          <div class="pin-wal-div p-3 mb-3">
+            <h3>Accounts</h3>
+            <span>No pinned wallets</span>
+          </div>
+          <div class="pin-pair-div p-3">
+            <h3 class="mb-3">Pinner Pairs</h3>
+            <div class="cont mb-2" *ngFor="let item of PairsArr">
+              <h5>{{item}}</h5>
+              <img src="assets/images/union.png" class="close cur-pointer" (click)="FavsectionPair(item)">
+            </div>
+            <div class="cont" *ngIf="!PairsArr || PairsArr.length=='0'">
+              <span>No pinned pairs</span>
+            </div>
+          </div>
+          <div class="pin-tok-div p-3">
+            <h3 class="mb-3">Pinned tokens</h3>
+            <div class="cont mb-2" *ngFor="let item of coins">
+              <div class="d-flex align-items-center">
+                <img src="assets/images/qube.png">
+                <h5 class="cur-pointer" [routerLink]="'/coinview/'+item">{{item}}</h5>
+              </div>
+              <img src="assets/images/union.png" class="close cur-pointer" (click)="Favsection(item)">
+            </div>
+            <div class="cont mb-2" *ngIf="!coins || coins.length=='0'">
+              <span>No pinned tokens</span>
+            </div>
+          </div>
+        </div>
+        <router-outlet></router-outlet>
+      </div>
+  </div>
+  <app-footer></app-footer>
+</div>

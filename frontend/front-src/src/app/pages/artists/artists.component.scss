@@ -1,0 +1,196 @@
+.artists-page{
+    h3{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 43px;
+        line-height: 52px;
+        text-align: center;
+        letter-spacing: -0.005em;
+        text-transform: uppercase;
+        color: #0D1815;
+        @media(max-width: 575px){
+            font-size: 31px;
+        }
+    }
+    .artists-page-cnt-div{
+        background: #FFFFFF;
+        box-shadow: 0px 2px 10px rgba(45, 186, 137, 0.15);
+        border-radius: 5px;
+        @media(max-width:575px){
+            padding: 1rem !important;
+        }
+        h6{
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 17px;
+            text-align: center;
+            letter-spacing: 0.015em;
+            text-transform: uppercase;
+            color: #259F76;
+        }
+        .form-group{
+            .bg-grn{
+                background: #E6F6F4;
+                border-radius: 6px;
+                position: relative;
+                label{
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 11px;
+                    line-height: 13px;
+                    letter-spacing: 0.06em;
+                    text-transform: uppercase;
+                    color: #0D1815;
+                    opacity: 0.7;
+                }
+                a{
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 11px;
+                    line-height: 13px;
+                    letter-spacing: 0.06em;
+                    text-transform: uppercase;
+                    color: #259F76;
+                }
+                a:hover{
+                    text-decoration: none;
+                }
+                .form-control{
+                    border: 0px;
+                    background: right;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 17px;
+                    color: #0D1815;
+                    opacity: 0.3;
+                    padding-left: 0;
+                }
+                span.count{
+                    position: absolute;
+                    right: 36px;
+                    bottom: 10px;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 11px;
+                    line-height: 13px;
+                    text-align: right;
+                    letter-spacing: 0.03em;
+                    text-transform: uppercase;
+                    color: #0D1815;
+                    opacity: 0.5;
+                }
+                .ldiv{
+                    span{
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 14px;
+                        line-height: 17px;
+                        color: #0D1815;
+                    }
+                }
+                .upload-div{
+                    width: 235px;
+                    height: 300px;
+                    position: absolute;
+                    bottom: 15px;
+                    background: #E6F6F4;
+                    border: 1px dashed #6CD9B3;
+                    border-radius: 5px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    left: 32%;
+                    @media(min-width:1200px) and (max-width:1399px){
+                        left:28%
+                    }
+                    @media(min-width:992px) and (max-width:1199px){
+                        left:23%
+                    }
+                    @media(min-width:768px) and (max-width:991px){
+                        left:31%
+                    }
+                    @media(min-width:575px) and (max-width:767px){
+                        left:23%
+                    }
+                    @media(min-width:421px) and (max-width:574px){
+                        left:23%
+                    }
+                    @media(min-width:375px) and (max-width:420px){
+                        left:20%
+                    }
+                    @media(min-width:361px) and (max-width:375px){
+                        left:18%
+                    }
+                    @media(max-width:360px){
+                        left:15%;
+                    }
+                    span{
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 13px;
+                        line-height: 20px;
+                        text-align: center;
+                        letter-spacing: 0.01em;
+                        color: #0D1815;
+                        opacity: 0.6;
+                        display: block;
+                    }
+                }                
+            }
+            .bg-white{
+                background: #fff;
+            }
+            .bg-grn.wpic{
+                width: 185px;
+                @media(max-width: 575px){
+                    width: 100%;
+                }
+            }           
+        }
+        span.sen-cnt{
+            font-style: normal;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 20px;
+            text-align: center;
+            color: #0D1815;
+            opacity: 0.6;
+            display: block;
+        }
+        .con-wal-btn{
+            width: 290px;
+            height: 65px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #259F76;
+            border-radius: 37.5px;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 19px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            border: 2px solid #259F76;
+            cursor: pointer;
+            margin: 1.5rem auto 0;
+            @media(max-width: 575px){
+                width: 100%;
+            }
+        }
+        .con-wal-btn:hover{
+            border: 2px solid #259F76;
+            color:#259F76;
+            transition: all .5s;
+            background: transparent;
+        }
+    }
+}
+@media(max-width:575px){
+    .mob-padd-0{
+        padding: 0;
+    }
+}

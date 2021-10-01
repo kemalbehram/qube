@@ -1,0 +1,758 @@
+.nft-det-page{
+    h3{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 43px;
+        line-height: 52px;
+        text-align: center;
+        letter-spacing: -0.005em;
+        text-transform: uppercase;
+        color: #0D1815;
+        @media(max-width: 575px){
+            font-size: 31px;
+        }
+    }
+    p{
+        font-style: normal;
+        font-weight: 500;
+        font-size: 13px;
+        line-height: 19px;
+        text-align: center;
+        letter-spacing: 0.005em;
+        color: #0D1815;
+        opacity: 0.6;
+    }
+    .art-work-div{
+        background: #FFFFFF;
+        box-shadow: 0px 2px 10px rgba(45, 186, 137, 0.15);
+        border-radius: 5px;
+        @media(max-width:991px){
+            display: none;
+        }
+        .my-art-works-btn{
+            background: #259F76;
+            border-radius: 37.5px;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            border:2px solid transparent;
+            width: 100%;
+            height: 40px;
+            cursor: pointer;
+        }
+        .my-art-works-btn:hover{
+            border: 2px solid rgba(37, 159, 118, 0.3);
+            box-sizing: border-box;
+            border-radius: 37.5px;
+            color: #259F76;
+            transition: all.5s;
+            background: transparent;
+        }
+        .mint-art-works-btn{
+            border: 2px solid rgba(37, 159, 118, 0.3);
+            border-radius: 37.5px;
+            color: #259F76;
+            background: transparent;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 15px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            width: 100%;
+            height: 40px;
+            cursor: pointer;
+        }
+        .mint-art-works-btn:hover{
+            background: #259F76;
+            border-radius: 37.5px;
+            color: #FFFFFF;
+            transition: all.5s;
+        }
+        .featured-artists-div{
+            h4{
+                font-style: normal;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 17px;
+                letter-spacing: 0.015em;
+                text-transform: uppercase;
+                color: #259F76;
+                margin-bottom: 1rem;
+            }
+            a{                
+                display: block;
+                margin-bottom: 0.5rem;                                
+                display: flex;
+                align-items: center;
+                span{
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 13px;
+                    line-height: 16px;
+                    letter-spacing: 0.005em;
+                    color: #0D1815;
+                    opacity: 0.6;
+                    width: auto;
+                    padding: 6px 10px;
+                    background: transparent;
+                    @media(min-width: 992px) and (max-width: 1199px){
+                        font-size: 12px;
+                    }
+                }
+            }
+            a:hover{
+                text-decoration: none;
+                span{
+                    background: #259F76;
+                    border-radius: 12px;
+                    color: #fff;
+                    transition: all .5s;
+                    opacity: 1;
+                    text-decoration: none;
+                }
+            }
+        }        
+    }
+    .search-bg{
+        background: #fff;
+        padding: 1rem;
+        box-shadow: 0px 2px 10px rgba(45, 186, 137, 0.15);
+        border-radius: 5px;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media(max-width:991px){
+            display: none;
+        }
+        .ldiv{
+            display: flex;
+            align-items: center;
+            .has-search{
+                position: relative;
+                .form-control{
+                    height: 45px;
+                    background: #E6F6F4;
+                    border-radius: 3px;
+                    border-color: transparent;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 14px;
+                    line-height: 17px;
+                    letter-spacing: 0.005em;
+                    color: #0D1815;
+                    opacity: 0.8;
+                }
+                .form-control-feedback {
+                    position: absolute;
+                    z-index: 2;
+                    display: block;
+                    width: 2.375rem;
+                    height: 2.375rem;
+                    line-height: 2.375rem;
+                    text-align: center;
+                    pointer-events: none;
+                    color: #259F76;
+                    bottom: 5px;
+                    right: 0px;
+                }                
+            }
+            span{
+                font-style: normal;
+                font-weight: 500;
+                font-size: 13px;
+                line-height: 16px;
+                letter-spacing: 0.005em;
+                color: #0D1815;
+                opacity: 0.4;
+            }
+        }
+        .rdiv{
+            display: flex;
+            align-items: center;
+            .btn-group{
+                .btn-primary{
+                    background: transparent;
+                    border:0px;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 17px;
+                    letter-spacing: 0.005em;
+                    color: #0D1815;
+                    opacity: 0.6;
+                }
+                .btn-primary:after{
+                    display: none;
+                }
+                .btn-primary:focus{
+                    box-shadow: none;
+                }
+                .dropdown-menu.show{
+                    background: #FFFFFF;
+                    box-shadow: 0px 2px 10px rgba(45, 186, 137, 0.15);
+                    border-radius: 5px;
+                    border: 0px;
+                    a.dropdown-item{
+                        font-size: 13px;
+                        color: #0D1815;
+                        opacity: 0.6;
+                    }
+                    a.dropdown-item:hover{
+                        background: transparent;
+                        color: #259F76;
+                        transition: all .5s;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+    .product-div{
+        .title-div{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            @media(max-width:575px){
+                display: block;
+                margin-bottom: 1rem;
+            }
+            h3{
+                font-style: normal;
+                font-weight: bold;
+                font-size: 22px;
+                line-height: 27px;
+                display: flex;
+                align-items: center;
+                letter-spacing: 0.005em;
+                text-transform: uppercase;
+                color: #0D1815;
+            }
+            .btn-group{
+                .btn-primary{
+                    background: transparent;
+                    border:0px;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 17px;
+                    letter-spacing: 0.005em;
+                    color: #0D1815;
+                    opacity: 0.6;
+                }
+                .btn-primary:after{
+                    display: none;
+                }
+                .btn-primary:focus{
+                    box-shadow: none;
+                }
+                .dropdown-menu.show{
+                    background: #FFFFFF;
+                    box-shadow: 0px 2px 10px rgba(45, 186, 137, 0.15);
+                    border-radius: 5px;
+                    border: 0px;
+                    a.dropdown-item{
+                        font-size: 13px;
+                        color: #0D1815;
+                        opacity: 0.6;
+                    }
+                    a.dropdown-item:hover{
+                        background: transparent;
+                        color: #259F76;
+                        transition: all .5s;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        img.res-img{
+            @media(max-width: 991px){
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+        .det-cnt{
+            background: #fff;            
+            border-radius: 5px;
+            box-shadow: 0px 2px 10px rgba(45, 186, 137, 0.15);
+            h5{
+                font-style: normal;
+                font-weight: 600;
+                font-size: 21px;
+                line-height: 28px;
+                letter-spacing: -0.005em;
+                color: #0D1815;
+                margin-bottom: 1rem;
+                min-height: 56px;
+                @media(max-width: 1199px) and (min-width: 992px){
+                    font-size: 16px;
+                }
+            }
+            p{
+                font-style: normal;
+                font-weight: 500;
+                font-size: 13px;
+                line-height: 16px;
+                letter-spacing: 0.005em;
+                color: #0D1815;
+                opacity: 0.6;
+                text-align: left;
+            }
+            .like-div{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .ldiv{
+                    span{
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 13px;
+                        line-height: 16px;
+                        letter-spacing: 0.005em;
+                        color: #0D1815;
+                        opacity: 0.4;
+                    }
+                }
+                .rdiv{
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 17px;
+                    text-align: right;
+                    letter-spacing: 0.005em;
+                    text-transform: uppercase;
+                    color: #259F76;
+                }
+            }
+            .con-wal-btn{
+                border: 2px solid #259F76;
+                border-radius: 37.5px;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 17px;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                color: #259F76;
+                height: 40px;
+                background: transparent;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+            .con-wal-btn:hover{
+                background: #259F76;
+                color: #fff;
+                transition: all .5s;
+            }
+        }
+        .more-btn{
+            background: #259F76;
+            color: #fff;
+            border: 2px solid #259F76;
+            border-radius: 37.5px;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 17px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            width: 300px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .more-btn:hover{
+            border: 2px solid #259F76;
+            color: #259F76;
+            transition: all .5s;
+            background: transparent;
+        }
+    }
+    .nft-details-cnt-div{
+        background: #FFFFFF;
+        box-shadow: 0px 2px 10px rgba(45, 186, 137, 0.15);
+        border-radius: 5px;        
+        .img-div{
+            position: relative; 
+            span{
+                font-style: normal;
+                font-weight: bold;
+                font-size: 10px;
+                line-height: 12px;
+                display: flex;
+                align-items: center;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                color: #FFFFFF;
+                background: #000;
+                width: 61px;
+                height: 21px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+        }
+        .details-content{
+            @media(max-width:767px){
+                margin-top: 1rem;
+            }
+            h4{
+                font-style: normal;
+                font-weight: 600;
+                font-size: 30px;
+                line-height: 38px;
+                letter-spacing: -0.005em;
+                color: #0D1815;
+            }
+            p{
+                text-align: left;
+                span{
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 13px;
+                    line-height: 16px;
+                    letter-spacing: 0.005em;                    
+                    color: #0D1815;                    
+                    opacity: 0.6; 
+                }
+                span.val{
+                    opacity: 1;
+                    color: #0D1815;
+                }
+            }
+            p{
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 23px;
+                letter-spacing: 0.005em;
+                color: #0D1815;
+                opacity: 0.6;
+            }
+            .like-det-div{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                h6{
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 24px;
+                    line-height: 29px;
+                    letter-spacing: 0.005em;
+                    text-transform: uppercase;
+                    color: #259F76;
+                }
+                .rdiv{
+                    display: flex;
+                    align-items: center;
+                    span{
+                        font-style: normal;
+                        font-weight: bold;
+                        font-size: 21px;
+                        line-height: 25px;
+                        letter-spacing: 0.005em;
+                        color: #0D1815;
+                    }
+                }
+            }
+            .wal-rep-div{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                @media(max-width:575px){
+                    display: block;
+                }
+                .con-wal-btn{
+                    border: 2px solid #259F76;
+                    border-radius: 37.5px;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 17px;
+                    letter-spacing: 0.02em;
+                    text-transform: uppercase;
+                    color: #259F76;
+                    height: 50px;
+                    background: transparent;
+                    width: 200px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    @media(max-width:575px){
+                        width: 100%;
+                        margin-bottom: 1rem;
+                    }
+                }
+                .con-wal-btn:hover{
+                    background: #259F76;
+                    color: #fff;
+                    transition: all .5s;
+                }
+                span{
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 11px;
+                    line-height: 20px;
+                    text-align: right;
+                    color: #0D1815;
+                    opacity: 0.6;
+                    @media(max-width:575px){
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                    }
+                }
+            }
+            .contract-div{
+                background: #E6F6F4;
+                border-radius: 6px;
+                span{
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 13px;
+                    line-height: 16px;
+                    letter-spacing: 0.005em;
+                    color: #000000;
+                    @media(min-width:992px) and (max-width: 1199px){
+                        font-size: 12px;
+                    }
+                }
+                span.val{
+                    color: #259F76;
+                    font-weight: 600;;
+                }
+            }
+        }
+        .bid-table{
+            h5{
+                font-style: normal;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 17px;
+                letter-spacing: 0.015em;
+                text-transform: uppercase;
+                color: #259F76;
+            }
+            table{
+                thead{
+                    th{
+                        border-top:0px;
+                        border-bottom: 0px;
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 10px;
+                        line-height: 11px;
+                        letter-spacing: 0.01em;
+                        text-transform: uppercase;
+                        color: #0D1815;
+                        opacity: 0.6;
+                    }
+                    th:last-child{
+                        text-align: right;
+                    }
+                }
+                tbody tr{
+                    td{
+                        border-top:0px;
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 13px;
+                        line-height: 16px;
+                        letter-spacing: 0.005em;
+                        color: #0D1815;
+                        height: 50px;
+                        vertical-align: middle;
+                        white-space: nowrap;
+
+                    }
+                    td:last-child{
+                        text-align: right;
+                    }
+                    td.val{
+                        color: #259F76;
+                    }
+                }
+                tbody tr:nth-child(odd){
+                    background: #F0FBF9;
+                }
+            }
+        }
+    }
+    @media(max-width:991px){
+        .search-bg-mob{
+            background: #fff;
+            padding: 1rem;
+            box-shadow: 0px 2px 10px rgba(45, 186, 137, 0.15);
+            border-radius: 5px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .ldiv{
+                width: 100%;           
+                .has-search{
+                    position: relative;
+                    .form-control{
+                        height: 45px;
+                        background: #E6F6F4;
+                        border-radius: 3px;
+                        border-color: transparent;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 14px;
+                        line-height: 17px;
+                        letter-spacing: 0.005em;
+                        color: #0D1815;
+                        opacity: 0.8;
+                    }
+                    .form-control-feedback {
+                        position: absolute;
+                        z-index: 2;
+                        display: block;
+                        width: 2.375rem;
+                        height: 2.375rem;
+                        line-height: 2.375rem;
+                        text-align: center;
+                        pointer-events: none;
+                        color: #259F76;
+                        bottom: 5px;
+                        right: 0px;
+                    }                
+                }
+                span{
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 13px;
+                    line-height: 16px;
+                    letter-spacing: 0.005em;
+                    color: #0D1815;
+                    opacity: 0.4;
+                }
+            }
+        }
+        .art-work-div-mob{
+            .my-art-works-btn{
+                background: #259F76;
+                border-radius: 37.5px;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 12px;
+                line-height: 15px;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                color: #FFFFFF;
+                border:2px solid transparent;
+                width: 100%;
+                height: 40px;
+                cursor: pointer;
+            }
+            .my-art-works-btn:hover{
+                border: 2px solid rgba(37, 159, 118, 0.3);
+                box-sizing: border-box;
+                border-radius: 37.5px;
+                color: #259F76;
+                transition: all.5s;
+                background: transparent;
+            }
+            .mint-art-works-btn{
+                border: 2px solid rgba(37, 159, 118, 0.3);
+                border-radius: 37.5px;
+                color: #259F76;
+                background: transparent;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 12px;
+                line-height: 15px;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                width: 100%;
+                height: 40px;
+                cursor: pointer;
+            }
+            .mint-art-works-btn:hover{
+                background: #259F76;
+                border-radius: 37.5px;
+                color: #FFFFFF;
+                transition: all.5s;
+            }
+        }
+        .art-work-div-mob-search{       
+            .featured-artists-div{
+                h4{
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 17px;
+                    letter-spacing: 0.015em;
+                    text-transform: uppercase;
+                    color: #259F76;
+                    margin-bottom: 1rem;
+                }
+                a{                
+                    display: block;
+                    margin-bottom: 0.5rem;                                
+                    display: flex;
+                    align-items: center;
+                    span{
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 13px;
+                        line-height: 16px;
+                        letter-spacing: 0.005em;
+                        color: #0D1815;
+                        opacity: 0.6;
+                        width: auto;
+                        padding: 6px 10px;
+                        background: transparent;
+                        @media(min-width: 992px) and (max-width: 1199px){
+                            font-size: 12px;
+                        }
+                    }
+                }
+                a:hover{
+                    text-decoration: none;
+                    span{
+                        background: #259F76;
+                        border-radius: 12px;
+                        color: #fff;
+                        transition: all .5s;
+                        opacity: 1;
+                        text-decoration: none;
+                    }
+                }
+            }        
+        }
+    }
+    @media(min-width: 992px){
+        .search-bg-mob, .art-work-div-mob{
+            display: none;
+        }        
+    }
+    @media(min-width:768px) and (max-width:991px){
+        .art-work-div-mob{
+            display: flex;
+            .mint-art-works-btn{
+                margin-left:5px;
+            }
+        }
+    }
+}
+@media(max-width:575px){
+    .mob-padd-0{
+        padding: 0;
+    }
+}

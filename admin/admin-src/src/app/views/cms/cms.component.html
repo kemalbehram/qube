@@ -1,0 +1,162 @@
+<div class="card">
+    <div class="card-header" style="background-color:#2f353a;color:#33adff;">
+          <i class="fa fa-align-justify"></i> Detached Pool History
+        </div>
+
+
+<!-- <h4 style="padding-left: 425px;">Manage Users</h4> -->
+<div class="tabcntcls" style=" -webkit-transition: all 1s ease;transition: all 1s ease;padding: 25px;">
+  <div class="row ">
+    <div class="col-md-9 align-items-center" style="display: inline-flex;">
+      <span>Display : </span>
+      <select (change)="changeRowLimits($event)" style="width: auto;background: transparent;height: 30px;margin-left: 5px;">
+          <option *ngFor="let limit of rowLimits" [value]="limit.value">{{limit.key}}</option>
+      </select>
+
+      <div class="input-group-btn" style="margin-left: 10px;">
+        <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="resetuserlist()">
+           <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="col-md-3 p-2">
+
+        <div class="input-group">
+          <input type="text" [(ngModel)]="defsearch" class="form-control" placeholder="Search" id="txtSearch" (keyup.enter)="updateFilter()"  
+          (keyfocus)="updateFilter()"/>
+          <div class="input-group-btn">
+            <button class="btn btn-primary" style="cursor:pointer;margin-left: -2px;" type="submit" (click)="updateFilter()">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="table-responsive tab_top">
+    <ngx-datatable #usertable class="bootstrap table table-bordered table-striped mb-0 material" [ngClass]="{'table-loaders': table_loader == true }"
+
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+    [rowHeight]="'auto'" [(limit)]="limit" [rows]='userrows' [externalPaging]="true"
+        [count]="page.totalElements"
+        [offset]="page.pageNumber"
+        [limit]="page.size"
+        [scrollbarH]="true"
+        (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [loadingIndicator]="loading">
+
+    <ngx-datatable-column name="S.No" [width]="50">
+      <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+        <!-- {{row.$$index + 1}} -->
+        <!-- {{rowIndex + 1}} -->
+        {{(page.pageNumber*page.size)+(rowIndex + 1)}}
+      </ng-template>
+    </ngx-datatable-column>
+
+
+    <ngx-datatable-column name="Pair">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.pair}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="User Address">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.user_address}}
+      </ng-template>
+    </ngx-datatable-column>
+    
+    <ngx-datatable-column name="Removed %">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.percentage}}
+      </ng-template>
+    </ngx-datatable-column> 
+
+    <ngx-datatable-column name="Removed Pool Balance" [width]="180">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.balance}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <!-- <ngx-datatable-column name="Removed Pool Balance">
+      <ng-template let-value="value" let-row="row" ngx-datatablsse-cell-template>
+        {{row.balance}}
+      </ng-template>
+    </ngx-datatable-column> -->
+
+    <ngx-datatable-column name="Txn Id" [width]="100">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <a href="https://testnet.bscscan.com/tx/{{row.tx_id}}" target="_blank">{{row.tx_id}}</a>
+      </ng-template>
+    </ngx-datatable-column>
+    
+    <ngx-datatable-column name="Status">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.status}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Created At">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.created_date |date:'medium'}}
+      </ng-template>
+    </ngx-datatable-column>
+  
+    </ngx-datatable>
+  </div>
+</div>
+</div>
+<ng-template #cmscontent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title text-uppercase">Edit Cms</h6>
+      <button type="button" class="close" aria-label="Close" (click)="cancelcms();d('Cross click')"  ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group row">
+        <label for="example-text-input" class="col-3 col-form-label">Page Title</label>
+        <div class="col-9">
+          <input type="text" id="cmspagetitle" style="cursor:not-allowed;" class="form-control" placeholder="Page Title"
+           [(ngModel)]="editcms.title" required (change)="changeeditcmsevent($event)" disabled="true" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-text-input" class="col-3 col-form-label">Page Content</label>
+        <div class="col-9">
+          <ckeditor name="editor1" [(ngModel)]="editcms.pagecontent"
+          (ngModelChange)="changeeditcmsevent($event)" 
+          [config]="ckeConfig" ></ckeditor>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" [disabled]="diseditcms" style="cursor:pointer;background-color:#30CE6A;" class="btn btn-info cursorcls" (click)="saveEditCMS();c('Close click')">Submit</button>
+      <button type="button" style="cursor:pointer;" class="btn btn-secondary cursorcls" (click)="cancelcms();c('Close click')">Close</button>
+    </div>
+</ng-template>
+ <!-- <div class="col-md-9 mb-4"> -->
+ <!-- <tabset>
+      <tab heading="Home Page Content">
+      <div class="card">
+      <div class="card-header">
+      <strong>General Settings</strong> 
+      </div>
+      <div class="card-body">
+      1. Firat.
+      </div>
+      <div class="card-footer" style="text-align: center;">
+      </div>
+      </div>
+      </tab>
+        <tab heading="Profile">
+          2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </tab>
+        <tab heading="Messages">
+          3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </tab>
+      </tabset> -->
+    <!-- </div> -->

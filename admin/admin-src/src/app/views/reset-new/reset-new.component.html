@@ -1,0 +1,44 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <h2 class="title" style="text-align: center;"><img src="{{site}}" width="100px"/></h2>
+      			<h4 class="form-text sub-title" style="color: #2b0c5b;">Forgot Password</h4>
+                <form #requestPassForm="ngForm"  (ngSubmit)=" onSubmit()" >
+                <label>Password</label> 
+            		<input name="password" [(ngModel)]="user.password" type="password" id="res-input-password"
+                 class="form-control" placeholder="Enter Password" #password="ngModel"
+                 [class.form-control-danger]="password.invalid && password.touched" required
+                 pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+                 [minlength]="8"
+                 [maxlength]="12"><br>
+                <small style="color: red;" class="form-text error text-left" *ngIf="password.invalid && password.touched && password.errors?.required">Password is required</small>
+                <small  style="color: red;"class="form-text error text-left" *ngIf="password.invalid && password.touched && password.errors?.pattern">Password should be 8 character ,atleast 1 Upper case,1 Lower Case ,1 Number and 1 Special character.Space are not allowed</small>
+                <label>Confirm Password</label>
+         	      <input name="rePass" [(ngModel)]="user.confirmPassword" type="password" id="res-input-re-password" class="form-control" placeholder="Enter Password" #rePass="ngModel"
+                [class.form-control-danger]="(rePass.invalid || password.value != rePass.value) && rePass.touched"
+                required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" ><br>
+                <small style="color: red;" class="form-text error" *ngIf="rePass.invalid && rePass.touched && rePass.errors?.required">Password confirmation is required!
+                </small>
+                <small style="color: red;" class="form-text error text-left" *ngIf="rePass.touched && password.value != rePass.value && !rePass.errors?.required">Password does not match password confirmation</small>
+                 <div class="google_captcha">
+               <!-- <re-captcha (resolved)="resolved($event)" siteKey="6Ld9bMkUAAAAAOUHW1ZOE71W2WT0NM833JjPG_tj"></re-captcha> -->
+               <re-captcha (resolved)="resolved($event)" siteKey="{{captchakey}}"></re-captcha>
+               <!-- Demo -->
+               <!-- <re-captcha (resolved)="resolved($event)" siteKey="6LcnX9gZAAAAAPvazhGjL-tqJPxk271UHFe00GV1"></re-captcha> -->
+             </div>
+              <button class="btn btn-lg btn-block"  type="submit"  class="bx-btn" >Save Password</button>
+                </form>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

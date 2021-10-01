@@ -1,0 +1,196 @@
+.launchpad-det-page{
+    h3{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 43px;
+        line-height: 52px;
+        text-align: center;
+        letter-spacing: -0.005em;
+        text-transform: uppercase;
+        color: #0D1815;
+        @media(max-width: 575px){
+            font-size: 31px;
+        }
+    }
+    .cnt-div{
+        position: relative;
+        span.badge{
+            font-style: normal;
+            font-weight: bold;
+            font-size: 10px;
+            line-height: 12px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            background: #F54D36;
+            border-radius: 3px;
+            width: 51px;
+            height: 21px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top:10px;
+            left:10px;
+        }
+        .cnt-det-div{
+            background: #fff;
+            box-shadow: 0px 2px 10px rgba(45, 186, 137, 0.15);
+            border-radius: 5px;
+            .bord-bot{
+                border-bottom: 1px solid rgba(45, 186, 137, 0.1);;
+            }
+            h5{
+                font-style: normal;
+                font-weight: bold;
+                font-size: 24px;
+                line-height: 29px;
+                letter-spacing: -0.005em;
+                color: #0D1815;
+                margin-bottom: 1rem;
+            }
+            .img-div{
+                height: 130px;
+            }
+            .con-wal-btn{
+                border: 2px solid #259F76;
+                background: transparent;
+                border-radius: 37.5px;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 17px;
+                letter-spacing: 0.02em;
+                text-transform: uppercase;
+                color: #259F76;
+                height: 50px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                margin: 1.5rem 0;
+                img{
+                    border-radius: 5px;
+                }
+            }
+            .con-wal-btn:hover{
+                background: #259F76;
+                color: #fff;
+                transition: all .5s;
+            }
+            span{
+                font-style: normal;
+                font-weight: 500;
+                font-size: 13px;
+                line-height: 16px;
+                letter-spacing: 0.01em;
+                color: #000;
+            }
+            span.val{                
+                color: #259F76;
+                font-weight: 600;
+                opacity: 1;                
+            }
+            span.time{                
+                color: #0D1815;
+                font-weight: 600;
+                opacity: 0.6;                
+            }
+            .form-group{
+                position: relative;
+                .input-group{
+                    .form-control{
+                        background: #E6F6F4;
+                        border-radius: 6px;    
+                        border: 0px;
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                        font-style: normal;
+                        font-weight: bold;
+                        font-size: 26px;
+                        line-height: 31px;
+                        letter-spacing: -0.015em;
+                        text-transform: uppercase;
+                        color: #8F9E9A;
+                        height: 50px;
+                    }
+                    .input-group-append{
+                        span{
+                            background: #E6F6F4;
+                            border-radius: 6px;
+                            border: 0px;
+                            border-top-left-radius: 0;
+                            border-bottom-left-radius: 0;
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 12px;
+                            line-height: 15px;
+                            letter-spacing: 0.04em;
+                            text-transform: uppercase;
+                            color: #259F76;
+                        }
+                    }
+                }
+                select.form-control{
+                    background: #E6F6F4;
+                    border-radius: 6px;    
+                    border: 0px;
+                    height: 50px;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 17px;
+                    color: #0D1815;
+                    appearance: none;
+                }
+                img{
+                    position: absolute;
+                    bottom: 20px;
+                    right: 10px;
+                }
+                .con-wal-btn{
+                    border: 2px solid #259F76;
+                    background: #259F76;
+                    border-radius: 37.5px;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 17px;
+                    letter-spacing: 0.02em;
+                    text-transform: uppercase;
+                    color: #fff;
+                    height: 50px;
+                    width: 300px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    margin: 0 auto;
+                    img{
+                        border-radius: 5px;
+                    }
+                }
+                .con-wal-btn:hover{
+                    background: transparent;
+                    color: #259F76;
+                    transition: all .5s;
+                    border: 2px solid #259F76;
+                }
+            }    
+        }
+        .details-cnt{
+            p{
+                font-style: normal;
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 23px;
+                letter-spacing: 0.005em;
+                color: #0D1815;
+                opacity: 0.5;
+            }
+        }
+    }
+}

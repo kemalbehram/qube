@@ -1,0 +1,98 @@
+<div class="card">
+    <div class="card-header" style="background-color:#2f353a;color:#33adff;">
+          <i class="fa fa-align-justify"></i> Lending Assets
+        </div>
+
+
+<!-- <h4 style="padding-left: 425px;">Manage Users</h4> -->
+<div class="tabcntcls" style=" -webkit-transition: all 1s ease;transition: all 1s ease;padding: 25px;">
+  <div class="row">
+    <div class="col-md-9 align-items-center" style="display: inline-flex;padding-left: 0px;">
+      <span>Display : </span>
+      <select (change)="changeRowLimits($event)" style="width: auto;background: transparent;height: 30px;margin-left: 5px;">
+          <option *ngFor="let limit of rowLimits" [value]="limit.value">{{limit.key}}</option>
+      </select>
+
+      <div class="input-group-btn" style="margin-left: 10px;">
+        <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="resetuserlist()">
+           <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="col-md-3 p-2">
+
+        <div class="input-group">
+          <input type="text" [(ngModel)]="defsearch" class="form-control" placeholder="Search" id="txtSearch" (keyup.enter)="updateFilter()"  
+          (keyfocus)="updateFilter()"/>
+          <div class="input-group-btn">
+            <button class="btn btn-primary" style="cursor:pointer;margin-left: -2px;" type="submit" (click)="updateFilter()">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="table-responsive tab_top">
+    <ngx-datatable #usertable class="bootstrap table table-bordered table-striped mb-0 material" [ngClass]="{'loaders': dataLoader == true }"
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+    [rowHeight]="'auto'" [(limit)]="limit" [rows]='userrows' [externalPaging]="true"
+        [count]="page.totalElements"
+        [offset]="page.pageNumber"
+        [limit]="page.size"
+        [scrollbarH]="true"
+        (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [loadingIndicator]="loading">
+
+    <ngx-datatable-column name="SNO" [width]="50">
+      <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+        <!-- {{row.$$index + 1}} -->
+        <!-- {{rowIndex + 1}} -->
+        {{(page.pageNumber*page.size)+(rowIndex + 1)}}
+      </ng-template>
+    </ngx-datatable-column>
+        <ngx-datatable-column name="Asset Name">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.asset_name}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Asset Address">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.asset_address}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Amount">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.amount}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Txn Id">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.tx_id}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="User Address">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.user_address}}
+      </ng-template>
+    </ngx-datatable-column>
+     <ngx-datatable-column name="Date & Time">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.created_date  | date:'medium'}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Status" prop="status">
+      <ng-template let-value="value" let-row="row" >
+    
+      <span class="tfadisable"  *ngIf="row.status ==Active"  style="color: green;" >Active</span>
+     <span class="enable"  *ngIf="row.status==Deactive"  style="color: red;">Deactive </span>
+        </ng-template>
+      </ngx-datatable-column>   
+    </ngx-datatable>
+  </div>
+</div>
+</div>

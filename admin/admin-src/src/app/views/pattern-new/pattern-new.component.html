@@ -1,0 +1,39 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <h2 class="title" style="text-align: center;"><img src="{{site}}" width="100px"/></h2>
+      			<h4 class="form-text sub-title" style="color: #2b0c5b;">Forgot Pattern</h4>
+                <form #requestPassForm="ngForm"  (ngSubmit)=" onSubmit()" >
+                <label>Pattern</label> 
+            		  <div class="input-group mb-4">
+                     <div id="patternContainer"></div>
+                <input type="hidden" name="pattern_code" id="patterncode">
+                  </div>
+                <label>Confirm Pattern</label>
+         	        <div class="input-group mb-4">
+                     <div id="patternContainer1"></div>
+                <input type="hidden" name="pattern_code" id="patterncode1">
+                  </div>
+                 <div class="google_captcha">
+               <!-- <re-captcha (resolved)="resolved($event)" siteKey="6Ld9bMkUAAAAAOUHW1ZOE71W2WT0NM833JjPG_tj"></re-captcha> -->
+
+               <re-captcha (resolved)="resolved($event)" siteKey="{{captchakey}}"></re-captcha>
+               <!-- Demo -->
+             <!--  <re-captcha (resolved)="resolved($event)" siteKey="6LcnX9gZAAAAAPvazhGjL-tqJPxk271UHFe00GV1"></re-captcha> -->
+              </div> 
+              <button class="buttun"  type="submit" >Save Pattern</button>
+                </form>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

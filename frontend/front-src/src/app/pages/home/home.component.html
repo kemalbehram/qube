@@ -1,0 +1,1886 @@
+<div class="container">
+  <div class="banner-sec mb-5">
+    <div data-slick='{"slidesToShow": 1, "slidesToScroll": 1}' class="slider">
+      <div *ngFor="let ads of banner" class="banner-bg-slider" [ngStyle]="show && {background: 'url(' + ads.image + ')no-repeat center'}" style="background-size: cover;height: 235px;border-radius: 5px;">     
+        <div class="banner-caption" *ngIf="show">
+        <!-- <div class="banner-caption"> -->
+          <h6>{{ads.heading1}}</h6>
+          <h5>{{ads.heading2}}</h5>
+          <div class="banner-nft-div">
+            <h3>{{ads.heading3}}</h3>
+            <button class="btn banner-nft-btn ml-3">{{ads.button_txt}}</button>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="banner-bg-slider" style="background: url('/assets/images/bannerbg.png') no-repeat center;background-size: cover;height: 235px;border-radius: 5px;">     
+        <div class="banner-caption">
+          <h6>Minting</h6>
+          <h5>VIDEO & AUDIO</h5>
+          <div class="banner-nft-div">
+            <h3>NFT</h3>
+            <button class="btn banner-nft-btn ml-3">GO TO NFT SUPERMARKET</button>
+          </div>
+        </div>
+      </div>
+      <div class="banner-bg-slider" style="background: url('/assets/images/bannerbg.png') no-repeat center;background-size: cover;height: 235px;">     
+        <div class="banner-caption">
+          <h6>Minting</h6>
+          <h5>VIDEO & AUDIO</h5>
+          <div class="banner-nft-div">
+            <h3>NFT</h3>
+            <button class="btn banner-nft-btn ml-3">GO TO NFT SUPERMARKET</button>
+          </div>
+        </div>
+      </div>
+      <div class="banner-bg-slider" style="background: url('/assets/images/bannerbg.png') no-repeat center;background-size: cover;height: 235px;">      
+        <div class="banner-caption">
+          <h6>Minting</h6>
+          <h5>VIDEO & AUDIO</h5>
+          <div class="banner-nft-div">
+            <h3>NFT</h3>
+            <button class="btn banner-nft-btn ml-3">GO TO NFT SUPERMARKET</button>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="hottest-staking-sec mb-4">
+    <h3 class="mb-4"><img src="assets/images/star.png" class="mr-2">Hottest Staking</h3>
+    <div class="row">
+      <div class="col-lg-9 mb-3">
+        <div data-slick='{"rows":2}' class="hot-stake-slider">
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/btc-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>BTCB to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/monero-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>XMR to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/eth-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>ETH to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/doge-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>DASH to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/btc-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>BTCB to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/monero-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>XMR to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/eth-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>ETH to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/doge-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>DASH to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/btc-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>BTCB to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/monero-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>XMR to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>        
+        </div>
+        <div class="hot-stake-slider hot-stake-slider-mob">
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/btc-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>BTCB to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/btc-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>BTCB to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/btc-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>BTCB to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/btc-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>BTCB to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/btc-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>BTCB to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+          <div class="hot-stake-slider-div">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="assets/images/btc-stake.png" class="coin-img">
+              <div class="cont-div">
+                <h3>BTCB to QUBE</h3>
+                <div class="cont-det-div">
+                  <span>Deposit:</span>
+                  <span class="val">BTCB</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>Earn:</span>
+                  <span class="val">QUBE</span>
+                </div>
+                <div class="cont-det-div">
+                  <span>ROI:</span>
+                  <span class="val">1</span>
+                </div>
+              </div>
+              <button class="btn select-btn">Select</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 pl-lg-2">
+        <div class="bal-price-div p-3">
+          <div class="balance-div">
+            <div class="balance-det-div mb-3 row">
+              <div class="l-div col-6">
+                <span>Your QUBE balance</span>
+                <h4><img src="assets/images/lock.png" class="mr-2">Locked</h4>
+              </div>
+              <div class="rdiv col-6">
+                <span>Pending harvest</span>
+                <h4>0.000</h4>
+              </div>
+            </div>
+            <div class="balance-det-div row">
+              <div class="l-div col-6">
+                <span>QUBE in circulation</span>
+                <h4>139,611,798</h4>
+              </div>
+              <div class="rdiv col-6">
+                <span>QUBE burned</span>
+                <h4>441,755,198</h4>
+              </div>
+            </div>
+          </div>
+          <div class="balance-div">
+            <div class="balance-det-div mb-3 row">
+              <div class="l-div col-6">
+                <span>QUBE price</span>
+                <h4>$1.078</h4>
+              </div>
+              <div class="rdiv col-6">
+                <span>QUBE Market Cap</span>
+                <h4>$150,529,440</h4>
+              </div>
+            </div>
+            <div class="balance-det-div row">
+              <div class="l-div col-6">
+                <span>TVL</span>
+                <h4>$153,042,736</h4>
+              </div>
+              <div class="rdiv col-6">
+                <span>Volume (24h)</span>
+                <h4>$18,151,789</h4>
+              </div>
+            </div>
+          </div>
+          <div class="balance-div">
+            <div class="balance-det-div mb-3 row">
+              <div class="l-div col-6">
+                <span>Minted NFT</span>
+                <h4>66,234</h4>
+              </div>
+              <div class="rdiv col-6">
+                <span>NFT Transactions</span>
+                <h4>204,716</h4>
+              </div>
+            </div>
+            <div class="balance-det-div row">
+              <div class="l-div col-6">
+                <span>NFT Trading Vol</span>
+                <h4>27,654,365</h4>
+              </div>
+              <div class="rdiv col-6">
+                <span>QUBE locked by NFT</span>
+                <h4>12,185,312</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dex-exchange-div p-4">
+          <div class="ldiv">
+            <h5>Dex<br>Exchange</h5>
+            <p>Convert more currencies</p>
+          </div>
+          <img src="assets/images/convert.png" class="img-fluid">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="hottest-artworks-sec mb-4">
+    <h3 class="mb-4"><img src="assets/images/star.png" class="mr-2">Hottest Artworks</h3>
+    <div class="row">
+      <div class="col-lg-9 mb-3">
+        <div data-slick='{"rows":2}' class="hot-artworks-slider">
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork1.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork2.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork3.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork4.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork5.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork6.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-3">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork7.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork8.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork1.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork2.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork3.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork4.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork5.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork6.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork7.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork8.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hot-artworks-slider hot-artworks-slider-mob">
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork1.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork2.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork3.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork4.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork5.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork6.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-3">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork7.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork8.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork1.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork2.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork3.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork4.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork5.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork6.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork7.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+          <div class="hot-artworks-slider-div">
+            <div class="hot-artworks-div">            
+              <img src="assets/images/artwork8.png">
+              <div class="cont-div">
+                <p>Birds of Love</p>
+                <div class="likes-div">
+                  <div class="ldiv">
+                    <img src="assets/images/like.png" class="mr-2">
+                    <span>1254</span>
+                  </div>
+                  <span class="val">8 QUBE</span>
+                </div>
+                <button class="btn approve-vote-btn">Approve vote</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 pl-lg-2 mb-3">
+        <div class="top-artists-table">
+          <h3>Top artists</h3>
+          <div class="table-responsive">
+            <table class="table mb-0">
+              <thead>
+                <tr>
+                  <th>Artist</th>
+                  <th class="d-flex align-items-center text-right"><img src="assets/images/arrow_down.png" class="mr-2">7 day<br> volume</th>
+                  <th class="text-right">7 day<br> Change</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="d-flex align-items-center"><img src="assets/images/client1.png" class="mr-2">Cryptowomen</td>
+                  <td>4 582,8</td>
+                  <td class="greencol">21,24%</td>
+                </tr>
+                <tr>
+                  <td class="d-flex align-items-center"><img src="assets/images/client2.png" class="mr-2">TaylorInc</td>
+                  <td>4 582,8</td>
+                  <td class="redcol">15,24%</td>
+                </tr>
+                <tr>
+                  <td class="d-flex align-items-center"><img src="assets/images/client3.png" class="mr-2">JonesB</td>
+                  <td>4 582,8</td>
+                  <td class="greencol">21,24%</td>
+                </tr>
+                <tr>
+                  <td class="d-flex align-items-center"><img src="assets/images/client4.png" class="mr-2">Hijack</td>
+                  <td>4 582,8</td>
+                  <td class="greencol">21,24%</td>
+                </tr>
+                <tr>
+                  <td class="d-flex align-items-center"><img src="assets/images/client5.png" class="mr-2">Maru</td>
+                  <td>4 582,8</td>
+                  <td class="greencol">21,24%</td>
+                </tr>
+                <tr>
+                  <td class="d-flex align-items-center"><img src="assets/images/client1.png" class="mr-2">Blueeyes</td>
+                  <td>4 582,8</td>
+                  <td class="redcol">15,24%</td>
+                </tr>
+                <tr>
+                  <td class="d-flex align-items-center"><img src="assets/images/client2.png" class="mr-2">Marselina</td>
+                  <td>4 582,8</td>
+                  <td class="redcol">15,24%</td>
+                </tr> 
+                <tr>
+                  <td class="d-flex align-items-center"><img src="assets/images/client3.png" class="mr-2">Boyboy22</td>
+                  <td>4 582,8</td>
+                  <td class="greencol">21,24%</td>
+                </tr>
+                <tr>
+                  <td class="d-flex align-items-center"><img src="assets/images/client4.png" class="mr-2">Infinity78</td>
+                  <td>4 582,8</td>
+                  <td class="greencol">21,24%</td>
+                </tr>
+                <tr>
+                  <td class="d-flex align-items-center"><img src="assets/images/client4.png" class="mr-2">King_of_Kings</td>
+                  <td>4 582,8</td>
+                  <td class="greencol">21,24%</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagination-div p-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <img src="assets/images/left-paging-arrow.png">
+                <div class="val"><span>1-10</span></div>
+                <img src="assets/images/right-paging-arrow.png">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="projects-airdrops-sec mb-4">
+  <div class="row">
+    <div class="col-lg-9">
+      <h3 _ngcontent-c4="" class="mb-4"><img _ngcontent-c4="" class="mr-2" src="assets/images/star.png">Projects</h3>
+      <div data-slick='{}' class="projects-airdrops-slider mb-4">
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/btc.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Industry:</span>
+                <span class="val">Cryptoсurrency</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Project stage:</span>
+                <span class="val">Business</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Product stage:</span>
+                <span class="val colgreen">Beta</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Website:</span>
+                <span class="val">https://bitcoin.org</span>
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/users.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <button class="btn follow-btn">Follow</button>
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/starter.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Industry:</span>
+                <span class="val">Cryptoсurrency</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Project stage:</span>
+                <span class="val">Business</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Product stage:</span>
+                <span class="val colgreen">Beta</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Website:</span>
+                <span class="val">https://bitcoin.org</span>
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/users.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <button class="btn follow-btn">Follow</button>
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/monero.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Industry:</span>
+                <span class="val">Cryptoсurrency</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Project stage:</span>
+                <span class="val">Business</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Product stage:</span>
+                <span class="val colgreen">Beta</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Website:</span>
+                <span class="val">https://bitcoin.org</span>
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/users.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <button class="btn follow-btn">Follow</button>
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/starter.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Industry:</span>
+                <span class="val">Cryptoсurrency</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Project stage:</span>
+                <span class="val">Business</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Product stage:</span>
+                <span class="val colgreen">Beta</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Website:</span>
+                <span class="val">https://bitcoin.org</span>
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/users.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <button class="btn follow-btn">Follow</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="projects-airdrops-slider projects-airdrops-slider-mob mb-4">
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/btc.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Industry:</span>
+                <span class="val">Cryptoсurrency</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Project stage:</span>
+                <span class="val">Business</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Product stage:</span>
+                <span class="val colgreen">Beta</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Website:</span>
+                <span class="val">https://bitcoin.org</span>
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/users.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <button class="btn follow-btn">Follow</button>
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/starter.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Industry:</span>
+                <span class="val">Cryptoсurrency</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Project stage:</span>
+                <span class="val">Business</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Product stage:</span>
+                <span class="val colgreen">Beta</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Website:</span>
+                <span class="val">https://bitcoin.org</span>
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/users.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <button class="btn follow-btn">Follow</button>
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/monero.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Industry:</span>
+                <span class="val">Cryptoсurrency</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Project stage:</span>
+                <span class="val">Business</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Product stage:</span>
+                <span class="val colgreen">Beta</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Website:</span>
+                <span class="val">https://bitcoin.org</span>
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/users.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <button class="btn follow-btn">Follow</button>
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/starter.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Industry:</span>
+                <span class="val">Cryptoсurrency</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Project stage:</span>
+                <span class="val">Business</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Product stage:</span>
+                <span class="val colgreen">Beta</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Website:</span>
+                <span class="val">https://bitcoin.org</span>
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/users.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <button class="btn follow-btn">Follow</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3 _ngcontent-c4="" class="mb-4"><img _ngcontent-c4="" class="mr-2" src="assets/images/star.png">Air Drops</h3>
+      <div data-slick='{}' class="projects-airdrops-slider air-drops-new-slider">
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/starter.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Start:</span>
+                <span class="val">11 Dec 2021</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Value:</span>
+                <span class="val">$10 in EGLD</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Platform:</span>
+                <span class="val">ETH</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Type:</span>
+                <span class="val">Bounty</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Status:</span>
+                <span class="val colgreen">Ongoing</span>
+              </div>
+              <div class="cont-det-div justify-content-center">
+                <img src="assets/images/facebook.png">
+                <img src="assets/images/twitter.png" class="mx-3">
+                <img src="assets/images/insta.png">
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/eye.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/comment.png" class="mr-2">
+                <span>12</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/like.png">
+                <span class="mx-2">79</span>
+                <img  src="assets/images/dislike.png">
+              </div>      
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/starter1.png" class="coin-img">
+                <h6>Target Project</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Start:</span>
+                <span class="val">11 Dec 2021</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Value:</span>
+                <span class="val">$10 in EGLD</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Platform:</span>
+                <span class="val">ETH</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Type:</span>
+                <span class="val">Bounty</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Status:</span>
+                <span class="val colgreen">Ongoing</span>
+              </div>
+              <div class="cont-det-div justify-content-center">
+                <img src="assets/images/facebook.png">
+                <img src="assets/images/twitter.png" class="mx-3">
+                <img src="assets/images/insta.png">
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/eye.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/comment.png" class="mr-2">
+                <span>12</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/like.png">
+                <span class="mx-2">79</span>
+                <img  src="assets/images/dislike.png">
+              </div>      
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/wow.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Start:</span>
+                <span class="val">11 Dec 2021</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Value:</span>
+                <span class="val">$10 in EGLD</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Platform:</span>
+                <span class="val">ETH</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Type:</span>
+                <span class="val">Bounty</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Status:</span>
+                <span class="val colgreen">Ongoing</span>
+              </div>
+              <div class="cont-det-div justify-content-center">
+                <img src="assets/images/facebook.png">
+                <img src="assets/images/twitter.png" class="mx-3">
+                <img src="assets/images/insta.png">
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/eye.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/comment.png" class="mr-2">
+                <span>12</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/like.png">
+                <span class="mx-2">79</span>
+                <img  src="assets/images/dislike.png">
+              </div>      
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/starter.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Start:</span>
+                <span class="val">11 Dec 2021</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Value:</span>
+                <span class="val">$10 in EGLD</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Platform:</span>
+                <span class="val">ETH</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Type:</span>
+                <span class="val">Bounty</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Status:</span>
+                <span class="val colgreen">Ongoing</span>
+              </div>
+              <div class="cont-det-div justify-content-center">
+                <img src="assets/images/facebook.png">
+                <img src="assets/images/twitter.png" class="mx-3">
+                <img src="assets/images/insta.png">
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/eye.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/comment.png" class="mr-2">
+                <span>12</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/like.png">
+                <span class="mx-2">79</span>
+                <img  src="assets/images/dislike.png">
+              </div>      
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="projects-airdrops-slider air-drops-new-slider projects-airdrops-slider-mob">
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/starter.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Start:</span>
+                <span class="val">11 Dec 2021</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Value:</span>
+                <span class="val">$10 in EGLD</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Platform:</span>
+                <span class="val">ETH</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Type:</span>
+                <span class="val">Bounty</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Status:</span>
+                <span class="val colgreen">Ongoing</span>
+              </div>
+              <div class="cont-det-div justify-content-center">
+                <img src="assets/images/facebook.png">
+                <img src="assets/images/twitter.png" class="mx-3">
+                <img src="assets/images/insta.png">
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/eye.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/comment.png" class="mr-2">
+                <span>12</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/like.png">
+                <span class="mx-2">79</span>
+                <img  src="assets/images/dislike.png">
+              </div>      
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/starter1.png" class="coin-img">
+                <h6>Target Project</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Start:</span>
+                <span class="val">11 Dec 2021</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Value:</span>
+                <span class="val">$10 in EGLD</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Platform:</span>
+                <span class="val">ETH</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Type:</span>
+                <span class="val">Bounty</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Status:</span>
+                <span class="val colgreen">Ongoing</span>
+              </div>
+              <div class="cont-det-div justify-content-center">
+                <img src="assets/images/facebook.png">
+                <img src="assets/images/twitter.png" class="mx-3">
+                <img src="assets/images/insta.png">
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/eye.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/comment.png" class="mr-2">
+                <span>12</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/like.png">
+                <span class="mx-2">79</span>
+                <img  src="assets/images/dislike.png">
+              </div>      
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div p-3">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/wow.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Start:</span>
+                <span class="val">11 Dec 2021</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Value:</span>
+                <span class="val">$10 in EGLD</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Platform:</span>
+                <span class="val">ETH</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Type:</span>
+                <span class="val">Bounty</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Status:</span>
+                <span class="val colgreen">Ongoing</span>
+              </div>
+              <div class="cont-det-div justify-content-center">
+                <img src="assets/images/facebook.png">
+                <img src="assets/images/twitter.png" class="mx-3">
+                <img src="assets/images/insta.png">
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/eye.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/comment.png" class="mr-2">
+                <span>12</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/like.png">
+                <span class="mx-2">79</span>
+                <img  src="assets/images/dislike.png">
+              </div>      
+            </div>
+          </div>
+        </div>
+        <div class="projects-airdrops-slider-div">
+          <div class="projects-airdrops-div py-3 px-2">
+            <div class="inner-bg-div">
+              <div class="top-div">
+                <img src="assets/images/starter.png" class="coin-img">
+                <h6>Bitcoin</h6>              
+              </div>            
+            </div>
+            <div class="cont-div">
+              <div class="cont-det-div">
+                <span>Start:</span>
+                <span class="val">11 Dec 2021</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Value:</span>
+                <span class="val">$10 in EGLD</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Platform:</span>
+                <span class="val">ETH</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Type:</span>
+                <span class="val">Bounty</span>
+              </div>
+              <div class="cont-det-div">
+                <span>Status:</span>
+                <span class="val colgreen">Ongoing</span>
+              </div>
+              <div class="cont-det-div justify-content-center">
+                <img src="assets/images/facebook.png">
+                <img src="assets/images/twitter.png" class="mx-3">
+                <img src="assets/images/insta.png">
+              </div>
+            </div>
+            <div class="user-follow-div p-3">
+              <div class="ldiv">
+                <img  src="assets/images/eye.png" class="mr-2">
+                <span>2468</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/comment.png" class="mr-2">
+                <span>12</span>
+              </div>
+              <div class="ldiv">
+                <img  src="assets/images/like.png">
+                <span class="mx-2">79</span>
+                <img  src="assets/images/dislike.png">
+              </div>      
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 pl-lg-2">
+      <div class="top-blocks-div">
+        <div class="px-3 py-4">
+          <h3 class="mb-3">Top 10 Blocks</h3>
+          <tabset>
+            <tab heading="Blogs" id="tab1">
+              <div class="blogs-det">
+                <div class="ldiv">
+                  <img src="assets/images/client1.png" class="mr-2">
+                  <span>Fintech Heavyweights Revolut, Robinhood Gun for More...</span>
+                </div>
+                <span class="free">Free</span>
+              </div>
+              <div class="blogs-det">
+                <div class="ldiv">
+                  <img src="assets/images/client2.png" class="mr-2">
+                  <span>Lawyers Fighting Craig Wright Also File Lawsuit Against...</span>
+                </div>
+                <span class="paid">Paid</span>
+              </div>
+              <div class="blogs-det">
+                <div class="ldiv">
+                  <img src="assets/images/client3.png" class="mr-2">
+                  <span>Bitcoin, Ethereum and Altcoins Move Higher, Dips Attractive</span>
+                </div>
+                <span class="free">Free</span>
+              </div>
+              <div class="blogs-det">
+                <div class="ldiv">
+                  <img src="assets/images/client4.png" class="mr-2">
+                  <span>Collect Taxes More Effectively to Avoid ‘Debt Trap’ Chaos...</span>
+                </div>
+                <span class="paid">Paid</span>
+              </div>
+              <div class="blogs-det">
+                <div class="ldiv">
+                  <img src="assets/images/client5.png" class="mr-2">
+                  <span>Bitcoin, Ethereum and Altcoins Move Higher, Dips Attractive</span>
+                </div>
+                <span class="free">Free</span>
+              </div>
+              <div class="blogs-det">
+                <div class="ldiv">
+                  <img src="assets/images/client1.png" class="mr-2">
+                  <span>Fintech Heavyweights Revolut, Robinhood Gun for More...</span>
+                </div>
+                <span class="free">Free</span>
+              </div>
+              <div class="blogs-det">
+                <div class="ldiv">
+                  <img src="assets/images/client2.png" class="mr-2">
+                  <span>Lawyers Fighting Craig Wright Also File Lawsuit Against...</span>
+                </div>
+                <span class="paid">Paid</span>
+              </div>
+              <div class="blogs-det">
+                <div class="ldiv">
+                  <img src="assets/images/client3.png" class="mr-2">
+                  <span>Bitcoin, Ethereum and Altcoins Move Higher, Dips Attractive</span>
+                </div>
+                <span class="free">Free</span>
+              </div>
+              <div class="blogs-det">
+                <div class="ldiv">
+                  <img src="assets/images/client4.png" class="mr-2">
+                  <span>Collect Taxes More Effectively to Avoid ‘Debt Trap’ Chaos...</span>
+                </div>
+                <span class="paid">Paid</span>
+              </div>
+              <div class="blogs-det">
+                <div class="ldiv">
+                  <img src="assets/images/client5.png" class="mr-2">
+                  <span>Bitcoin, Ethereum and Altcoins Move Higher, Dips Attractive</span>
+                </div>
+                <span class="free">Free</span>
+              </div>
+              <button class="btn see-all-btn">See All</button>
+            </tab>
+            <tab heading="Blogers"></tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

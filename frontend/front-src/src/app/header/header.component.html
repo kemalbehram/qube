@@ -1,0 +1,163 @@
+<div class="header my-3">
+  <nav class="navbar navbar-expand-xl bg-dark navbar-dark container p-0">
+    <a class="navbar-brand" href="#"><img src="{{site.site_logo}}"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/home'" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/blogs'" routerLinkActive="active">Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/community'" routerLinkActive="active">Community</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/freelance'" routerLinkActive="active">Freelance</a>
+        </li>
+        <li class="nav-item">
+          <!-- <a class="nav-link" href="swap">Dex</a> -->
+          <a class="nav-link" [routerLink]="'/swap'" routerLinkActive="active">Dex</a>
+        </li>
+        <li class="nav-item">
+          <!-- <a class="nav-link" href="earning">Staking</a> -->
+          <!-- <a class="nav-link" [routerLink]="'/earning'" routerLinkActive="active">Earning</a> -->
+          <a class="nav-link" href="#" routerLinkActive="active">Earning</a>
+
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/nft'" routerLinkActive="active">Nft</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/launchpad'" routerLinkActive="active">Launch Pad</a>
+        </li>
+        <li class="nav-item">
+          <!-- <a class="nav-link" [routerLink]="'/overview'" routerLinkActive="active">Info</a> -->
+          <a class="nav-link" href="#" routerLinkActive="active">Info</a>
+        </li>
+      </ul>
+      <ul class="navbar-right mb-0">
+        <!-- after login -->
+          <li class="nav-item mr-2" *ngIf="isLogin">
+            <div class="wallet-bal" (click)="staticModal1.show()">
+              <span class="val">0 QUB</span>
+              <span class="address" title="{{Metamask_address}}">{{showuseraddress}}</span>
+            </div>
+          </li>
+        <!-- after login -->
+        <!-- before login -->
+          <li class="nav-item mr-2 " *ngIf="!isLogin">
+            <button class="btn connect-wallet-btn" (click)="staticModal.show()">Connect to a wallet</button>
+          </li>
+        <!-- before login -->
+        <!-- slippage tolerance -->
+          <li class="nav-item hamb-div">
+            <div class="settings-btn">
+              <img src="assets/images/hamb.png" class="cur-pointer" (click)="settingControl()"> 
+               <div class="trans-set-div p-3" *ngIf="settingPopup">
+                  <h6>Transaction Settings</h6>
+                  <span>Slippage tolerance<img src="assets/images/info.png" class="ml-2"></span>
+                  <ul class="percent my-3">
+                    <li [ngClass]="{'active' : slippageclass == 0.1}" (click)="ToleranceClick(0.1)">0.1%</li>
+                    <!-- <li class="active" [ngClass]="{'active' : slippageclass.pointFive == true}" (click)="ToleranceClick(0.5)">0.5%</li> -->
+                    <li [ngClass]="{'active' : slippageclass == 0.5}" (click)="ToleranceClick(0.5)">0.5%</li>
+                    <li [ngClass]="{'active' : slippageclass == 1}" (click)="ToleranceClick(1)">1%</li>
+                    <!-- <li class="det"><input type="text" class="form-control" placeholder="0.50%" (keyup)="ToleranceKeyUp($event)"></li> --> 
+                    <li class="det"><input type="text" class="form-control" placeholder="0.50%" value="{{slippageclass}}%" readonly></li>
+                  </ul>
+                  <span>Transaction deadline<img src="assets/images/info.png" class="ml-2"></span>
+                  <div class="mins-div my-3">
+                    <div class="count mr-2"><input type="text" class="form-control" placeholder="20" (keyup)="DeadlineKeyUp($event)" value="{{commonservice.simpleUserStorage?.userDeadline / 60}}"></div>
+                    <span>Minutes</span>
+                  </div>
+                  <h6>Interface Settings</h6>
+                  <div class="expert-mode-div mb-3">
+                    <span>Expert Mode<img src="assets/images/info.png" class="ml-2"></span>
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <div class="expert-mode-div dark-mode">
+                    <span>Expert Mode<img src="assets/images/info.png" class="ml-2"></span>
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+               </div>
+            </div>
+          </li>
+        <!-- slippage tolerance -->
+        <li class="nav-item">
+          <img src="assets/images/nav-close-btn.png" class="nav-class-btn d-none cur-pointer" data-toggle="collapse" data-target="#collapsibleNavbar">
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog con-wal-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Connect to a wallet</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="wallet-div">
+          <button class="btn wallet-btn mb-3" (click)="connectwallet('metamask')"><img src="assets/images/metamask.png" class="mr-3">Connect metamask</button>
+          <button class="btn wallet-btn mb-3" (click)="connectwallet('walletconnect')"><img src="assets/images/wallet-connect.png" class="mr-3">walletconnect</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #staticModal1="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog acc-wal-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Account</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal1.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="metamask-div p-3 mb-3">
+          <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <p class="mb-0">Connected with Metamask</p>
+            <button class="btn change-btn" (click)="logout()">Change</button>
+          </div>
+          <h5 class="address" title="{{Metamask_address}}">{{showuseraddress}}</h5>
+          <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <div class="ldiv cur-pointer"  (click)="copyvalue()">
+              <i class="fa fa-copy"></i>
+              <span class="ml-2">Copy Address</span>
+            </div>
+            <div class="rdiv cur-pointer" (click)="openaddress_explorer()">
+              <i class="fa fa-external-link"></i>
+              <span class="ml-2">View an Etherscan</span>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="recent-trans-div">
+          <div class="title-div">
+            <h3>Recent Transactions</h3>
+            <span>Clear All</span>
+          </div>
+          <div class="tit-det-div">
+            <h4 class="val">Swap 0.1 BNB for 239 CAKE</h4>
+            <i class="fa fa-check"></i>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

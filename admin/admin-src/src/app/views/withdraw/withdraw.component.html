@@ -1,0 +1,74 @@
+<div class="card">
+  <div class="card-header" style="background-color:#2f353a;color:#33adff;">
+        <i class="fa fa-align-justify"></i> Unstake History
+      </div>
+
+
+<!-- <h4 style="padding-left: 425px;">Manage Users</h4> -->
+<div class="tabcntcls" style=" -webkit-transition: all 1s ease;transition: all 1s ease;padding: 25px;">
+<div class="row">
+  <div class="col-md-9 align-items-center" style="display: inline-flex;padding-left: 0px;">
+    <span>Display : </span>
+    <select (change)="changeRowLimits($event)" style="width: 8%;background: transparent;height: 30px;margin-left: 5px;">
+        <option *ngFor="let limit of rowLimits" [value]="limit.value">{{limit.key}}</option>
+    </select>
+
+    <div class="input-group-btn" style="margin-left: 10px;">
+      <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="resetuserlist()">
+         <i class="fa fa-refresh" aria-hidden="true"></i>
+      </button>
+    </div>
+
+  </div>
+</div>
+<div class="table-responsive tab_top">
+  <ngx-datatable #usertable class="bootstrap table table-bordered table-striped mb-0 material" [ngClass]="{'table-loaders': table_loader == true }"
+
+  [columnMode]="'force'"
+  [headerHeight]="30"
+  [footerHeight]="50"
+  [rowHeight]="'auto'" [(limit)]="limit" [rows]='userrows' [externalPaging]="true"
+      [count]="page.totalElements"
+      [offset]="page.pageNumber"
+      [limit]="page.size"
+      (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [loadingIndicator]="loading">
+
+  <ngx-datatable-column name="S.No" [width]="50">
+    <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+      <!-- {{row.$$index + 1}} -->
+      <!-- {{rowIndex + 1}} -->
+      {{(page.pageNumber*page.size)+(rowIndex + 1)}}
+    </ng-template>
+  </ngx-datatable-column>
+
+
+  <ngx-datatable-column name="User Address">
+    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+      {{row.userAddress}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Pair">
+    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+      {{row.pair}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Amount">
+    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+      {{row.amount}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Transaction Hash">
+    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+      <!-- <a href="{{environment.connectionUrl}}/tx/{{row.txId}}" target="_blank">{{row.txId}}</a> -->
+      <a href="https://testnet.bscscan.com/tx/{{row.txId}}" target="_blank">{{row.txId}}</a>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column name="Created At" prop="createddate">
+    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+      <span class="brkwrdcls">{{row.created_date | date:'medium'}}</span>
+    </ng-template>
+  </ngx-datatable-column>
+  </ngx-datatable>
+</div>
+</div>
+</div>

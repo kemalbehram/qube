@@ -1,0 +1,126 @@
+<div class="card">
+    <div class="card-header" style="background-color:#2f353a;color:#33adff;">
+          <i class="fa fa-align-justify"></i> Exchange History
+        </div>
+
+
+<!-- <h4 style="padding-left: 425px;">Manage Users</h4> -->
+<div class="tabcntcls" style=" -webkit-transition: all 1s ease;transition: all 1s ease;padding: 25px;">
+  <div class="row align-items-center">
+    <div class="col-md-9" style="display: inline-flex;">
+      <span>Display : </span>
+      <select (change)="changeRowLimits($event)" style="width: auto;background: transparent;height: 30px;margin-left: 5px;">
+          <option *ngFor="let limit of rowLimits" [value]="limit.value">{{limit.key}}</option>
+      </select>
+
+      <div class="input-group-btn" style="margin-left: 10px;">
+        <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="resetuserlist()">
+           <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="col-md-3 p-2">
+
+        <div class="input-group">
+          <input type="text" [(ngModel)]="defsearch" class="form-control" placeholder="Search" id="txtSearch" (keyup.enter)="updateFilter()"  
+          (keyfocus)="updateFilter()"/>
+          <div class="input-group-btn">
+            <button class="btn btn-primary" style="cursor:pointer;margin-left: -2px;" type="submit" (click)="updateFilter()">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+ <!-- <div class="d-flex flex-row-reverse">
+          <div class="export_option">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                {{'Export Exchange orders'}}
+              </li>
+                           
+              <li class="list-inline-item">
+                <a (click)="exportToexchange()" class="cursorcls" title="Csv">       
+              <i class="fa fa-download"></i>
+                     </a>
+              </li>
+            </ul>
+          </div>
+        </div> -->
+  <div class="table-responsive tab_top">
+    <ngx-datatable #usertable class="bootstrap table table-bordered table-striped mb-0 material" [ngClass]="{'table-loaders': table_loader == true }"
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+   [rowHeight]="'100%'" [(limit)]="limit" [rows]='userrows' [externalPaging]="true"
+        [count]="page.totalElements"
+        [offset]="page.pageNumber"
+        [limit]="page.size"
+        [scrollbarH]="true"
+        (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [loadingIndicator]="loading">
+
+    <ngx-datatable-column name="S.No" [width]="50">
+      <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+        <!-- {{row.$$index + 1}} -->
+        <!-- {{rowIndex + 1}} -->
+        {{(page.pageNumber*page.size)+(rowIndex + 1)}}
+      </ng-template>
+    </ngx-datatable-column>
+
+
+    <ngx-datatable-column name="User Address" [width]="150">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.userAddress}}
+      </ng-template>
+    </ngx-datatable-column>
+
+     <ngx-datatable-column name="Pair" [width]="100">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.pair}}
+      </ng-template>
+    </ngx-datatable-column>
+
+      <ngx-datatable-column name="Amount" [width]="100">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.type == 'coinToToken' ?  decimalrounds(row.amountETH,8) :  decimalrounds(row.amountToken,8)}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Price">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.type == 'coinToToken' ?  decimalrounds(row.amountToken,8) :  decimalrounds(row.amountETH,8)}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Transaction Hash" [width]="150">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <a href="https://testnet.bscscan.com/tx/{{row.txId}}" target="_blank">{{row.txId}}</a>
+      </ng-template>
+    </ngx-datatable-column>
+     
+     <ngx-datatable-column name="Status">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.status == true ? 'Completed' : 'Pending'}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Created At">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.createddate| date: 'medium'}}
+      </ng-template>
+    </ngx-datatable-column>
+    
+<!--   <ngx-datatable-column name="Action" [resizeable]="false" prop="_id" >
+    <ng-template ngx-datatable-cell-template let-value="value">
+  <button class="btn btn-link mr-1 mb-1 cursorcls" (click)="openCMSmodel(cmscontent, value)" style="outline:none;" ngbTooltip="Edit">
+   <i class="fa fa-edit" style="color:blue"></i> </button>
+   </ng-template>
+ </ngx-datatable-column>
+    -->
+    </ngx-datatable>
+  </div>
+</div>
+</div>

@@ -1,0 +1,47 @@
+<div class="row mb-4">
+  <div class="col-lg-12">
+    <div class="title-div">
+      <h3>Top Pairs</h3>
+      <div class="search-bg">
+        <div class="form-group has-search mb-0">          
+          <input type="text" class="form-control" placeholder="Search"  (keyup)="filterFnc($event.target.value)">
+          <span class="fa fa-search form-control-feedback"></span>
+        </div>
+      </div>
+    </div>
+    <div class="top-tokens-table">            
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <!-- <th>S.No</th> -->
+            <th>Name</th>
+            <th>Liquidity<img src="assets/images/arrow_down.png" class="ml-2"></th>
+            <th>VOLUME (24hrs)</th>
+            <th>VOLUME (7d)</th>
+            <th>FEES (24hrs)</th>
+            <!-- <th>1y Fees / Liquidity<img src="assets/images/info-big.png" class="ml-2"></th> -->
+          </thead>
+          <tbody>
+                <tr *ngFor="let val of pairArray | paginate: {itemsPerPage:pairsSno.itemsPerPage,currentPage: pairsSno.currentPage,totalItems: pairsSno.totalItems};let i=index">
+                  <!-- <td>{{pairsSno.itemsPerPage *(pairsSno.currentPage-1)+i+1}}</td> -->
+                  <td><img src="{{val.fromCurrency_i}}" class="coinimg"><img src="{{val.toCurrency_i}}" class="mr-2 pair-img-first coinimg"><span class="name cur-pointer"  [routerLink]="'/pairview/'+val.pair_address">{{val.pair}}</span></td>
+                  <td>{{val.liqudity_value | number:'1.8-8'}}</td>
+                  <td>{{val.liquidityHr | number:'1.8-8'}}</td>
+                  <td>{{val.liquidityHr | number:'1.8-8'}}</td>
+                  <td>$572.07</td>
+                  <!-- <td><span class="greencol">+5.24%</span></td> -->
+                </tr>
+                <tr *ngIf="pairsSno.totalItems == 0 && recordShow==true">
+                 <td colspan="4" class="text-center">No records found</td>
+                </tr>   
+          </tbody>              
+        </table>
+         <div class="d-flex justify-content-center my-4">
+          <div class="pagination-div">
+            <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

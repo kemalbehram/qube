@@ -1,0 +1,375 @@
+<div class="card">
+    <div class="card-header" style="background-color:#2f353a;color:#33adff;">
+          <i class="fa fa-align-justify"></i> Pairs Management
+        </div>
+
+
+<!-- <h4 style="padding-left: 425px;">Manage Users</h4> -->
+<div class="tabcntcls" style=" -webkit-transition: all 1s ease;transition: all 1s ease;padding: 25px;">
+  <div class="row">
+    <div class="col-md-9 align-items-center" style="display: inline-flex;padding-left: 0px;">
+      <span>Display : </span>
+      <select (change)="changeRowLimits($event)" style="width: auto;background: transparent;height: 30px;margin-left: 5px;">
+          <option *ngFor="let limit of rowLimits" [value]="limit.value">{{limit.key}}</option>
+      </select>
+
+      <div class="input-group-btn" style="margin-left: 10px;">
+        <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="resetuserlist()">
+           <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="col-md-3 p-2">
+
+        <div class="input-group">
+          <input type="text" [(ngModel)]="defsearch" class="form-control" placeholder="Search" id="txtSearch" (keyup.enter)="updateFilter()"  
+          (keyfocus)="updateFilter()"/>
+          <div class="input-group-btn">
+            <button class="btn btn-primary" style="cursor:pointer;margin-left: -2px;" type="submit" (click)="updateFilter()">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+  </div>
+<!-- 
+   <div class="d-flex flex-row-reverse">
+          <div class="export_option">
+            <ul class="list-inline">
+              <li class="list-inline-item">
+                {{'Exportusersdetails'}}
+              </li>
+                           
+              <li class="list-inline-item">
+                <a (click)="exportToExcel_user()" class="cursorcls" title="Csv">
+              <i class="fas fa-file-download" style="color: green;"></i>
+                     </a>
+              </li>
+            </ul>
+          </div>
+        </div> -->
+
+        <div class="d-flex flex-row-reverse">
+      <div class="export_option">
+        <ul class="list-inline">
+          <li class="list-inline-item btn btn-primary" (click)="opencreatepairmodel(createpaircontent)" style="cursor:pointer;margin-left: -2px;">
+            {{'Create Pair +'}}
+          </li>
+
+          <!-- <li class="list-inline-item ">
+            <a (click)="exportToprofit()" class="cursorcls" title="Csv">       
+            <i class="fa fa-download" style="color: blue;"></i>
+            </a>
+          </li> -->
+        </ul>
+      </div>
+    </div>
+  <div class="table-responsive tab_top"  >
+    <ngx-datatable #usertable class="bootstrap table table-bordered table-striped mb-0 material" [ngClass]="{'loaders': dataLoader == true }"
+
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+    [rowHeight]="'auto'" [(limit)]="limit" [rows]='userrows' [externalPaging]="true"
+        [count]="page.totalElements"
+        [offset]="page.pageNumber"
+        [limit]="page.size"
+        [scrollbarH]="true"
+        (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [loadingIndicator]="loading">
+
+    <ngx-datatable-column name="S.No" [width]="50">
+      <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+        <!-- {{row.$$index + 1}} -->
+        <!-- {{rowIndex + 1}} -->
+        {{(page.pageNumber*page.size)+(rowIndex + 1)}}
+      </ng-template>
+    </ngx-datatable-column>
+
+
+    <ngx-datatable-column name="Pairs">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.pair}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Fee">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.fee}}
+      </ng-template>
+    </ngx-datatable-column>
+    <!-- <ngx-datatable-column name="From Currency">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <span class="brkwrdcls">{{row.fromCurrency}}</span>
+      </ng-template>
+    </ngx-datatable-column>
+
+      <ngx-datatable-column name="To Currency" >
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+      {{row.toCurrency}}
+        </ng-template>
+      </ngx-datatable-column> -->
+
+      <ngx-datatable-column name="Status" >
+        <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+        {{row.status}}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column name="Pair Address" >
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >
+          {{row.pair_address ? row.pair_address : '-'}}
+            </ng-template>
+          </ngx-datatable-column>
+
+    
+        <ngx-datatable-column name="Action">
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row" >&nbsp;&nbsp;
+              <button class="btn btn-link mr-1 mb-1 cursorcls" (click)="bannermodel(bannercontent,row)" *ngIf="row.pair_address && !row.contract_add_status" ngbTooltip="Edit">Add Staking</button>
+              <button class="btn btn-link mr-1 mb-1 cursorcls" *ngIf="row.pair_address && row.contract_add_status" ngbTooltip="Edit">Staked</button>
+
+              <!-- <button class="btn btn-link mr-1 mb-1 cursorcls" (click)="publish_approve()" *ngIf="row.pair_address" ngbTooltip="Edit">Approve</button> -->
+              <!-- <button class="btn btn-link mr-1 mb-1 cursorcls"
+              (click)="addContractmodel(row)" *ngIf="row.pair_address" ngbTooltip="Edit">
+              Add Contract  
+              </button>
+              <button class="btn btn-link mr-1 mb-1 cursorcls"  
+              (click)="changehost(statusmodel, row)"
+              style="color:#b4b4b4;" >
+              <i *ngIf="row.status == 'Active'" style="color: #1FA86D" class="fa fa-unlock" aria-hidden="true" ngbTooltip="Move to Deactive"></i>
+              <i *ngIf="row.status == 'Deactive'"style="color: #E51F1F" class="ace-icon fa fa-lock bigger-130" aria-hidden="true" ngbTooltip="Move to Active"></i>
+              </button> -->
+            </ng-template>
+        </ngx-datatable-column>
+
+    </ngx-datatable>
+  </div>
+</div>
+</div>
+
+<ng-template #statusmodel let-c="close" let-d="dismiss">
+    <div class="modal-body" id="actiondialog">
+      <h6>Do you want to change the status of Pairs?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success cursorcls"
+      (click)="changebannerStatus(bannersvalue);c('Close click')">Yes</button>
+      <button type="button" class="btn cursorcls"
+      (click)="c('Close click')">No</button>
+    </div>
+</ng-template>
+<!--Edit popup model-->
+<ng-template #editbannercontent let-c="close" let-d="dismiss">
+<div class="modal-header">
+  <h5 class="modal-title text-uppercase" style="color: #347deb"><b>Edit pairs</b></h5>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')" ngbTooltip="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+   <div class="common-border"><form  autocomplete="off" (ngSubmit)="editpairs(pairsform)" #pairsform="ngForm">
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-3 col-form-label">Pair</label>
+    <div class="col-6">
+      <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.pair"  #pair="ngModel" name="currencyName" pattern="[a-zA-Z ]+" disabled required/>
+       
+      </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-3 col-form-label">Buy Limit </label>
+    <div class="col-6">
+      <select class="form-control" name="buylimit" (change)="buycalculation(edithostlist)" [(ngModel)] = "edithostlist.buylimit" style="    font-size: 15px;color: #000;height: 39px !important;">
+          <option value='plus'>+(Plus)</option>
+          <option value='minus'>-(Minus)</option>
+         <!--  <option *ngIf="edithostlist.buylimit==1" value=1>+(Plus)</option>
+          <option  *ngIf="edithostlist.buylimit==1"value=2>-(Minus)</option> -->
+
+         <!--  <option *ngFor="let x of symbol"  [selected]="edithostlist.buylimit == x.values" [value]="x.symbolval">{{x.values}}
+          {{edithostlist.buylimit == x.values}}
+          {{ x.symbolval}}
+          </option> -->
+      
+      </select>
+      
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-3 col-form-label">Buy limit value(%) </label>
+    <div class="col-6">
+      <input type="number" name="emailid" class="form-control" [(ngModel)] ="edithostlist.buylimitvalue" #buylimitvalue="ngModel" (input)="buyratecalculation(edithostlist)" (keypress)="isNumberKey($event)" (cut)="$event.preventDefault()" (copy)="$event.preventDefault()" (paste)="$event.preventDefault()" required text>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-3 col-form-label">Buy Rate(1 {{fcurrency}}) </label>
+    <div class="col-6">
+      <input type="number"style="cursor: not-allowed;"name="usd_price"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="0"class="form-control" [(ngModel)] ="edithostlist.buyrate" #buyrate="ngModel" disabled required text>
+    </div>
+  </div>
+   <div class="form-group row">
+    <label for="example-text-input" class="col-3 col-form-label">Sell Limit  </label>
+    <div class="col-6">
+    <select class="form-control" name="selllimit" (change)="sellcalculation(edithostlist)"  [(ngModel)] = "edithostlist.selllimit" style="    font-size: 15px;color: #000;height: 39px !important;">
+          <option value='plus'>+(Plus)</option>
+          <option value='minus'>-(Minus)</option>
+      </select>
+    </div>
+  </div>
+    <div class="form-group row">
+    <label for="example-text-input" class="col-3 col-form-label">Sell limit value(%) </label>
+    <div class="col-6">
+      <input type="number" name="withdrawfee"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="0"class="form-control" [(ngModel)] ="edithostlist.selllimitvalue" #selllimitvalue="ngModel" (keypress)="isNumberKey($event)" (cut)="$event.preventDefault()" (copy)="$event.preventDefault()" (paste)="$event.preventDefault()" (input)="sellratecalculation(edithostlist)" required text>
+    </div>
+  </div>
+   <div class="form-group row">
+    <label for="example-text-input" class="col-3 col-form-label">Sell Rate (1 {{fcurrency}})</label>
+    <div class="col-6">
+      <input type="number"style="cursor: not-allowed;"name="maxwithamt"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="0"class="form-control" [(ngModel)] ="edithostlist.sellrate" #sellrate="ngModel"  disabled required text>
+    </div>
+  </div>
+  <div class="form-group row" *ngIf="fcurrency != 'IDD'">
+    <label for="example-text-input" class="col-3 col-form-label">Market Price</label>
+    <div class="col-6">
+      <input type="number"style="cursor: not-allowed;"name="marketPrice"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="0"class="form-control" [(ngModel)] ="edithostlist.marketPrice" #marketPrice="ngModel" disabled required text>
+    </div>
+  </div>
+  <div class="form-group row" *ngIf="fcurrency == 'IDD'">
+    <label for="example-text-input" class="col-3 col-form-label">Market Price</label>
+    <div class="col-6">
+      <input type="number"style="cursor: not-allowed;"name="marketPrice"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="0"class="form-control" [(ngModel)] ="edithostlist.marketPrice" #marketPrice="ngModel" required text>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-3 col-form-label"> Minimum exchange amount</label>
+    <div class="col-6">
+      <input type="number" name="total_amt"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="0"class="form-control" [(ngModel)] ="edithostlist.total_amt" #total_amt="ngModel"(keypress)="isNumberKey($event)" (cut)="$event.preventDefault()" (copy)="$event.preventDefault()" (paste)="$event.preventDefault()" required text>
+    </div>
+  </div>
+
+   <!--  <div class="form-group row">
+    <label for="example-text-input" class="col-3 col-form-label">Minimum Exchange amount</label>
+    <div class="col-6">
+      <input type="number" name="min_amt"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="0"class="form-control" [(ngModel)] ="edithostlist.min_amt" #min_amt="ngModel"(keypress)="isNumberKey($event)" (cut)="$event.preventDefault()" (copy)="$event.preventDefault()" (paste)="$event.preventDefault()" required text>
+    </div>
+  </div> -->
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-3 col-form-label">Fee Type </label>
+    <div class="col-6">
+         <input type="text"style="cursor: not-allowed;"name="fee_type"  class="form-control" [(ngModel)] ="edithostlist.fee_type" #fee_type="ngModel" disabled required text>
+     <!-- <select id="select1" class="form-control"  [(ngModel)]="edithostlist.fee_type" #fee_type="ngModel" name="select1" class="form-control">
+  <option value="Percentage">Percentage</option>
+  <option value="fiat">fiat</option>
+  </select> -->
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-3 col-form-label">Exchange Fee</label>
+    <div class="col-6">
+      <input type="number" name="fee"  onkeydown="javascript: return event.keyCode == 69 ? false : true" min="0"class="form-control" [(ngModel)] ="edithostlist.fee" #fee="ngModel" (keypress)="isNumberKey($event)" (cut)="$event.preventDefault()" (copy)="$event.preventDefault()" (paste)="$event.preventDefault()" required text>
+    </div>
+  </div>
+ 
+<div class="modal-footer">
+  <button type="submit"  style="cursor: pointer; background-color:#349eeb;" class="btn btn-info cursorcls" [disabled]='!pairsform.valid'>Submit</button>
+  <button type="button"  style="cursor: pointer; background-color:#eb3d34;" class="btn btn-secondary cursorcls" (click)="c('Close click')" >Close</button>
+</div>
+</form></div>
+</div>
+
+</ng-template>
+
+
+   
+<!-- create pair -->
+
+<ng-template #createpaircontent let-c="close" let-d="dismiss" >
+      <div class="modal-header">
+        <h6 class="modal-title text-uppercase" style="color:#eb7d34;"><b>Add Pair List</b></h6>
+        <button type="button" *ngIf="dataLoader" (click)="restrictclose()" class="close" aria-label="Close" ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+         <button type="button" *ngIf="!dataLoader" (click)="d('Cross click');reformdata()" class="close" aria-label="Close" ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" [ngClass]="{'loaders': dataLoader == true }">
+        <div class="common-border">
+          <form  autocomplete="off" #createpair_form="ngForm">          
+            <div class="form-group row">
+                <label for="example-text-input" class="col-4 col-form-label">From Currency </label>
+                <div class="col-6">
+                  <select class="form-control" name="fromCurrency"  [(ngModel)] = "createpairlist.fromCurrency" style=" font-size: 15px;color: #000;height: 39px !important;">
+                    <option class="dropdown-item" disabled selected value="undefined">Select an Option</option>
+                     <option *ngFor="let ccy of from_currency; let i=index" [selected]="i==0">{{ccy.currencySymbol}}</option>
+                 </select>
+               </div>
+             </div>
+             <div class="form-group row">
+                <label for="example-text-input" class="col-4 col-form-label">To Currency </label>
+                <div class="col-6">
+                  <select class="form-control" name="toCurrency"  [(ngModel)] = "createpairlist.toCurrency" style=" font-size: 15px;color: #000;height: 39px !important;">
+                    <option class="dropdown-item" disabled selected value="undefined">Select an Option</option>
+                    <option *ngFor="let ccy of currencyData; let i=index" [selected]="i==0">{{ccy.currencySymbol}}</option>
+                 </select>
+               </div>
+             </div>
+              <div class="form-group row">
+                <label for="example-text-input" class="col-4 col-form-label">Status</label>
+                <div class="col-6">
+                  <select class="form-control" name="status"  [(ngModel)] = "createpairlist.status" style=" font-size: 15px;color: #000;height: 39px !important;">
+                    <option class="dropdown-item" disabled selected value="undefined">Select an Option</option>
+                    <option value='Active'>Active</option>
+                    <option value='Deactive'>Deactive</option>
+                 </select>
+               </div>
+             </div>
+             
+            <div class="modal-footer">
+              <div> 
+                <button type="submit" [disabled] ='createpair_form.invalid' style="cursor: pointer; background-color:#349eeb;" class="btn btn-info cursorcls" (click)="onSubmitData('coin')">Submit</button>
+                <button type="button"  style="cursor: pointer;background-color:#eb3d34" class="btn btn-secondary cursorcls" (click)="c('Close click')" >Close</button>
+              </div> 
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- create pair -->
+
+     <ng-template #bannercontent let-c="close" let-d="dismiss">
+      
+      <div class="modal-header">
+        <h6 class="modal-title text-uppercase">Update Rewards</h6>
+        <button type="button" style="cursor:pointer;" class="close" aria-label="Close" (click)="d('Cross click')" ngbTooltip="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="col-md-12">
+          
+              <form name="form" (ngSubmit)="willaddform.form.valid && willadd()" #willaddform="ngForm"  novalidate>
+                <div class="form-group">
+                  <label for="email">Staking Rewards </label>
+                  <input type="number" placeholder="Staking Rewards" class="form-control" name="heading" [(ngModel)]="Datas.rewards"  #rewards="ngModel" pattern="^\S.*"  required />
+                  <div *ngIf="(rewards.invalid && willaddform.submitted) || rewards.touched" class="text-danger">
+                    <span *ngIf="rewards.errors?.required">Staking rewards is required</span>
+                    <span *ngIf="rewards.errors?.pattern">Prefix space not allowed</span>
+                  </div>
+                </div>
+
+                <div class="form-group rit">
+                  <button class="btn btn-primary" style="cursor:pointer;" *ngIf="!FromSubmit" [disabled]="fileerr" >Update</button>
+                  <button *ngIf="FromSubmit" type="submit" class="btn btn-danger rit">Processing <i class="fa fa-spinner fa-spin" style="font-size:16px"></i> </button>
+                </div>
+              </form>
+            
+        </div>
+      </div>
+      
+      <div class="modal-footer"></div>
+    
+    </ng-template>

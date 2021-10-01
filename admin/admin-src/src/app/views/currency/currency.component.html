@@ -1,0 +1,279 @@
+<div class="card">
+    <div class="card-header" style="background-color:#2f353a;color:#33adff;">
+          <i class="fa fa-align-justify"></i> Lending Assets
+        </div>
+
+
+<!-- currency_image
+contract_address
+currency_decimal
+status
+created_date -->
+<!-- <h4 style="padding-left: 425px;">Manage Users</h4> -->
+<div class="tabcntcls" style=" -webkit-transition: all 1s ease;transition: all 1s ease;padding: 25px;">
+  <div class="row">
+    <div class="col-md-8 align-items-center" style="display: inline-flex;padding-left: 0px;">
+      <span>Display : </span>
+      <select (change)="changeRowLimits($event)" style="width: auto;background: transparent;height: 30px;margin-left: 5px;">
+          <option *ngFor="let limit of rowLimits" [value]="limit.value">{{limit.key}}</option>
+      </select>
+
+      <div class="input-group-btn" style="margin-left: 10px;">
+        <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="resetuserlist()">
+           <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="col-md-3 p-2">
+
+        <div class="input-group">
+          <input type="text" [(ngModel)]="defsearch" class="form-control" placeholder="Search" id="txtSearch" (keyup.enter)="updateFilter()"  
+          (keyfocus)="updateFilter()"/>
+          <div class="input-group-btn">
+            <button class="btn btn-primary" style="cursor:pointer;margin-left: -2px;" type="submit" (click)="updateFilter()">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
+           
+        
+   
+         
+        </div>
+        
+
+    </div>
+    <div class="col-md-1 p-2">
+
+        <div class="input-group">
+       
+          <div class="input-group-btn">
+             <button class="btn btn-primary button-refresh" style="cursor:pointer;height: 35px;" type="submit"  (click)="openbannermodel(addbannercontent)"> <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="table-responsive tab_top">
+    <ngx-datatable #usertable class="bootstrap table table-bordered table-striped mb-0 material" [ngClass]="{'loaders': dataLoader == true }"
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+    [rowHeight]="'auto'" [(limit)]="limit" [rows]='userrows' [externalPaging]="true"
+        [count]="page.totalElements"
+        [offset]="page.pageNumber"
+        [limit]="page.size"
+        [scrollbarH]="true"
+        (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [loadingIndicator]="loading">
+
+    <ngx-datatable-column name="SNO" [width]="50">
+      <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+        <!-- {{row.$$index + 1}} -->
+        <!-- {{rowIndex + 1}} -->
+        {{(page.pageNumber*page.size)+(rowIndex + 1)}}
+      </ng-template>
+    </ngx-datatable-column>
+     <ngx-datatable-column name="Currency Image">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+         <img [src]="row.currency_image"  height="40" width="40" style="border-radius:50%;">
+      </ng-template>
+    </ngx-datatable-column>
+       <ngx-datatable-column name="Currency Name">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.currencyName}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Currency symbol">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.currencySymbol}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Status" prop="status">
+      <ng-template let-value="value" let-row="row" >
+    
+      <span class="tfadisable"  *ngIf="row.status ==Active"  style="color: green;" >Active</span>
+     <span class="enable"  *ngIf="row.status==Deactive"  style="color: red;">Deactive </span>
+        </ng-template>
+      </ngx-datatable-column>   
+      <ngx-datatable-column name="Date & Time">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.created_date | date:'medium'}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Action" [resizeable]="false" prop="_id" >
+    <ng-template ngx-datatable-cell-template let-value="value"   let-row="row">
+
+            <button class="btn btn-link mr-1 mb-1 cursorcls" 
+     (click)="openmodel(bannercontent,row)"  ngbTooltip="View">
+      <i class="fa fa-eye" style="color:blue"></i>
+    </button>
+   </ng-template>
+ </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</div>
+</div>
+
+ <ng-template #addbannercontent let-c="close" let-d="dismiss">
+      
+      <div class="modal-header">
+        <h6 class="modal-title text-uppercase">Add New Currency</h6>
+        <button type="button" style="cursor:pointer;" class="close" aria-label="Close" (click)="d('Cross click')" ngbTooltip="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="col-md-12">
+          
+              <form name="form" (ngSubmit)="addform.form.valid && uploadimage()" #addform="ngForm"  novalidate>
+                <div class="form-group row">
+                  <label for="email" class="col-4 col-form-label">Currency Type</label>
+                  <div class="col-6">
+                    <select class="form-control" name="currency_type"  [(ngModel)] = "ipDatas.currency_type" style=" font-size: 15px;color: #000;height: 39px !important;">
+                    <option class="dropdown-item" disabled selected value="undefined">Select an Option</option>
+                    <option value='token'>Token</option>
+                    <option value='coin'>Coin</option>
+                 </select>
+                  <!-- <input type="text" placeholder="Currency Type" class="form-control" name="Type" [(ngModel)]="ipDatas.currency_type"  #currency_type="ngModel" pattern="^\S.*"  required />
+                  <div *ngIf="(currency_type.invalid && addform.submitted) || currency_type.touched" class="text-danger">
+                    <span *ngIf="currency_type.errors?.required">Currency Type is required</span>
+                    <span *ngIf="currency_type.errors?.pattern">Prefix space not allowed</span>
+                  </div> -->
+                </div>
+                </div>
+                 <div class="form-group row" *ngIf="ipDatas.currency_type=='token'">
+                  <label for="email" class="col-4 col-form-label">Contract Address</label>
+                  <div class="col-6">
+                  <input type="text" (ngModelChange)="setdecimal($event)"  placeholder="Contract Address" class="form-control" name="ContractAddress" [(ngModel)]="ipDatas.contract_address"  #contract_address="ngModel" pattern="^\S.*"  required />
+                  <div *ngIf="(contract_address.invalid && addform.submitted) || contract_address.touched" class="text-danger">
+                    <span *ngIf="contract_address.errors?.required">Contract Address is required</span>
+                    <span *ngIf="contract_address.errors?.pattern">Prefix space not allowed</span>
+                  </div>
+                </div>
+                </div>
+                <div class="form-group row">
+                  <label for="email" class="col-4 col-form-label">Currency Name</label>
+                  <div class="col-6">
+                  <input type="text" placeholder="Currency Name" class="form-control" name="Name" [(ngModel)]="ipDatas.currencyName"  #currencyName="ngModel" pattern="^\S.*"  required />
+                  <div *ngIf="(currencyName.invalid && addform.submitted) || currencyName.touched" class="text-danger">
+                    <span *ngIf="currencyName.errors?.required">Currency Name is required</span>
+                    <span *ngIf="currencyName.errors?.pattern">Prefix space not allowed</span>
+                  </div>
+                </div>
+                </div>
+               
+                <div class="form-group row">
+                  <label for="email" class="col-4 col-form-label">Currency Symbol</label>
+                  <div class="col-6">
+                  <input type="text" placeholder="Currency Symbol" class="form-control" name="Symbol" [(ngModel)]="ipDatas.currencySymbol"  #currencySymbol="ngModel" pattern="^\S.*"  required />
+                  <div *ngIf="(currencySymbol.invalid && addform.submitted) || currencySymbol.touched" class="text-danger">
+                    <span *ngIf="currencySymbol.errors?.required">Currency Symbol is required</span>
+                    <span *ngIf="currencySymbol.errors?.pattern">Prefix space not allowed</span>
+                  </div>
+                  </div>
+                </div>
+
+
+
+<div class="form-group row">
+                  <label for="email" class="col-4 col-form-label">Currency Decimal</label>
+                  <div class="col-6">
+                  <input type="number" placeholder="Currency Decimal" class="form-control" name="Decimal" [(ngModel)]="ipDatas.currency_decimal"  #currency_decimal="ngModel" pattern="^\S.*"  required />
+                  <div *ngIf="(currency_decimal.invalid && addform.submitted) || currency_decimal.touched" class="text-danger">
+                    <span *ngIf="currency_decimal.errors?.required">Currency Decimal is required</span>
+                    <span *ngIf="currency_decimal.errors?.pattern">Prefix space not allowed</span>
+                  </div>
+                </div>
+                </div>
+
+                <div class="form-group row">
+                <label for="example-text-input" class="col-4 col-form-label">Status </label>
+                <div class="col-6">
+                  <select class="form-control" name="status"  [(ngModel)] = "ipDatas.status" style=" font-size: 15px;color: #000;height: 39px !important;">
+                    <option class="dropdown-item" disabled selected value="undefined">Select an Option</option>
+                    <option value='Active'>Active</option>
+                    <option value='Deactive'>Deactive</option>
+                 </select>
+               </div>
+             </div>
+                 <div class="form-group row" >
+              <label class="col-4 col-form-label" for="file-input">Image</label>
+              <div class="col-6" >
+                <input #fileinput id="file-input" name="file-input" type="file" 
+                (change)="fileChangeEvent($event)" placeholder="Upload a file..." single accept="image/gif,image/jpeg,image/jpg,image/png,"/>
+                 <div *ngIf="ipDatas.currency_image">
+                <img src="{{ipDatas.currency_image}}" height="100px" width="100px" disabled/>
+              </div>
+                </div>
+              </div>
+                <div class="form-group rit">
+                  <button class="btn btn-primary" style="cursor:pointer;" *ngIf="!FromSubmit" [disabled]="fileerr" >Add</button>
+                  <button *ngIf="FromSubmit" class="btn btn-danger rit">Processing <i class="fa fa-spinner fa-spin" style="font-size:16px"></i> </button>
+                </div>
+              </form>
+            
+        </div>
+      </div>
+      
+      <div class="modal-footer"></div>
+    
+    </ng-template>
+ <ng-template #bannercontent let-c="close" let-d="dismiss">
+      
+      <div class="modal-header">
+        <h6 class="modal-title text-uppercase">View Currency</h6>
+        <button type="button" style="cursor:pointer;" class="close" aria-label="Close" (click)="d('Cross click')" ngbTooltip="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+              
+              <form name="form" novalidate>
+                <div class="form-group row">
+                    <label for="email" class="col-4 col-form-label">Currency Name</label>
+                  <label for="email" class="col-4 col-form-label">{{ipDatas.currencyName}} </label>
+                </div>
+                <div class="form-group row">
+
+                    <label for="email" class="col-4 col-form-label">Currency Symbol</label>
+
+                  <label for="email" class="col-4 col-form-label">{{ipDatas.currencySymbol}} </label>
+                </div>
+                <div class="form-group row">
+
+                    <label for="email" class="col-4 col-form-label">Currency Type</label>
+                  <label for="email" class="col-4 col-form-label">{{ipDatas.currency_type}} </label>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-4 col-form-label">Contract Address</label>
+                  <label for="email" class="col-4 col-form-label">{{ipDatas.contract_address}} </label>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-4 col-form-label">Currency Decimal</label>
+                  <label for="email" class="col-4 col-form-label">{{ipDatas.currency_decimal}} </label>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-4 col-form-label">Supply</label>
+                    <label for="email" class="col-4 col-form-label">{{ipDatas.supply}}</label>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-4 col-form-label">Status</label>
+                    <label for="email"  class="col-4 col-form-label" >{{ipDatas.status}}</label>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-4 col-form-label">Created Date</label>
+                    <label for="email" class="col-4 col-form-label">{{ipDatas.created_date | date:'medium'}}</label>
+                </div>
+                
+              </form>
+            
+      </div>
+      
+      <div class="modal-footer"></div>
+    
+    </ng-template>

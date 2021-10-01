@@ -1,0 +1,457 @@
+<div class="card">
+    <div class="card-header" style="background-color:#2f353a;color:#33adff;">
+          <i class="fa fa-align-justify"></i> CMS Management
+        </div>
+
+
+<!-- <h4 style="padding-left: 425px;">Manage Users</h4> -->
+<div class="tabcntcls" style=" -webkit-transition: all 1s ease;transition: all 1s ease;padding: 25px;">
+  <div class="row">
+    <div class="col-md-9 align-items-center" style="display: inline-flex;padding-left: 0px;">
+      <span>Display : </span>
+      <select (change)="changeRowLimits($event)" style="width: auto;background: transparent;height: 30px;margin-left: 5px;">
+          <option *ngFor="let limit of rowLimits" [value]="limit.value">{{limit.key}}</option>
+      </select>
+
+      <div class="input-group-btn" style="margin-left: 10px;">
+        <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="resetuserlist()">
+           <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="col-md-3 p-2">
+
+        <div class="input-group">
+          <input type="text" [(ngModel)]="defsearch" class="form-control" placeholder="Search" id="txtSearch" (keyup.enter)="updateFilter()"  
+          (keyfocus)="updateFilter()"/>
+          <div class="input-group-btn">
+            <button class="btn btn-primary" style="cursor:pointer;margin-left: -2px;" type="submit" (click)="updateFilter()">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row-reverse">
+      <div class="export_option">
+        <ul class="list-inline">
+          <li class="list-inline-item btn btn-primary" (click)="openaddcherrymodel(addcherrycontent)" style="cursor:pointer;margin-left: -2px;">
+            {{'Add Token Lots +'}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  <div class="table-responsive tab_top">
+    <ngx-datatable #usertable class="bootstrap table table-bordered table-striped mb-0 material" [ngClass]="{'table-loaders': table_loader == true }"
+
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+    [rowHeight]="'auto'" [(limit)]="limit" [rows]='userrows' [externalPaging]="true"
+        [count]="page.totalElements"
+        [offset]="page.pageNumber"
+        [limit]="page.size"
+        [scrollbarH]="true"
+        (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [loadingIndicator]="loading">
+
+    <ngx-datatable-column name="S.No" [width]="50">
+      <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+        <!-- {{row.$$index + 1}} -->
+        <!-- {{rowIndex + 1}} -->
+        {{(page.pageNumber*page.size)+(rowIndex + 1)}}
+      </ng-template>
+    </ngx-datatable-column>
+
+
+    <ngx-datatable-column name="Designation">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.designation}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Price">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.price}}
+      </ng-template>
+    </ngx-datatable-column>
+     <ngx-datatable-column name="Total Token">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.total_supply}}
+      </ng-template>
+    </ngx-datatable-column>
+     <ngx-datatable-column name="Location">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.location}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Status">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.status}}
+      </ng-template>
+    </ngx-datatable-column>
+     <!-- <ngx-datatable-column name="Page Key">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.contract_addrs}}
+      </ng-template>
+    </ngx-datatable-column> -->
+    <ngx-datatable-column name="Modified Date and Time">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.created_date| date: 'medium'}}
+      </ng-template>
+    </ngx-datatable-column>
+    
+  <ngx-datatable-column name="Action" [resizeable]="false" prop="_id" >
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+ <!--  <button class="btn btn-link mr-1 mb-1 cursorcls" (click)="openeditmodel(edittoken, row)" style="outline:none;" ngbTooltip="Edit">
+   <i class="fa fa-edit"></i> </button> -->
+   <button class="btn btn-link mr-1 mb-1 cursorcls" (click)="openviewmodel(viewtokencontent, row)" style="outline:none;" ngbTooltip="Edit">
+   <i class="fa fa-eye"></i> </button>
+   </ng-template>
+ </ngx-datatable-column>
+   
+    </ngx-datatable>
+  </div>
+</div>
+</div>
+
+<ng-template #viewtokencontent let-c="close" let-d="dismiss">
+<div class="modal-header">
+ <h6 class="modal-title text-uppercase" style="color:#eb7d34;"><b>View Token Lots</b></h6>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')" ngbTooltip="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <div class="common-border"><form  autocomplete="off" (ngSubmit)="editflag(countryflag)" #countryflag="ngForm">
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Designation</label>
+    <div class="col-6">
+      <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.designation"  #designation="ngModel" name="designation"  disabled readonly/>
+       
+      </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Price</label>
+    <div class="col-6">
+      <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.price" #price="ngModel" name="price" pattern="[a-zA-Z ]+" disabled readonly />
+    </div>
+  </div>
+   <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Price</label>
+    <div class="col-6">
+      <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.price_btc" #price_btc="ngModel" name="price_btc" pattern="[a-zA-Z ]+" disabled readonly />
+    </div>
+  </div>
+   <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Price</label>
+    <div class="col-6">
+      <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.price_eth" #price_eth="ngModel" name="price_eth" pattern="[a-zA-Z ]+" disabled readonly />
+    </div>
+  </div>
+   <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Price</label>
+    <div class="col-6">
+      <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.price_usdt" #price_usdt="ngModel" name="price_usdt" pattern="[a-zA-Z ]+" disabled readonly />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Total Token</label>
+    <div class="col-6">
+      <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.total_supply" #total_supply="ngModel" name="total_supply" pattern="[a-zA-Z ]+" disabled readonly />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Status</label>
+    <div class="col-6">
+      <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.status" #status="ngModel" name="status"  disabled readonly />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Location</label>
+    <div class="col-6">
+      <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.location" #location="ngModel" name="location" pattern="[a-zA-Z ]+" disabled readonly />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">
+    Start Date</label>
+    <div class="col-6">
+      <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.start_date" #from_date="ngModel" name="from_date" pattern="[a-zA-Z ]+" disabled readonly />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">
+    End Date</label>
+    <div class="col-6">
+      <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.end_date" #to_date="ngModel" name="to_date" pattern="[a-zA-Z ]+" disabled readonly/>
+    </div>
+  </div>
+  
+</form></div>
+</div>
+
+</ng-template>
+
+ <ng-template #addcherrycontent let-c="close" let-d="dismiss" class="col-md-12">
+      <div class="modal-header">
+        <h6 class="modal-title text-uppercase" style="color:#eb7d34;"><b>Add Token lots</b></h6>
+        <button type="button" *ngIf="dataLoader" (click)="restrictclose()" class="close" aria-label="Close" ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+         <button type="button" *ngIf="!dataLoader" (click)="d('Cross click')" class="close" aria-label="Close" ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"  [ngClass]="{'loaders': dataLoader == true }">
+        <div class="common-border">
+          <form  autocomplete="off" (ngSubmit)="add_token_result()" #countryflag="ngForm">
+            <div class="form-group row">
+              <label for="example-text-input" class="col-6 col-form-label">Designation</label>
+              <div class="col-6">
+                <input type="text" class="form-control"  [(ngModel)] ="edithostlist.designation" #designation="ngModel" name="designation" required />
+                 <div *ngIf="(designation.invalid && countryflag.submitted) || designation.touched" class="txt-color">
+                  <span *ngIf="designation.errors?.required">Designation  is required</span> 
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-text-input" class="col-6 col-form-label">Price</label>
+              <div class="col-6">
+                <input type="text" class="form-control"  [(ngModel)] ="edithostlist.price" #price="ngModel" name="price" required />
+                 <div *ngIf="(price.invalid && countryflag.submitted) || price.touched" class="txt-color">
+                  <span *ngIf="price.errors?.required">Price is required</span> 
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-text-input" class="col-6 col-form-label">price btc</label>
+              <div class="col-6">
+                <input type="text" class="form-control"  [(ngModel)] ="edithostlist.price_btc" #price_btc="ngModel" name="price_btc" required />
+                 <div *ngIf="(price_btc.invalid && countryflag.submitted) || price_btc.touched" class="txt-color">
+                  <span *ngIf="price_btc.errors?.required">btc price is required</span> 
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-text-input" class="col-6 col-form-label">price eth</label>
+              <div class="col-6">
+                <input type="text" class="form-control"  [(ngModel)] ="edithostlist.price_eth" #price_eth="ngModel" name="price_eth" required />
+                 <div *ngIf="(price_eth.invalid && countryflag.submitted) || price_eth.touched" class="txt-color">
+                  <span *ngIf="price_eth.errors?.required">eth price is required</span> 
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-text-input" class="col-6 col-form-label">price usdt</label>
+              <div class="col-6">
+                <input type="text" class="form-control"  [(ngModel)] ="edithostlist.price_usdt" #price_usdt="ngModel" name="price_usdt" required />
+                 <div *ngIf="(price_usdt.invalid && countryflag.submitted) || price_usdt.touched" class="txt-color">
+                  <span *ngIf="price_usdt.errors?.required">usdt price is required</span> 
+                  </div>
+              </div>
+            </div>
+             <div class="form-group row">
+              <label for="example-text-input" class="col-6 col-form-label">Total Token</label>
+              <div class="col-6">
+                <input type="text" class="form-control"  [(ngModel)] ="edithostlist.total_supply" #total_supply="ngModel" name="total_supply"  onkeydown="javascript: return event.keyCode == 69 ? false : true" (keypress)="descimalkey($event)" required />
+                 <div *ngIf="(total_supply.invalid && countryflag.submitted) || total_supply.touched" class="txt-color">
+                  <span *ngIf="total_supply.errors?.required">Total Token is required</span> 
+                  </div>
+              </div>
+            </div>
+             <div class="form-group row">
+              <label for="example-text-input" class="col-6 col-form-label">Location</label>
+              <div class="col-6">
+                <input type="text" class="form-control"  [(ngModel)] ="edithostlist.location" #location="ngModel" name="location" required />
+                 <div *ngIf="(location.invalid && countryflag.submitted) || location.touched" class="txt-color">
+                  <span *ngIf="location.errors?.required">Location is required</span> 
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+                  <label for="example-text-input" class="col-6 col-form-label">Start Date</label>
+                  <div class="col-6">
+                  <my-date-picker name="start_date" [options]="myOptionss1_start" [(ngModel)]="edithostlist.start_date" #start_date="ngModel" (dateChanged)="onDateChanged($event)" (click)="eidtdisableUntil()" style="display: flex;" placeholder="Start Date" ></my-date-picker>
+                    <div *ngIf="(start_date.invalid && countryflag.submitted) || start_date.touched" class="txt-color">
+                    <span *ngIf="start_date.errors?.required">Start Date is required</span> 
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="example-text-input" class="col-6 col-form-label">End Date</label><br>
+                  <div *ngIf="helo1" class="col-6">
+                    <my-date-picker name="end_date" [options]="myOptionss1" [(ngModel)]="edithostlist.end_date" #end_date="ngModel" (dateChanged)="onDate($event)" (click)="eidtdisableUnti()" style="display: flex;" placeholder="End Date" required></my-date-picker>
+                    <div *ngIf="(end_date.invalid && countryflag.submitted) || end_date.touched" class="txt-color">
+                    <span *ngIf="end_date.errors?.required">End Date is required</span>
+                    </div>
+                  </div>
+                  <div *ngIf="!helo1" class="col-6">
+                    <my-date-picker name="end_date" [options]="myOptionss1" [(ngModel)]="edithostlist.end_date" #end_date="ngModel" (dateChanged)="onDate($event)" (click)="eidtdisableUnti()" style="display: flex;" placeholder="End Date" disabled required></my-date-picker> 
+                    <div *ngIf="(end_date.invalid && countryflag.submitted) || end_date.touched" class="txt-color">
+                    <span *ngIf="end_date.errors?.required">End Date is required</span>
+                    </div>
+                  </div>
+                </div>
+            <div class="modal-footer">
+              <div> 
+                <button type="submit"  style="cursor: pointer; background-color:#349eeb;" [disabled] ="!countryflag.valid" class="btn btn-info cursorcls" >Submit</button>
+                <button type="button"  style="cursor: pointer;background-color:#eb3d34" class="btn btn-secondary cursorcls" (click)="c('Close click')" >Close</button>
+              </div> 
+            </div>
+          </form>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #edittoken let-c="close" let-d="dismiss">
+<div class="modal-header">
+ <h6 class="modal-title text-uppercase" style="color:#eb7d34;"><b>Edit Token Lots</b></h6>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')" ngbTooltip="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <div class="common-border"><form  autocomplete="off" (ngSubmit)="edittoken_result()" #edit_tokenform="ngForm">
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Token Symbol</label>
+    <div class="col-6">
+      <input type="text" class="form-control" [(ngModel)] ="edittoken_list.token_symbol" #token_symbol="ngModel" name="token_symbol" required />
+       <div *ngIf="(token_symbol.invalid && edit_tokenform.submitted) || token_symbol.touched" class="txt-color">
+                  <span *ngIf="token_symbol.errors?.required">Token Symbol is required</span> 
+        </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Token Contract address</label>
+    <div class="col-6">
+      <input type="text" class="form-control"  [(ngModel)] ="edittoken_list.contract_addrs" #contract_addrs="ngModel"
+      name="contract_addrs" required/>
+      <div *ngIf="(contract_addrs.invalid && edit_tokenform.submitted) || contract_addrs.touched" class="txt-color">
+                  <span *ngIf="contract_addrs.errors?.required">Contract address is required</span> 
+      </div>    
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">
+    Token decimal </label>
+    <div class="col-6">
+      <input type="text"  class="form-control"  [(ngModel)] ="edittoken_list.token_decimal" #token_decimal="ngModel" name="token_decimal" required onkeydown="javascript: return event.keyCode == 69 ? false : true" (keypress)="descimalkey($event)" />
+      <div *ngIf="(token_decimal.invalid && edit_tokenform.submitted) || token_decimal.touched" class="txt-color">
+                  <span *ngIf="token_decimal.errors?.required">Token decimal is required</span> 
+      </div> 
+    </div>
+  </div>
+   <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">
+    Token Supply </label>
+    <div class="col-6">
+      <input type="text" class="form-control"  [(ngModel)] ="edittoken_list.total_supply" #total_supply="ngModel" name="total_supply" required/>
+       <div *ngIf="(total_supply.invalid && edit_tokenform.submitted) || total_supply.touched" class="txt-color">
+                  <span *ngIf="total_supply.errors?.required">Token Supply is required</span> 
+      </div> 
+    </div>
+  </div>
+  
+   <div class="form-group row">
+                  <label for="example-text-input" class="col-4 col-form-label">Start Date</label>
+                  <div class="col-6">
+                  <my-date-picker name="start_date" [options]="myOptionss" [(ngModel)]="edittoken_list.start_date" #start_date="ngModel" (dateChanged)="onDateChanged($event)" (click)="eidtdisableUntil_edit()" style="display: flex;" placeholder="Start Date" required></my-date-picker>
+                    <div *ngIf="(start_date.invalid && edit_tokenform.submitted) || start_date.touched" class="txt-color">
+                    <span *ngIf="start_date.errors?.required">Start Date is required</span> 
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="example-text-input" class="col-4 col-form-label">End Date</label><br>
+                  <div *ngIf="helo1_edit" class="col-6">
+                    <my-date-picker name="end_date" [options]="myOptionss1_edit" [(ngModel)]="edittoken_list.end_date" #end_date="ngModel" (dateChanged)="onDate($event)" (click)="eidtdisableUnti_edit()" style="display: flex;" placeholder="End Date" required></my-date-picker>
+                    <div *ngIf="(end_date.invalid && edit_tokenform.submitted) || end_date.touched" class="txt-color">
+                    <span *ngIf="end_date.errors?.required">End Date is required</span>
+                    </div>
+                  </div>
+                  <div *ngIf="!helo1_edit" class="col-6">
+                    <my-date-picker name="end_date" [options]="myOptionss1_edit" [(ngModel)]="edittoken_list.end_date" #end_date="ngModel" (dateChanged)="onDate($event)" (click)="eidtdisableUnti_edit()" style="display: flex;" placeholder="End Date" disabled required></my-date-picker> 
+                    <div *ngIf="(end_date.invalid && edit_tokenform.submitted) || end_date.touched" class="txt-color">
+                    <span *ngIf="end_date.errors?.required">End Date is required</span>
+                    </div>
+                  </div>
+                </div>
+   <div class="modal-footer">
+              <div> 
+                <button type="submit"  style="cursor: pointer; background-color:#349eeb;" [disabled] ="!edit_tokenform.valid" class="btn btn-info cursorcls" >Submit</button>
+                <button type="button"  style="cursor: pointer;background-color:#eb3d34" class="btn btn-secondary cursorcls" (click)="c('Close click')" >Close</button>
+              </div> 
+              
+            </div>
+</form></div>
+</div>
+
+</ng-template>
+<ng-template #cmscontent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title text-uppercase">Edit Cms</h6>
+      <button type="button" class="close" aria-label="Close" (click)="cancelcms();d('Cross click')"  ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Page Title</label>
+        <div class="col-10">
+          <input type="text" id="cmspagetitle" style="cursor:not-allowed;" class="form-control" placeholder="Page Title"
+           [(ngModel)]="editcms.title" required (change)="changeeditcmsevent($event)" disabled="true" />
+        </div>
+      </div>
+       <div class="form-group row" >
+        <label for="example-text-input" class="col-2 col-form-label">Content Title</label>
+        <div class="col-10">
+          <input type="text" id="cmspagetitle"  class="form-control" placeholder="Content Title"
+           [(ngModel)]="editcms.content_title" required />
+        </div>
+      </div>
+
+        <div class="form-group row" *ngIf="editcms.title=='global_terms'|| editcms.title=='news_terms'">
+        <label for="example-text-input" class="col-2 col-form-label">Sub Title</label>
+        <div class="col-10">
+          <input type="text" id="cmspagetitle"  class="form-control" placeholder="Sub Title"
+           [(ngModel)]="editcms.sub_title" required disabled="true" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Page Content</label>
+        <div class="col-10">
+          <ckeditor name="editor1" [(ngModel)]="editcms.pagecontent"
+          (ngModelChange)="changeeditcmsevent($event)" 
+          [config]="ckeConfig" ></ckeditor>
+        </div>
+      </div>
+       <div class="form-group row"  *ngIf="  editcms.title!='Deposit_Withdraw1' && editcms.title!='Deposit_Withdraw2'  && editcms.title!='Deposit_Withdraw3' && editcms.title!='Buy_Sell1'  && editcms.title!= 'Buy_Sell2' && editcms.title!='Buy_Sell3' && editcms.title!='footercontent' ">
+        <label for="example-text-input" class="col-2 col-form-label">Image</label>
+        <img  src="{{editcms.image}}" style="height: 60px;width: 60px;" />
+         <div class="col-sm-9 currency_image" style="|padding-left: 22px;">
+          <input  id="idssss" #filess  name="image" type="file" (change)="fileChangeEvent($event,'image')" placeholder="Upload a file..." single accept="image/gif,image/jpeg,image/jpg,image/png,"/>
+         
+        </div>
+    </div>
+
+     <div class="form-group row" *ngIf="editcms.title=='downloadapp'|| editcms.title=='googleapp'">
+        <label for="example-text-input" class="col-2 col-form-label">Second Image</label>
+        <img  src="{{editcms.imagesec}}" style="height: 60px;width: 60px;" />
+         <div class="col-sm-9 currency_image" style="|padding-left: 22px;">
+          <input  id="id_proof" #fileInput  name="image" type="file" (change)="fileChangeEvent($event,'imagesec')" placeholder="Upload a file..." single accept="image/gif,image/jpeg,image/jpg,image/png,"/>
+         
+        </div>
+    </div>
+
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" [disabled]="diseditcms" style="cursor:pointer;background-color:#30CE6A;" class="btn btn-info cursorcls" (click)="saveEditCMS();c('Close click')">Submit</button>
+      <button type="button" style="cursor:pointer;" class="btn btn-secondary cursorcls" (click)="cancelcms();c('Close click')">Close</button>
+    </div>
+</ng-template>

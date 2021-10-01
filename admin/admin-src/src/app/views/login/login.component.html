@@ -1,0 +1,152 @@
+
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5 mx-auto">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <form (ngSubmit)="onSubmit(content)" #form="ngForm" aria-labelledby="title" >
+                  <h1>Login</h1>
+                  <p class="text-muted">Sign In to your account</p>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Email Id" autocomplete="Email Id" name="emailid" 
+                    [(ngModel)]="user.emailid" pattern=".+@.+\..+"  #emailid="ngModel" [class.form-control-danger]="emailid.invalid && emailid.touched" required>
+                    <small  style="color: red;"class="form-text error" *ngIf="emailid.invalid && emailid.touched && emailid.errors?.required">
+                        Email is required!
+                    </small>
+                    <small style="color: red;" class="form-text error" *ngIf="emailid.invalid && emailid.touched && emailid.errors?.pattern">
+                       Email should be the real one!
+                    </small>
+                  </div>
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Password" autocomplete="current-password" name="password"  [(ngModel)]="user.password"  #password="ngModel" 
+                             pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*\s).{8,}$"
+                          [minlength]="8"
+                          [maxlength]="30"
+                           [class.form-control-danger]="password.invalid && password.touched" required>
+                      <small style="color: red;" class="form-text error" *ngIf="password.invalid && password.touched && password.errors?.required">
+                        Password is required!
+                      </small>
+                  </div>
+
+                  <div class="input-group mb-4">
+                    <div id="patternContainer"></div>
+                    <input type="hidden" name="pattern_code" id="patterncode">
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6">
+                      <button type="submit" class="btn btn-primary px-4">Login</button>
+                    </div>
+                    <div class="col-6 text-right">
+                      <button type="button"  (click)="resetpwd();"class="btn btn-link px-0">Forgot password?</button>
+                      <button type="button"  (click)="resetpattern();"class="btn btn-link px-0">Forgot pattern?</button>
+                    </div>
+                  </div>
+              </form>
+
+    <ng-template #content class="modal-dialog modal-lg" let-c="close" let-d="dismiss">
+          <div *ngIf="!tfa">
+              <div class="modal-header modal-var">
+                <h4 class="modal-title" id="modal-basic-title">Login OTP</h4>
+                <button type="button" class="close" aria-label="Close"
+                (click)="d('Cross click')" ngbTooltip="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="dateOfBirth">Please enter OTP</label>
+                  <div class="input-group">
+                    <input name="otp" class="form-control" [(ngModel)]="user.otp" placeholder="Enter OTP" >
+                  </div>
+                </div>
+          
+          
+                <div class="google_captcha">
+                  <!-- Live -->
+                   <!-- <re-captcha (resolved)="resolved($event)" siteKey="6LcnX9gZAAAAAPvazhGjL-tqJPxk271UHFe00GV1"></re-captcha> -->
+                   <re-captcha (resolved)="resolved($event)" siteKey="{{captchakey}}"></re-captcha>
+                   <!-- DEmo -->
+                   <!-- <re-captcha (resolved)="resolved($event)" siteKey="6LeTnsYbAAAAAM8N9GHlj7PyxfkwURz3IX1zKu7a"></re-captcha> -->
+                </div>  
+              </form>
+            </div>
+            <div class="modal-footer">
+              
+              <button type="button" class="btn btn-block btn-hero-success" (click)="ResendOTP(content)">Resend OTP</button>
+              <button type="button" class="btn btn-block btn-hero-success" (click)="SaveOTP()">Login</button>
+            </div>
+          </div>
+
+          <div *ngIf="tfa">
+              <div class="modal-header modal-var">
+                <h4 class="modal-title" id="modal-basic-title">Login TFA</h4>
+                <button type="button" class="close" aria-label="Close"
+                (click)="d('Cross click')" ngbTooltip="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="dateOfBirth">Please enter TFACode</label>
+                  <div class="input-group">
+                    <input name="otp" class="form-control" [(ngModel)]="user.otp" placeholder="Enter TFA Code" >
+                  </div>
+                </div>
+          
+          
+                <div class="google_captcha">
+                   <!-- <re-captcha (resolved)="resolved($event)" siteKey="6Ldygt8UAAAAAFEhWyYSfNW9fwDJyi4dl1-V2Ujs"></re-captcha> -->
+                   <re-captcha (resolved)="resolved($event)" siteKey="{{captchakey}}"></re-captcha>
+                </div>  
+              </form>
+            </div>
+            <div class="modal-footer">
+              
+              <!-- <button type="button" class="btn btn-block btn-hero-success" (click)="ResendOTP(content)">Resend OTP</button> -->
+              <button type="button" class="btn btn-block btn-hero-success" (click)="SaveTFA()">Login</button>
+            </div>
+          </div>
+    </ng-template>
+
+
+    <!--     <ng-template #loaderModal class="modal-dialog modal-lg" >
+      <div class="modal-body">
+        <form>
+          <div class="form-group" style="padding-left: 8em">
+           <img style="padding-left: 4em" src="assets/images/loader.gif" height="90px" />
+          <div>You are logging in. Please Wait</div>
+          </div>
+        </form>
+      </div>
+    </ng-template> -->
+              </div>
+            </div>
+           <!--  <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+              <div class="card-body text-center">
+                <div>
+                  <h2>Sign up</h2>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                  <button type="button" class="btn btn-primary active mt-3">Register Now!</button>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+ 

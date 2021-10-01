@@ -1,0 +1,603 @@
+<div class="container">
+  <div class="earning-page">
+    <h3>QUBE STAKING</h3>
+    <div>
+      <tabset>
+        <tab id="tab1">
+          <ng-template tabHeading>
+            <span class=""><img src="assets/images/star-small.png" class="mr-2">Hot</span>
+          </ng-template> 
+          <div class="row justify-content-center" *ngIf="farminglist_show">
+            <div class="col-lg-3 col-md-6 mb-5" *ngFor="let data of farm_fullpair_data;let i=index">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="{{data.pairdata.fromCurrency_i}}" class="coin-img">
+                <div class="cont-div">
+                  <h3>{{data.pair}}</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">{{data.total_deposit | number:'1.8-8'}} LP</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">{{data.rewardAmount | number:'1.8-8'}} QUBE</span>
+                  </div>
+                  <!-- <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div> -->
+                  <!-- <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div> -->
+                </div>
+                <button class="btn select-btn" (click)="loginmetamask();" *ngIf="!commonservice.metaDetails.isLogin">Connect Wallet</button>
+                <button  (click)="showdeposit_page(data);"  *ngIf="commonservice.metaDetails.isLogin" class="btn select-btn">Select</button>
+              </div>
+            </div>
+          </div>
+        </tab>
+        <tab>
+          <ng-template tabHeading>
+            <span class=""><img src="assets/images/star-small.png" class="mr-2">earn QUBE</span>
+          </ng-template>
+          <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/btc-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>BTCB to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/monero-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>XMR to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/eth-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>ETH to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/doge-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>DASH to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/btc-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>BTCB to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/monero-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>XMR to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/eth-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>ETH to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/doge-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>DASH to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+          </div>
+        </tab>
+        <tab>
+          <ng-template tabHeading>
+            <span class=""><img src="assets/images/star-small.png" class="mr-2">STAKING</span>
+          </ng-template>
+          <div class="row justify-content-center">
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/btc-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>BTCB to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/monero-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>XMR to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/eth-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>ETH to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/doge-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>DASH to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/btc-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>BTCB to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/monero-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>XMR to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/eth-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>ETH to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/doge-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>DASH to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+          </div>
+        </tab>
+        <tab>
+          <ng-template tabHeading>
+            <span class=""><img src="assets/images/star-small.png" class="mr-2">nft pool</span>
+          </ng-template>
+          <div class="row justify-content-center">
+            <div class="col-lg-12">
+              <h4 class="comingsoon">Coming soon</h4>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+              <div class="hot-stake-div p-3" style="opacity: 0.1;">
+                <img src="assets/images/ribbon.png" class="ribbon-img">
+                <img src="assets/images/btc-stake.png" class="coin-img">
+                <div class="cont-div">
+                  <h3>BTCB to QUBE</h3>
+                  <div class="cont-det-div">
+                    <span>Deposit:</span>
+                    <span class="val">BTCB</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>Earn:</span>
+                    <span class="val">QUBE</span>
+                  </div>
+                  <div class="cont-det-div">
+                    <span>ROI:</span>
+                    <span class="val">1</span>
+                  </div>
+                </div>
+                <button class="btn select-btn">Select</button>
+              </div>
+            </div>
+          </div>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="depositpage_show">
+  <div class="earn-card-page">
+    <div class="row mb-3">
+      <div class="col-lg-12">
+        <div class="coin-trans" (click)="show_Staking()">          
+            <img style="cursor:pointer;" src="assets/images/left-arrow.png">
+            <h6 class="mx-2 back_btn">Back</h6>
+       <!--      <img src="assets/images/info.png"> -->
+        </div> 
+        <img class="coin-img" src="{{selected_stake_pair.pairdata.fromCurrency_i}}">
+        <div class="coin-trans">
+          <h3>{{selected_stake_pair.pair}}</h3>
+        </div>
+        <p>Stake {{selected_stake_pair.pair}} QLP</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="row">
+          <div class="col-lg-6 mb-5">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="{{selected_stake_pair.pairdata.fromCurrency_i}}" class="coin-img">
+              <div class="cont-div">
+                <!-- <h3 *ngIf="selected_stake_pair.total_deposit">{{selected_stake_pair.total_deposit | number:'1.8-8'}}</h3>
+                <h3 *ngIf="!selected_stake_pair.total_deposit">0.00000000</h3> -->
+                <h3>{{reward_amount | number:'1.8-8'}}</h3>
+                <p>QUBE Earned</p>                
+              </div>
+              <button class="btn select-btn mb-0" [disabled]="!show_harvest" (click)="harvest();" *ngIf="!harvestbutton_loading && commonservice.metaDetails.isLogin">Harvest</button>
+               <button  class="btn select-btn mb-0" [disabled]="true" *ngIf="harvestbutton_loading" (click)="c('Close click')">Loading... <i class="fa fa-spinner fa-spin"></i></button>
+              <button class="btn select-btn mb-0" (click)="loginmetamask();" *ngIf="!commonservice.metaDetails.isLogin">Connect Wallet</button>
+            </div>
+          </div>          
+          <div class="col-lg-6 mb-5">
+            <div class="hot-stake-div p-3">
+              <img src="assets/images/ribbon.png" class="ribbon-img">
+              <img src="{{selected_stake_pair.pairdata.toCurrency_i}}" class="coin-img">
+              <div class="cont-div">
+                <h3 *ngIf="selected_stake_pair.total_deposit">{{selected_stake_pair.total_deposit | number:'1.8-8'}}</h3>
+                <h3 *ngIf="!selected_stake_pair.total_deposit">0.00000000</h3>
+                <p>{{selected_stake_pair.pair}} Lp Staked</p>
+              </div>
+
+
+              <!-- <div class="d-flex align-items-center mb-3" *ngIf="show_stake  && selected_stake_pair.total_deposit == 0">
+                  <button class="btn select-btn mb-0" (click)="loginmetamask();" *ngIf="!commonservice.metaDetails.isLogin">Connect Wallet</button>
+                  <button class="btn select-btn mb-0" (click)="staticModal.show()" *ngIf="!stakebutton_loading && commonservice.metaDetails.isLogin">Stake </button>
+                  <button  class="btn select-btn mb-0" [disabled]="true" *ngIf="stakebutton_loading">Loading... <i class="fa fa-spinner fa-spin"></i></button>
+                  <i class="fa fa-plus add" (click)="staticModal.show()"></i>
+              </div>
+              <div class="d-flex align-items-center mb-3" *ngIf="show_unstake && selected_stake_pair.total_deposit > 0">
+                <button class="btn select-btn mb-0" (click)="loginmetamask();" *ngIf="!commonservice.metaDetails.isLogin">Connect Wallet</button>
+                <button class="btn select-btn mb-0" [disabled]="!show_unstake" (click)="staticModal1.show()" *ngIf="!unstakebutton_loading && commonservice.metaDetails.isLogin">Unstake</button>
+                <button class="btn select-btn mb-0" [disabled]="true" *ngIf="unstakebutton_loading">Loading... <i class="fa fa-spinner fa-spin"></i></button>
+                <i class="fa fa-plus add" (click)="staticModal.show()"></i>
+              </div> -->
+
+              <div *ngIf="!commonservice.metaDetails.isLogin">
+                <div class="d-flex align-items-center mb-3" >
+                    <button class="btn select-btn mb-0" (click)="loginmetamask();" *ngIf="!commonservice.metaDetails.isLogin">Connect Wallet</button>
+                </div>
+              </div>
+              <div *ngIf="commonservice.metaDetails.isLogin">
+                <div *ngIf="!show_unstake && !show_stake">
+                  <div class="d-flex align-items-center mb-3" *ngIf="!show_unstake">
+                      <button class="btn select-btn mb-0" [disabled]="!show_stake" (click)="staticModal.show()">Stake</button>
+                  </div>
+                </div>
+                <div *ngIf="!show_unstake && show_stake">
+                  <div class="d-flex align-items-center mb-3">
+                      <button class="btn select-btn mb-0" [disabled]="!show_stake" (click)="staticModal.show()">Stake</button>
+                  </div>
+                </div>
+                <div *ngIf="!show_stake && show_unstake">
+                 <div class="d-flex align-items-center mb-3">
+                    <button class="btn select-btn mb-0" type="button" [disabled]="!show_unstake"  (click)="unstake();" *ngIf="!unstakebutton_loading">Unstake </button>
+                    <button  class="btn select-btn mb-0" [disabled]="true" *ngIf="unstakebutton_loading" (click)="c('Close click')">Loading... <i class="fa fa-spinner fa-spin"></i></button>
+
+                    <i class="fa fa-plus add" (click)="staticModal.show()" *ngIf="show_stake"></i>
+                  </div>
+                </div>
+                <div *ngIf="show_stake && show_unstake">
+                 <div class="d-flex align-items-center mb-3">
+                    <button class="btn select-btn mb-0" type="button" [disabled]="!show_unstake"  (click)="unstake();" *ngIf="!unstakebutton_loading">Unstake </button>
+                    <button  class="btn select-btn mb-0" [disabled]="true" *ngIf="unstakebutton_loading" (click)="c('Close click')">Loading... <i class="fa fa-spinner fa-spin"></i></button>
+
+                    <i class="fa fa-plus add" (click)="staticModal.show()" *ngIf="show_stake"></i>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+          <img src="assets/images/right.png" class="d-block mx-auto right-arrow">        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade wd-modal" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Deposit {{selected_stake_pair.pair}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide();Cancel()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{pair_balance}} {{selected_stake_pair.pair}} avilable</p>
+        <div class="input-group mb-3">
+          <input type="text" id="cmspagetitle"  class="form-control"  placeholder="0.00" 
+           [(ngModel)]="stake_value.stake_pair_balance"  #stake_pair_balance="ngModel" name="stake_pair_balance" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" (paste)="$event.preventDefault()" pattern="09." (keyup)="pricecal('Staking')" required />
+          <div class="input-group-prepend">
+            <span class="input-group-text val">{{selected_stake_pair.pair}}</span>
+            <span class="input-group-text max" (click)="stake_max()">Max</span>
+          </div>          
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <button class="btn can-con-btn" (click)="staticModal.hide();Cancel()">Cancel</button>
+          <button class="btn can-con-btn" [disabled]="!show_stake_button" (click)="Approve_stake();" *ngIf="!stakebutton_loading">Confirm </button>
+                  <button  class="btn can-con-btn" [disabled]="true" *ngIf="stakebutton_loading">Loading... <i class="fa fa-spinner fa-spin"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="modal fade wd-modal" bsModal #staticModal1="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Withdraw Bake</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal1.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{reward_amount | number:'1.8-8'}} BAKE avilable</p>
+        <div class="input-group mb-3">
+           <input type="text" id="cmspagetitle"  class="form-control"  placeholder="0.00" 
+           [(ngModel)]="stake_value.unstake_pair_balance"  #unstake_pair_balance="ngModel" name="unstake_pair_balance" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" (paste)="$event.preventDefault()" pattern="09."  required />
+          <div class="input-group-prepend">
+            <span class="input-group-text val">BAKE</span>
+            <span class="input-group-text max" (click)="unstake_max()">Max</span>
+          </div>          
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <button class="btn can-con-btn" >Cancel</button>
+          <button class="btn can-con-btn" type="button" [disabled]="!show_unstake"  (click)="unstake();" *ngIf="!unstakebutton_loading">Confirm </button>
+                  <button  class="btn can-con-btn" [disabled]="true" *ngIf="unstakebutton_loading" (click)="c('Close click')">Loading... <i class="fa fa-spinner fa-spin"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

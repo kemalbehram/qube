@@ -1,0 +1,59 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+
+// If you want to add something do it here
+@import "custom";
+
+@import "../assets/patternLock/patternLock.css";
+
+.app-header .navbar-brand{display:none;}.app-header .navbar-brand.navbar-brand-dash{display:block;line-height: 52px;
+padding-left: 5px;}.header-fixed .app-header{border-bottom:none;}
+.app-body .main{padding-top: 20px;}
+
+
+.ngx-datatable .datatable-body-cell, .ngx-datatable .datatable-header-cell{padding: 7px;}
+.ngx-datatable .datatable-header-cell{background: #2f353a;}.ngx-datatable .datatable-header{height: auto !important;}
+.ngx-datatable .datatable-header-cell span{color: #ffffff;}
+.ngx-datatable.material .empty-row{text-align:center;}
+i.fa.fa-users{font-size:30px;}
+i.fa.fa-support{font-size:30px;}
+i.fa.fa-money{font-size:30px;}
+i.fa.fa-btc{font-size:30px;}
+.details{font-size:16px;font-weight:bold;}
+.button-refresh{padding:3px 10px;}
+.slider.round{width:100px;}
+.row-search-export{margin-top:20px;}
+.tabcntcls label{font-size:13px;}
+.mob-user-manage{margin-bottom:15px;}
+.datatable-row-wrapper,.datatable-header{border-bottom: 1px solid #ddd;}
+/*.datatable-body{margin-top: 15px;}*/
+.datatable-header{height: 50px !important;color:#fff;font-size: 15px;}
+/*.datatable-header-inner{padding-top: 12px;}*/
+.datatable-row-center{padding: 15px 0;}
+.datatable-row-left{font-size: 14px;}
+.datatable-pager ul li a{padding: 5px 10px;color: #000;border: 1px solid #ddd;border-radius: 5px;}
+.datatable-pager ul li.active a{background: #0060ce;color:#fff !important;border-radius: 5px;border: 1px solid #0060ce;text-decoration: none;}
+.datatable-pager ul li:hover a{background: #ddd;color:#fff !important;border-radius: 5px;border: 1px solid #ddd;text-decoration: none;}
+.page-count{font-weight: bold;}
+.common-border{box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.26);padding:30px;border-radius:15px;}
+.export_option ul.list-inline{margin-bottom:0;}
+.table thead th{white-space:nowrap;}
+.fa-download,.fa-eye, .fa-edit{color:#007bff;}
+.site-maintain{margin:15px 0;}
+.badge-info{padding:10px;}
+.ngx-datatable .datatable-body .datatable-body-row>div{align-items:center;}
+.modal-title{font-weight:bold;color:#33adff !important;}
+@media (max-width:767px){.mob-export-options{display:block !important;}.btn-marg-submit{margin-top:15px;}.marg-top-25{margin-top:25px;}}
+
+
+@media screen and (max-width:1200px){
+.dash_blk .details {    font-size: 18px;  min-height: 86px; }
+.dash_blk .card-body{padding:0;}
+}
+.btn-group i.fa {
+    font-size: 25px;
+}
+.input-group > .form-control{width:70% !important;}

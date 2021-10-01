@@ -1,0 +1,390 @@
+.pool-page{
+    padding: 2rem 0 4rem;
+    @media(max-width:575px){
+        padding: 0rem;
+    }
+    h3{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 43px;
+        line-height: 52px;
+        text-align: center;
+        letter-spacing: -0.005em;
+        text-transform: uppercase;
+        color: #0D1815;
+        margin-bottom: 1.5rem;
+        @media(max-width:575px){
+            font-size: 31px;
+        }
+    }
+    .pool-div{
+        //background: linear-gradient(180deg, #2DBA89 8.87%, #26A87B 33.28%, #229E73 46.4%, #1F946B 59.51%, #198660 78.82%);
+        background: linear-gradient(180deg, #2DBA89 8.87%, #26A87B 33.28%, #229E73 46.4%, #1F946B 59.51%, #198660 78.82%);
+        border-radius: 5px;
+        @media(max-width:575px){
+            border-radius: 0;
+        }
+        ul.pool-swap-div{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 1.5rem 0;
+            position: relative;
+            li{
+                list-style: none;
+                width: 50%;
+                text-align: center;
+                
+                a{
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 16px;
+                    line-height: 19px;
+                    text-align: center;
+                    letter-spacing: 0.04em;
+                    text-transform: uppercase;
+                    color: #FFFFFF;
+                    opacity: 0.6;
+                }
+                a:hover{
+                    text-decoration: none;
+                }               
+            }
+            li.active a, li:hover a{
+                opacity: 1;
+            }
+            li:after{
+                content: '';
+                background: transparent;
+                height: 2px;
+                display: block;
+                position: absolute;
+                bottom: 0px;
+                width: 50%;
+            }
+            li.active:after, li:hover:after{
+                background: #fff;
+                transition: all .5s;
+            }           
+        }        
+        .add-liq-page{            
+            @media(max-width:575px){
+                padding: 0rem;
+            }
+            h3{
+                font-style: normal;
+                font-weight: 600;
+                font-size: 43px;
+                line-height: 52px;
+                text-align: center;
+                letter-spacing: -0.005em;
+                text-transform: uppercase;
+                color: #0D1815;
+                margin-bottom: 1.5rem;
+                @media(max-width:575px){
+                    font-size: 31px;
+                }
+            }
+            .add-liq-div{
+                background: linear-gradient(180deg, #2DBA89 8.87%, #26A87B 33.28%, #229E73 46.4%, #1F946B 59.51%, #198660 78.82%);
+                border-radius: 5px;
+                @media(max-width:575px){
+                    border-radius: 0;
+                }
+                .back-div{
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 1rem;
+                    h6{
+                        font-style: normal;
+                        font-weight: 600;
+                        font-size: 14px;
+                        line-height: 19px;
+                        letter-spacing: 0.015em;
+                        text-transform: uppercase;
+                        color: #FFFFFF;
+                        margin-bottom: 0;
+                    }
+                }
+                .input-bg{
+                    height: 80px;
+                    background: rgba(255, 255, 255, 0.15);
+                    border-radius: 6px;
+                    label{
+                        font-style: normal;
+                        font-weight: 500;
+                        font-size: 11px;
+                        line-height: 13px;
+                        letter-spacing: 0.06em;
+                        text-transform: uppercase;
+                        color: #FFFFFF;
+                        opacity: 0.7;
+                    }
+                    .form-control{
+                        background: transparent;
+                        border:0px;
+                        padding:0;
+                        font-style: normal;
+                        font-weight: bold;
+                        font-size: 26px;
+                        line-height: 31px;
+                        letter-spacing: -0.015em;
+                        text-transform: uppercase;
+                        color: #FFFFFF;
+                    }
+                    .coin-div{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        cursor: pointer;
+                        span{
+                            font-style: normal;
+                            font-weight: 600;
+                            font-size: 18px;
+                            line-height: 22px;
+                            letter-spacing: 0.005em;
+                            text-transform: uppercase;
+                            color: #FFFFFF;
+                        }
+                    }            
+                    
+                }
+                .price-div{
+                    p{
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 13px;
+                        line-height: 16px;
+                        letter-spacing: 0.01em;
+                        color: #FFFFFF;
+                        text-align: right;
+                        opacity: 0.8;
+                        span{
+                            text-transform: uppercase;
+                            font-weight: bold;
+                        }
+                    }
+                }
+                .connect-wallet-btn{
+                    border: 3px solid #FFFFFF;
+                    border-radius: 37.5px;
+                    width: 100%;
+                    background: transparent;
+                    height: 65px;
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 16px;
+                    line-height: 19px;
+                    letter-spacing: 0.02em;
+                    text-transform: uppercase;
+                    color: #FFFFFF;
+                    margin-bottom: 1rem;
+                }
+                .connect-wallet-btn:hover{
+                    background: #fff;
+                    color: #239F74;
+                    transition: all .5s;
+                }
+                .swap-val-div{
+                    border-top: 1px solid rgba(255, 255, 255, 0.15);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+                    padding:15px 0;
+                    .det-div{
+                        display: flex;
+                        justify-content:space-between;
+                        align-items: center;
+                        margin-bottom: 1rem;
+                        span{
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 13px;
+                            line-height: 16px;
+                            letter-spacing: 0.01em;
+                            color: #FFFFFF;
+                            opacity: 0.6;
+                        }
+                        span.value{
+                            font-weight: bold;
+                            opacity: 1;
+                        }
+                    }
+                    .det-div:last-child{
+                        margin-bottom: 0;
+                    }
+                }
+                .route-div{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    span{
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 13px;
+                        line-height: 16px;
+                        letter-spacing: 0.01em;
+                        color: #FFFFFF;
+                        opacity: 0.6;
+                    }
+                    .coin-det-list{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .ldiv{
+                            display: flex;
+                            align-items: center;
+                            margin-left: 10px;
+                            h5{
+                                font-style: normal;
+                                font-weight: bold;
+                                font-size: 13px;
+                                line-height: 16px;
+                                letter-spacing: 0.01em;
+                                color: #FFFFFF;
+                                margin: 0 0.5rem;
+                            }
+                        }
+                    }
+                }
+            }
+        } 
+    }
+    
+}
+
+.select-token-modal{
+    .modal-dialog{
+        .modal-content{
+            background: linear-gradient(180deg, #2DBA89 8.87%, #198660 78.82%);
+            border-radius: 5px;
+            .modal-header{
+                border-bottom: 0px;
+                align-items: center;
+                h4{
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    line-height: 17px;
+                    letter-spacing: 0.005em;
+                    text-transform: uppercase;
+                    color: #FFFFFF;
+                }
+                .close{opacity: 1;}
+                .close:focus{outline:0}
+            }
+            .modal-body{
+                .form-control{
+                    background: rgba(255, 255, 255, 0.15);
+                    border-radius: 6px;
+                    height: 45px;
+                    border:0px;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 11px;
+                    line-height: 13px;
+                    display: flex;
+                    align-items: center;
+                    letter-spacing: 0.06em;
+                    text-transform: uppercase;
+                    color: #FFFFFF;
+                    opacity: 0.7;
+                    margin-bottom: 1rem;
+                }
+                .token-list-div{                    
+                    .token-title{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+                        padding-bottom: 10px;
+                        h6{
+                            font-style: normal;
+                            font-weight: normal;
+                            font-size: 13px;
+                            line-height: 16px;
+                            letter-spacing: 0.01em;
+                            color: #FFFFFF;
+                            opacity: 0.6;
+                        }
+                    }
+                    .token-list-det-div{
+                        .tok-list{
+                            scrollbar-width: thin;
+                            scrollbar-color: #28AE7F transparent;
+                            height: 250px;
+                            overflow-y: auto;
+                            cursor: pointer;
+                            .ldiv{
+                                display: flex;
+                                align-items: center;
+                                height: 45px;
+                                padding-left: 15px;
+                                padding-right: 15px;
+                                h5{
+                                    font-style: normal;
+                                    font-weight: 600;
+                                    font-size: 15px;
+                                    line-height: 19px;
+                                    letter-spacing: 0.01em;
+                                    text-transform: uppercase;
+                                    color: #FFFFFF;
+                                    margin-left: 0.5rem;
+                                    margin-bottom: 0;
+                                }
+                            }
+                            .ldiv:hover{
+                                background: rgba(255, 255, 255, 0.1);
+                                transition: all .5s;
+                            }
+                        }
+                    }
+                }                
+            }
+        }
+    }
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #FFFFFF;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: #FFFFFF;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: #FFFFFF;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: #FFFFFF;
+  }
+  .tok-list {
+    scrollbar-width: thin;
+    scrollbar-color: #28AE7F transparent;
+  }
+  .tok-list:-webkit-scrollbar {
+    width: 5px;
+  }
+  .tok-list:-webkit-scrollbar-track {
+    background-color: #28AE7F;
+  }
+  .tok-list:-webkit-scrollbar-thumb {
+    background-color: #28AE7F;
+    border-radius: 15px;
+    border: 3px solid transparent;
+  }
+  
+  /* webkit browsers */
+  
+  .tok-list::-webkit-scrollbar-thumb {
+    height: 26px;
+    border-radius: 15px;
+    background-clip: padding-box;
+    border: 3px solid #28AE7F;
+  }
+  .tok-list::-webkit-scrollbar{
+    width: 5px;
+  }
+  
+  .tok-list::-webkit-scrollbar-thumb {        
+   // box-shadow: 0 0 0 3px #28AE7F;
+  }
+  
+  .cur-pointer{cursor:pointer;} 

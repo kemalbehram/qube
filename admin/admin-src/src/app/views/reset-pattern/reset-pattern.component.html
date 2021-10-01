@@ -1,0 +1,97 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 mx-auto">
+          <div class="card-group">
+            <div class="card p-4">
+              <div class="card-body">
+                <h2 class="title" style="text-align: center;"><img src="{{site}}" width="100px"/></h2>
+      <h4 class="form-text sub-title" style="color: #2b0c5b;">Enter your email address</h4>
+                <form #requestPassForm="ngForm">
+                  <!-- <h1>Login</h1> -->
+                  <!-- <p class="text-muted">Sign In to your account</p> -->
+             <!--  <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="hf-email">Email</label>
+              <div class="col-md-9">
+                <input type="email" id="hf-email" name="hf-email"  [(ngModel)]="user.admin_emailid"  #admin_emailid="ngModel" class="form-control" placeholder="Email address" pattern=".+@.+\..+"
+                 [class.form-control-danger]="admin_emailid.invalid && admin_emailid.touched"
+                 required>
+                <small style="color: red;" class="form-text error" *ngIf="admin_emailid.invalid && admin_emailid.touched && admin_emailid.errors?.required">
+            Email is required!
+          </small>
+          <small  style="color: red;" class="form-text error"
+                 *ngIf="admin_emailid.invalid && admin_emailid.touched && admin_emailid.errors?.pattern">
+            Email should be the real one!
+          </small>
+              </div>
+            </div> -->
+          <!-- <div class="row" >
+            <div class="col-md-12 generate_btn">
+              <button  type="button" (click)="requestPass()"  *ngIf="!submitted" 
+              [disabled]="!requestPassForm.valid" class="btn btn-link px-0">Generate OTP</button>
+
+               <div class="col-6 text-right">
+                      <button type="button" (click)="requestPass()"class="btn btn-link px-0">Forgot password?</button>
+                </div>
+                <h6 *ngIf="submitted">Loading... <i class="fa fa-spinner fa-spin"></i> </h6>
+            </div>
+          </div> -->
+        </form><br>
+
+         <form #OTPPassForm="ngForm">
+             
+
+
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="hf-email">Email</label>
+                <div class="col-md-9">
+                  <input type="email" id="hf-email" name="hf-email"  [(ngModel)]="user.admin_emailid"  #admin_emailid="ngModel" class="form-control" placeholder="Email" pattern=".+@.+\..+"
+                   [class.form-control-danger]="admin_emailid.invalid && admin_emailid.touched" 
+                   required>
+                  <small style="color: red;" class="form-text error" *ngIf="admin_emailid.invalid && admin_emailid.touched && admin_emailid.errors?.required">
+                    Email is required!
+                  </small>
+                   <small  style="color: red;" class="form-text error"
+                         *ngIf="admin_emailid.invalid && admin_emailid.touched && admin_emailid.errors?.pattern">
+                    Email should be the real one!
+                  </small>
+                  </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-md-3 col-form-label">Enter OTP</label>
+                <div class="col-md-9">
+                  <input type="text" name="otp" [(ngModel)]="user.otp"  #otp="ngModel" class="form-control" placeholder="OTP"
+                   [class.form-control-danger]="otp.invalid && otp.touched" (keypress)="descimalkey($event)"
+                   required>
+                  <small style="color: red;" class="form-text error" *ngIf="otp.invalid && otp.touched && otp.errors?.required">
+                    OTP is required!
+                  </small>
+                  </div>
+              </div>
+              <div class="row" >
+                <div class="col-md-12 generate_btn">
+                  <div class="col-6 otp_val">
+                    <button  type="button" (click)="Otpgenerate()" *ngIf="!submitted_otp" 
+                    [disabled]="!OTPPassForm.valid" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>Submit</button>
+                      <h6 *ngIf="submitted_otp">Loading... <i class="fa fa-spinner fa-spin"></i> </h6>
+                  </div>
+
+                  <div class="col-6 generate_btn">
+                      <button type="button" (click)="requestPass()"class="btn btn-link px-0">Generate OTP</button>
+                  </div>
+              
+                </div>
+
+              </div>
+                </form>
+              </div>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

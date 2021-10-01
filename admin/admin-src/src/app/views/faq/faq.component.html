@@ -1,0 +1,220 @@
+<div class="card">
+    <div class="card-header" style="background-color:#2f353a;color:#33adff;">
+          <i class="fa fa-align-justify"></i> FAQ Management
+        </div>
+
+
+<!-- <h4 style="padding-left: 425px;">Manage Users</h4> -->
+<div class="tabcntcls" style=" -webkit-transition: all 1s ease;transition: all 1s ease;padding: 25px;">
+  <div class="row">
+    <div class="col-md-9 align-items-center" style="display: inline-flex;padding-left: 0px;">
+      <span>Display : </span>
+      <select (change)="changeRowLimits($event)" style="width: auto;background: transparent;height: 30px;margin-left: 5px;">
+          <option *ngFor="let limit of rowLimits" [value]="limit.value">{{limit.key}}</option>
+      </select>
+
+      <div class="input-group-btn" style="margin-left: 10px;">
+        <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="resetuserlist()">
+           <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="col-md-3 p-2">
+
+        <div class="input-group">
+          <input type="text" [(ngModel)]="defsearch" class="form-control" placeholder="Search" id="txtSearch" (keyup.enter)="updateFilter()"  
+          (keyfocus)="updateFilter()"/>
+          <div class="input-group-btn">
+            <button class="btn btn-primary" style="cursor:pointer;margin-left: -2px;" type="submit" (click)="updateFilter()">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+   <div class="d-flex flex-row-reverse">
+      <div class="export_option">
+        <ul class="list-inline">
+          <li class="list-inline-item btn btn-primary" (click)="opencreatepairmodel(addfaqcontent)" style="cursor:pointer;margin-left: -2px;">
+            {{'Add FAQ +'}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  <div class="table-responsive tab_top">
+    <ngx-datatable #usertable class="bootstrap table table-bordered table-striped mb-0 material" [ngClass]="{'loaders': dataLoader == true }"
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+    [rowHeight]="'auto'" [(limit)]="limit" [rows]='userrows' [externalPaging]="true"
+        [count]="page.totalElements"
+        [offset]="page.pageNumber"
+        [limit]="page.size"
+        [scrollbarH]="true"
+        (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [loadingIndicator]="loading">
+
+    <ngx-datatable-column name="SNO" [width]="50">
+      <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+        <!-- {{row.$$index + 1}} -->
+        <!-- {{rowIndex + 1}} -->
+        {{(page.pageNumber*page.size)+(rowIndex + 1)}}
+      </ng-template>
+    </ngx-datatable-column>
+       <ngx-datatable-column name="Question">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.question}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <!-- <ngx-datatable-column name="Answer">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.answer}}
+      </ng-template>
+    </ngx-datatable-column> -->
+  <ngx-datatable-column name="Action" [resizeable]="false" prop="_id" >
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+  <button class="btn btn-link mr-1 mb-1 cursorcls" (click)="openCMSmodel(cmscontent,row)" style="outline:none;" ngbTooltip="Edit">
+   <i class="fa fa-edit"></i> </button>
+    <button class="btn btn-link mr-1 mb-1 cursorcls" 
+     (click)="openviewmodel(viewcontent,row)"  ngbTooltip="View">
+      <i class="fa fa-eye" style="color:blue"></i>
+    </button> 
+      
+      <button class="btn btn-link mr-1 mb-1 cursorcls" 
+     (click)="opendeletemodel(deletecontent,row)"  ngbTooltip="View">
+      <i class="fa fa-trash" style="color:blue"></i>
+    </button> 
+   </ng-template>
+ </ngx-datatable-column>
+   
+    </ngx-datatable>
+  </div>
+</div>
+</div>
+<!----delete faq--->
+<ng-template #deletecontent let-c="close" let-d="dismiss">
+    <div class="modal-body" id="actiondialog">
+      <h6>Are you sure to delete FAQ ?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success cursorcls"
+      (click)="delete_faq(bannersvalue);c('Close click')">Yes</button>
+      <button type="button" style="cursor: pointer;
+      background-color:#d9dce0;" class="btn cursorcls"
+      (click)="c('Close click')">No</button>
+    </div>
+    </ng-template>
+
+<!----delete faq----->
+
+<!----edit faq--->
+<ng-template #cmscontent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title text-uppercase">Edit FAQ</h6>
+      <button type="button" class="close" aria-label="Close" (click)="cancelcms();d('Cross click')"  ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+       <div class="form-group row" >
+        <label for="example-text-input" class="col-2 col-form-label">Question</label>
+        <div class="col-10">
+          <input type="text" id="cmspagetitle"  class="form-control" placeholder="Content Title"
+           [(ngModel)]="edit_value.question"  #question="ngModel" name="question" required />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Answer</label>
+        <div class="col-10">
+          <ckeditor  [(ngModel)]="edit_value.answer" #answer="ngModel" name="answer"
+          (ngModelChange)="changeeditcmsevent($event)" 
+          [config]="ckeConfig" ></ckeditor>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" [disabled]="diseditcms" style="cursor:pointer;background-color:#30CE6A;" class="btn btn-info cursorcls" (click)="saveEditCMS();c('Close click')">Submit</button>
+      <button type="button" style="cursor:pointer;" class="btn btn-secondary cursorcls" (click)="cancelcms();c('Close click')">Close</button>
+    </div>
+</ng-template>
+
+<!---edit faq end---->
+ 
+ <!----view faq--->
+ <ng-template #viewcontent let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h6 class="modal-title text-uppercase">View FAQ</h6>
+      <button type="button" class="close" aria-label="Close" (click)="cancelcms();d('Cross click')"  ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+       <div class="form-group row" >
+        <label for="example-text-input" class="col-2 col-form-label">Question</label>
+        <div class="col-10">
+          <input type="text" style="cursor: not-allowed;" id="cmspagetitle"  class="form-control" placeholder="Content Title"
+           [(ngModel)]="view_result.question" disabled required />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-text-input" class="col-2 col-form-label">Answer</label>
+        <div class="col-10">
+          <ckeditor name="editor1" style="cursor: not-allowed;"  [(ngModel)]="view_result.answer"
+          (ngModelChange)="changeeditcmsevent($event)" 
+          [config]="ckeConfig" disabled></ckeditor>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" [disabled]="diseditcms" style="cursor:pointer;background-color:#30CE6A;" class="btn btn-info cursorcls" (click)="saveEditCMS();c('Close click')">Submit</button>
+      <button type="button" style="cursor:pointer;" class="btn btn-secondary cursorcls" (click)="cancelcms();c('Close click')">Close</button>
+    </div> -->
+</ng-template>
+<!---view faq end---->
+
+<!----add faq-------->
+<ng-template #addfaqcontent let-c="close" let-d="dismiss" >
+      <div class="modal-header">
+        <h6 class="modal-title text-uppercase" style="color:#eb7d34;"><b>Add FAQ</b></h6>
+        <button type="button" *ngIf="dataLoader" (click)="restrictclose()" class="close" aria-label="Close" ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+         <button type="button" *ngIf="!dataLoader" (click)="d('Cross click')" class="close" aria-label="Close" ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"  [ngClass]="{'loaders': dataLoader == true }">
+        <div class="common-border">
+          <form  autocomplete="off" (ngSubmit)="onSubmitData(createpair_form)" #createpair_form="ngForm">
+            <div class="form-group row" >
+		        <label for="example-text-input" class="col-2 col-form-label">Question</label>
+		        <div class="col-10">
+		          <input type="text" id="cmspagetitle"  class="form-control" placeholder="Content Title"
+		           [(ngModel)]="addcms.question" #question="ngModel" name="question"  required />
+		        </div>
+		    </div>
+
+            <div class="form-group row">
+		        <label for="example-text-input" class="col-2 col-form-label">Answer</label>
+		        <div class="col-10">
+		          <ckeditor  [(ngModel)]="addcms.answer" #answer="ngModel" name="answer" 
+		          (ngModelChange)="changeeditcmsevent($event)" 
+		          [config]="ckeConfig" ></ckeditor>
+		        </div>
+		     </div>
+            <div class="modal-footer">
+              <div> 
+                <button type="submit" [disabled] ='createpair_form.invalid' style="cursor: pointer; background-color:#349eeb;" class="btn btn-info cursorcls" >Submit</button>
+                <button type="button"  style="cursor: pointer;background-color:#eb3d34" class="btn btn-secondary cursorcls" (click)="c('Close click')" >Close</button>
+              </div> 
+            </div>
+          </form>
+        </div>
+      </div>
+</ng-template>
+
+    <!---add faq end------->

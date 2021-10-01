@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-center align-items-center" id="loader-cnt" style="display: none!important;">
+	<div class="loader-inner-cnt d-flex felx-column align-items-center justify-content-center" id='wait_msg' style="display: none!important;">
+		<div id="cover-spin"><h2 style="color:#259F76;">Please wait until the process being completed... </h2><i class="fa fa-spinner fa-spin" style="color:#259F76;font-size: 120px;"></i>
+		</div>
+	</div>
+</div>
+
+<div id="site-cnt">
+	<app-header [site]="site"></app-header>
+	  <router-outlet></router-outlet>
+	<app-footer [site]="site"></app-footer>
+</div>

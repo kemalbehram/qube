@@ -1,0 +1,400 @@
+<div class="container pool-page" *ngIf="liquditylistShow">
+  <h3>Exchange</h3>
+  <div class="row justify-content-center mx-0">
+    <div class="col-lg-4 p-0">
+      <div class="pool-div">
+        <ul class="pool-swap-div">
+          <!-- <li><a href="swap">Swap</a></li> -->
+          <!-- <li class="active"><a href="pool">Pool</a></li>           -->
+          <li><a [routerLink]="'/swap'">Swap</a></li>
+          <li class="active"><a [routerLink]="'/pool'">Pool</a></li>          
+        </ul>
+        <div class="pool-content-div p-3">
+          <button class="btn add-liq-btn" (click)="show_addliqudity()">Add Liquidity</button>
+          <h6 class="mb-3">Liquidity<img src="assets/images/info.png" class="ml-2"></h6>
+          <div class="no-liq-div"  *ngIf="!commonservice.metaDetails.isLogin">
+            <span>Connect to a wallet to view your liquidity.</span>
+          </div>
+          <div class="no-liq-div"  *ngIf="commonservice.metaDetails.isLogin && poolhistory?.length == 0">
+            <span>There is no liquidity added yet.</span>
+          </div>
+          <div *ngIf="commonservice.metaDetails.isLogin">
+            <accordion [isAnimated]="true"  class="pool-acc" [closeOthers]="true">
+              <accordion-group class="mb-3" *ngFor="let pool of poolhistory; let i=index">
+                <button accordion-heading type="button" (click)="managePairs(pool, i)">
+                  <div class="ldiv d-flex justify-content-between align-items-center">
+                    <div class="mr-2">
+                      <!-- <img src="assets/images/btc-small.png" class="mr-2">
+                      <img src="assets/images/xmr-small.png" > -->
+                      <img src="{{pool.fromCurrency_i}}" class="mr-2" height="26 px"  width="26 px">
+                      <img src="{{pool.toCurrency_i}}"  height="26 px"  width="26 px">
+                    </div>
+                    <span>{{pool.fromCurrency}} / {{pool.toCurrency}}</span>
+                  </div>
+                  <img src="assets/images/down-arrow-big.png">
+                </button>
+                <div class="det-div" *ngIf="showPairDetails[i]">
+                  <div class="det-div-cnt">
+                    <span>Pooled {{selectedPairDetails.fromCurrency}} :</span>
+                    <span>{{poolDetails.myfromCurrency | number:'1.8-8'}}</span>
+                  </div>
+                  <div class="det-div-cnt">
+                    <span>Pooled {{selectedPairDetails.toCurrency}} :</span>
+                    <span>{{poolDetails.mytoCurrency | number:'1.8-8'}}</span>
+                  </div>
+                  <div class="det-div-cnt">
+                    <span>Your Pool Tokens:</span>
+                    <span>{{poolDetails.userBalance | number:'1.8-8'}}</span>
+                  </div>
+                  <div class="det-div-cnt">
+                    <span>Your Pool Share:</span>
+                    <span>{{poolDetails.totalShare ? (poolDetails.totalShare |number:'1.2-2') : 0.00}}%</span>
+                  </div>
+                  <div class="add-remove-btn-div">
+                    <button class="btn add-remove-btn" (click)="showaddliqudity(selectedPairDetails)">Add</button>
+                    <button class="btn add-remove-btn" *ngIf="poolDetails.userBalance > 0.000000" (click)="showremoveliqudity(selectedPairDetails)">Remove</button>
+                  </div> 
+                </div>
+              </accordion-group>            
+            </accordion>
+          </div>
+          <!-- <p>Don't see a pool you joined?<a href="#" class="ml-2">Import it</a></p> -->
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+<div class="container add-liq-page" *ngIf="AddLiqudityShow">
+  <h3>Exchange</h3>
+  <div class="row justify-content-center mx-0">
+    <div class="col-lg-5 p-0">
+      <div class="add-liq-div p-4">
+        <div class="back-div cur-pointer" (click)="show_liquditylist()">
+          <img src="assets/images/left-arrow-white.png">
+          <h6 class="mx-2">Add Liquidity</h6>
+          <img src="assets/images/info.png">
+        </div>
+        <div class="row">
+          <div class="col-6 pr-1">
+            <label>From </label>
+            <div class="input-bg p-3">
+              <label>Input</label>
+              <input type="text" class="form-control" placeholder="0.00"  name="from_amount"  [(ngModel)]="addpoolformdata.from_amount" pattern="09." #from_amount="ngModel" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" (paste)="$event.preventDefault()" required (keyup)="pricecal('addliqudity','first')" [class.form-control-danger]="from_amount.invalid && from_amount.touched" [disabled]="addliqudity_fromtextbox">
+            </div>            
+          </div>
+          <div class="col-6 pl-1">
+            <label>Balance : {{rounds(addlq_first_currency_balance,4)}} {{addlq_first_currency}}</label>
+            <div class="input-bg p-3">
+              <!-- <label>Input</label> -->
+              <label></label>
+
+              <div class="coin-div" (click)="staticModal_adf.show();get_from_currency('addliqudity')" *ngIf="!addlq_first_currency_show">
+                <div class="ldiv">
+                  <span class="mx-2">Select tokens</span>
+                </div>
+                <img src="assets/images/down-arrow-white.png">
+              </div>
+
+              <div class="coin-div" (click)="staticModal_adf.show();get_from_currency('addliqudity')" *ngIf="addlq_first_currency_show">
+                <div class="ldiv">
+                  <!-- <img src="assets/images/btc-small.png"> -->
+                  <img height="26 px" width="26 px" src="{{addlq_first_currency_logo}}">
+                  <span class="mx-2">{{addlq_first_currency}}</span>
+                </div>
+                <img src="assets/images/down-arrow-white.png">
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="assets/images/plus.png" class="d-block mx-auto my-3">
+        <div class="row mb-3">
+          <div class="col-6 pr-1">
+            <label>To </label>
+            <div class="input-bg p-3">
+              <label>Input</label>
+              <input type="text" class="form-control" placeholder="0.00"  name="to_amount" [(ngModel)]="addpoolformdata.to_amount" pattern="09." #to_amount="ngModel" [class.form-control-danger]="to_amount.invalid && to_amount.touched" onkeypress="return (event.charCode == 8 || event.charCode == 46) ? null : event.charCode >= 48 && event.charCode <= 57" (paste)="$event.preventDefault()" required (keyup)="pricecal('addliqudity','second')" [disabled]="addliqudity_totextbox">
+            </div>            
+          </div>
+          <div class="col-6 pl-1">
+            <label>Balance : {{rounds(addlq_second_currency_balance,4)}} {{addlq_second_currency}}</label>
+            <div class="input-bg p-3">
+              <!-- <label>Input</label> -->
+              <label></label>
+
+              <div class="coin-div" (click)="staticModal_ads.show();" *ngIf="!addlq_second_currency_show">
+                <div class="ldiv">
+                  <span class="mx-2">Select tokens</span>
+                </div>
+                <img src="assets/images/down-arrow-white.png">
+              </div>
+
+              <div class="coin-div" (click)="staticModal_ads.show();" *ngIf="addlq_second_currency_show">
+                <div class="ldiv">
+                  <!-- <img src="assets/images/pet.png"> -->
+                  <img height="26 px" width="26 px" src="{{addlq_second_currency_logo}}">
+                  <span class="mx-2">{{addlq_second_currency}}</span>
+                </div>
+                <img src="assets/images/down-arrow-white.png">
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- <div class="value-div mb-4">
+          <p>Prices and pool share</p>
+          <div class="val-det-div mb-3">
+            <div class="ldiv">
+              <span>124344</span>
+              <h5>PET per BTCB</h5>
+            </div>
+            <div class="ldiv">
+              <span>0.00000804217</span>
+              <h5>BTCB per PET</h5>
+            </div>
+            <div class="ldiv">
+              <span>100.00%</span>
+              <h5>Share of Pool</h5>
+            </div>
+          </div>
+          <div class="add-remove-btn-div">
+            <button class="btn add-remove-btn">Add</button>
+            <button class="btn add-remove-btn">Remove</button>
+          </div>
+        </div> -->
+
+        <!-- before login -->
+          <button class="btn connect-wallet-btn" *ngIf="!commonservice.metaDetails.isLogin" (click)="loginmetamask();">Connect WALLET</button>
+        <!-- before login -->
+        
+        <!-- after login -->
+          <button class="btn connect-wallet-btn" (click)="alq_approve_sumbit()" *ngIf="!addlq_approvesubmitted && addlq_approveshow && commonservice.metaDetails.isLogin" [disabled]="balanceok">Approve {{addlq_first_currency}}</button>
+          <button class="btn connect-wallet-btn" *ngIf="addlq_approvesubmitted && addlq_approveshow">Loading... <i class="fa fa-spinner fa-spin"></i></button>
+
+          <button class="btn connect-wallet-btn" (click)="alq_supply_sumbit()" *ngIf="!addlq_submitted && addlq_submittedshow && commonservice.metaDetails.isLogin" >Supply</button>
+          <button class="btn connect-wallet-btn" *ngIf="addlq_submitted && addlq_submittedshow">Loading... <i class="fa fa-spinner fa-spin"></i></button>
+        <!-- after login -->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container remove-liq-page" *ngIf="RemoveLiqudityShow">
+  <div class="row justify-content-center my-3">
+    <div class="col-lg-5 p-0">						
+      <div class="remove-liq-div p-4">
+        <div class="d-flex align-items-center mb-4 justify-content-between">
+          <img src="assets/images/left-arrow.png" class="cur-pointer" style="filter: brightness(0) invert(1);" (click)="show_liquditylist()">
+          <h4 id="dialog-static-name" class="modal-title pull-left mx-2">Remove Liquidity</h4>
+          <img src="assets/images/info.png">
+        </div>
+        <div class="progress">
+          <progressbar class="progress-bar" [value]="progressValue" >{{progressValue}}%</progressbar>
+        </div>
+        <div class="default-div">
+          <ul class="d-flex per_blk justify-content-between cur-pointer p-0 my-3" >
+                <li class="btn perc-btn" (click)="progressBar('25')">25%</li>
+                <li class="btn perc-btn" (click)="progressBar('50')">50%</li>
+                <li class="btn perc-btn" (click)="progressBar('75')">75%</li>
+                <li class="btn perc-btn" (click)="progressBar('100')">Max</li>
+              </ul>
+        </div>
+        <div class="default-div">
+          <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+            <p>{{removepoolformdata.from_amount |number:'1.8-8'}}</p>
+            <!-- <p>{{remove_liq_pair_from_amount |number:'1.8-8'}}</p> -->
+            <span>{{selectedPairDetails.fromCurrency}}<img src="{{selectedPairDetails.fromCurrency_i}}" class="ml-2" height="26 px"  width="26 px"></span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+            <p>{{removepoolformdata.to_amount |number:'1.8-8'}}</p>
+            <!-- <p>{{remove_liq_pair_to_amount |number:'1.8-8'}}</p> -->
+            <span>{{selectedPairDetails.toCurrency}}<img src="{{selectedPairDetails.toCurrency_i}}" class="ml-2" height="26 px"  width="26 px"></span>
+          </div>
+        </div>
+        <div class="default-div">
+          <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+            <p>Price</p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+            <span>1 {{selectedPairDetails.fromCurrency}} = {{removepoolformdata.one_fromAmount |number:'1.8-8'}} {{selectedPairDetails.toCurrency}}</span>
+            <span>1 {{selectedPairDetails.toCurrency}} = {{removepoolformdata.one_toAmount |number:'1.8-8'}} {{selectedPairDetails.fromCurrency}}</span>
+          </div>
+        </div>
+        <div class="default-div">
+          <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+            <p>Your Position</p>            
+            <div><img src="assets/images/btc-small.png" height="26 px"  width="26 px"><span class="mx-2">{{selectedPairDetails.pair}} : </span><span style="color:#fff">{{poolDetails.userBalance |number:'1.8-8'}}</span></div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+            <p>Your Pool</p>
+            <p>{{poolDetails.totalShare |number:'1.2-2'}}%</p>
+          </div>
+        </div>
+        <div class="default-div">
+          <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+            <span>{{selectedPairDetails.fromCurrency}}</span>
+            <p>{{poolDetails.fromCurrency |number:'1.8-8'}}</p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap">
+            <span>{{selectedPairDetails.toCurrency}}</span>
+            <p>{{poolDetails.toCurrency |number:'1.8-8'}}</p>
+          </div>
+        </div>
+        <!-- <a class="btn add-liquidity-btn1">Approve</a> -->
+        <button class="btn rem-liquidity-btn" *ngIf="!removeapprovesubmitted && removeapproveshow" (click)="rlq_approve_sumbit()">Approve</button>
+        <button class="btn rem-liquidity-btn" *ngIf="removeapprovesubmitted && removeapproveshow">Loading... <i class="fa fa-spinner fa-spin"></i></button>
+
+        <button class="btn rem-liquidity-btn" *ngIf="!removepoolsubmitted && removesupplyshow" (click)="removesubmit()">Remove Supply</button>
+        <button class="btn rem-liquidity-btn" *ngIf="removepoolsubmitted && removesupplyshow">Loading... <i class="fa fa-spinner fa-spin"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container import-page" *ngIf="importpoolshow">
+  <div class="row justify-content-center mb-4 align-items-center">
+    <div class="col-lg-5 p-0">
+      <div class="import-div p-4">
+        <div class="d-flex align-items-center mb-4 justify-content-between">
+          <img src="assets/images/left-arrow.png" class="cur_pointer" style="filter: brightness(0) invert(1);" >
+          <h4 id="dialog-static-name" class="modal-title pull-left mx-2">Import</h4>
+          <img src="assets/images/info.png">
+        </div>
+        <div class="d-flex align-items-center mb-4 justify-content-between tok-div" (click)="staticModal1.show()">
+          <div class="ldiv"><img src="assets/images/btc-small.png"><span class="mx-2">BTC</span></div>
+          <img src="assets/images/down-arrow-big.png">
+        </div>
+        <div class="d-flex align-items-center mb-4 justify-content-between tok-div" (click)="staticModal2.show()">
+          <div class="ldiv"><span>Select Token</span></div>
+          <img src="assets/images/down-arrow-big.png">
+        </div>
+        <h6>Select token to find your liquidity</h6>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- addliqudity fromcurrency -->
+  <div class="modal fade select-token-modal" bsModal #staticModal_adf="bs-modal" [config]="{backdrop: 'static'}"
+       tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="dialog-static-name" class="modal-title pull-left">Select a token1</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal_adf.hide()">
+            <img src="assets/images/close.png">
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control" (keyup)="filterFn($event.target.value,'first')" placeholder="Search name or paste address">
+          <div class="token-list-div">
+            <div class="token-title">
+              <h6>Token name</h6>
+              <img src="assets/images/sort.png">
+            </div>
+            <div class="token-list-det-div my-3">
+              <div class="tok-list">
+                <!-- dynamic data -->
+                  <div class="ldiv" *ngFor="let data of addlq_from_currency" (click)="addlq_set_currency(data,'addliqudity','first');">
+                    <img src="{{data.currency_image}}"  height="26 px"  width="26 px">
+                    <!-- <img src="assets/images/btc-small.png"> -->
+                    <h5 >{{data._id}}</h5>
+                  </div>                  
+                <!-- dynamic data -->
+              </div>
+            </div>
+          </div>        
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- addliqudity fromcurrency -->
+
+<!-- addliqudity tocurrency -->
+  <div class="modal fade select-token-modal" bsModal #staticModal_ads="bs-modal" [config]="{backdrop: 'static'}"
+       tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="dialog-static-name" class="modal-title pull-left">Select a token2</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal_ads.hide()">
+            <img src="assets/images/close.png">
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control" (keyup)="filterFn($event.target.value,'second')" placeholder="Search name or paste address">
+          <div class="token-list-div">
+            <div class="token-title">
+              <h6>Token name</h6>
+              <img src="assets/images/sort.png">
+            </div>
+            <div class="token-list-det-div my-3">
+              <div class="tok-list">
+                <div class="ldiv"  *ngFor="let data of addlq_sec_currency" (click)="addlq_set_currency(data,'addliqudity','second');">
+                  <!-- <img src="assets/images/btc-small.png"> -->
+                  <img src="{{data.toCurrency_i}}"  height="26 px"  width="26 px">
+                  <h5>{{data.toCurrency}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>        
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- addliqudity tocurrency -->
+
+<!-- import pool -->
+  <div class="modal fade select-token-modal" bsModal #staticModal2="bs-modal" [config]="{backdrop: 'static'}"
+       tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="dialog-static-name" class="modal-title pull-left">Select a token</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal2.hide()">
+            <img src="assets/images/close.png">
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control" placeholder="Search name or paste address">
+          <div class="token-list-div">
+            <div class="token-title">
+              <h6>Token name</h6>
+              <img src="assets/images/sort.png">
+            </div>
+            <div class="token-list-det-div my-3">
+              <div class="tok-list">
+                <div class="ldiv">
+                  <img src="assets/images/btc-small.png">
+                  <h5>BTCB</h5>
+                </div>
+                <div class="ldiv">
+                  <img src="assets/images/xmr-small.png">
+                  <h5>XMR</h5>
+                </div>
+                <div class="ldiv">
+                  <img src="assets/images/doge-small.png">
+                  <h5>Doge</h5>
+                </div>
+                <div class="ldiv">
+                  <img src="assets/images/usdt.png">
+                  <h5>USDT</h5>
+                </div>
+                <div class="ldiv">
+                  <img src="assets/images/tsa.png">
+                  <h5>TSA</h5>
+                </div>
+                <div class="ldiv">
+                  <img src="assets/images/tct.png">
+                  <h5>TST</h5>
+                </div>
+                <div class="ldiv">
+                  <img src="assets/images/pet.png">
+                  <h5>PET</h5>
+                </div>
+              </div>
+            </div>
+          </div>        
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- import pool -->

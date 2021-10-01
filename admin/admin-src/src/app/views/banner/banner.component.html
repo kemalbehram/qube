@@ -1,0 +1,346 @@
+<div class="card">
+    <div class="card-header" style="background-color:#2f353a;color:#33adff;">
+          <i class="fa fa-align-justify"></i> Banner Management
+        </div>
+
+
+<!-- <h4 style="padding-left: 425px;">Manage Users</h4> -->
+<div class="tabcntcls" style=" -webkit-transition: all 1s ease;transition: all 1s ease;padding: 25px;">
+  <div class="row">
+    <div class="col-md-9 align-items-center" style="display: inline-flex;padding-left: 0px;">
+      <span>Display : </span>
+      <select (change)="changeRowLimits($event)" style="width: auto;background: transparent;height: 30px;margin-left: 5px;">
+          <option *ngFor="let limit of rowLimits" [value]="limit.value">{{limit.key}}</option>
+      </select>
+
+      <div class="input-group-btn" style="margin-left: 10px;">
+        <button class="btn btn-primary button-refresh" style="cursor:pointer;" type="submit"  (click)="resetuserlist()">
+           <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+      </div>
+
+    </div>
+    <div class="col-md-3 p-2">
+
+        <div class="input-group">
+          <input type="text" [(ngModel)]="defsearch" class="form-control" placeholder="Search" id="txtSearch" (keyup.enter)="updateFilter()"  
+          (keyfocus)="updateFilter()"/>
+          <div class="input-group-btn">
+            <button class="btn btn-primary" style="cursor:pointer;margin-left: -2px;" type="submit" (click)="updateFilter()">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="d-flex flex-row-reverse">
+      <div class="export_option">
+        <ul class="list-inline">
+          <li class="list-inline-item btn btn-primary" (click)="openaddcherrymodel(addcherrycontent)" style="cursor:pointer;margin-left: -2px;">
+            {{'Add Banner +'}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  <div class="table-responsive tab_top">
+    <ngx-datatable #usertable class="bootstrap table table-bordered table-striped mb-0 material" [ngClass]="{'table-loaders': table_loader == true }"
+
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+    [rowHeight]="'auto'" [(limit)]="limit" [rows]='userrows' [externalPaging]="true"
+        [count]="page.totalElements"
+        [offset]="page.pageNumber"
+        [limit]="page.size"
+        
+        (page)='setPage($event)' [externalSorting]="true" (sort)="onSort($event)" [loadingIndicator]="loading">
+
+    <ngx-datatable-column name="S.No" [width]="50">
+      <ng-template let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+        <!-- {{row.$$index + 1}} -->
+        <!-- {{rowIndex + 1}} -->
+        {{(page.pageNumber*page.size)+(rowIndex + 1)}}
+      </ng-template>
+    </ngx-datatable-column>
+ <ngx-datatable-column name="Image">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+         <img [src]="row.image"  height="40" width="40" style="border-radius:50%;">
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Heading1">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.heading1}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Heading2">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.heading2}}
+      </ng-template>
+    </ngx-datatable-column>
+     <ngx-datatable-column name="Heading3">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.heading3}}
+      </ng-template>
+    </ngx-datatable-column>
+ <!--    <ngx-datatable-column name="Status" prop="status">
+      <ng-template let-value="value" let-row="row" >
+      <span *ngIf="row.status == 0"  style="color: green;" >Active</span>
+     <span  *ngIf="row.status== 1"  style="color: red;">Deactive </span>
+        </ng-template>
+      </ngx-datatable-column> -->
+
+    <ngx-datatable-column name="Modified Date">
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        {{row.modifieddate| date: 'medium'}}
+      </ng-template>
+    </ngx-datatable-column>
+    
+  <ngx-datatable-column name="Action" [resizeable]="false" prop="_id" [width]="150">
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      <button class="btn btn-link mr-1 mb-1 cursorcls"  
+             (click)="changehost(statusmodel, row)"
+                 style="color:#b4b4b4;" >
+               <i  *ngIf="row.status == 0"  style="color: #1FA86D" class="ace-icon fa fa-unlock bigger-130" aria-hidden="true" ngbTooltip="Move to Deactive"></i>
+              <i  *ngIf="row.status == 1" style="color: #E51F1F" class="ace-icon fa fa-lock bigger-130" aria-hidden="true" ngbTooltip="Move to Active"></i>
+            </button>
+  <button class="btn btn-link mr-1 mb-1 cursorcls" (click)="openeditmodel(edittoken, row)" style="outline:none;" ngbTooltip="Edit">
+   <i class="fa fa-edit"></i> </button>
+   <button class="btn btn-link mr-1 mb-1 cursorcls" (click)="openviewmodel(viewtokencontent, row)" style="outline:none;" ngbTooltip="Edit">
+   <i class="fa fa-eye"></i> </button>
+   </ng-template>
+ </ngx-datatable-column>
+   
+    </ngx-datatable>
+  </div>
+</div>
+</div>
+
+<ng-template #viewtokencontent let-c="close" let-d="dismiss">
+  <div class="modal-header">
+   <h6 class="modal-title text-uppercase" style="color:#eb7d34;"><b>View Banners</b></h6>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')" ngbTooltip="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="common-border"><form  autocomplete="off" (ngSubmit)="editflag(countryflag)" #countryflag="ngForm">
+
+    <div class="form-group row">
+      <label for="example-text-input" class="col-4 col-form-label">Heading 1 </label>
+      <div class="col-6">
+        <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.heading1"  #heading1="ngModel" name="heading1"  disabled readonly/>
+         
+        </div>
+    </div>
+    <div class="form-group row">
+      <label for="example-text-input" class="col-4 col-form-label">Heading 2</label>
+      <div class="col-6">
+        <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.heading2" #heading2="ngModel" name="heading2" pattern="[a-zA-Z ]+" disabled readonly />
+      </div>
+    </div>
+     <div class="form-group row">
+      <label for="example-text-input" class="col-4 col-form-label">Heading 3</label>
+      <div class="col-6">
+        <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.heading3" #heading3="ngModel" name="heading3" pattern="[a-zA-Z ]+" disabled readonly />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="example-text-input" class="col-4 col-form-label">Heading 3</label>
+      <div class="col-6">
+        <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.button_txt" #button_txt="ngModel" name="button_txt" pattern="[a-zA-Z ]+" disabled readonly />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="example-text-input" class="col-4 col-form-label">Status</label>
+      <div class="col-6">
+        <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.status" #status="ngModel" name="status"  disabled readonly />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="example-text-input" class="col-4 col-form-label">Modified Date</label>
+      <div class="col-6">
+        <input type="text" style="cursor: not-allowed;"  class="form-control"  [(ngModel)] ="edithostlist.modifieddate" #modifieddate="ngModel" name="modifieddate"  disabled readonly />
+      </div>
+    </div>
+     <div class="form-group row">
+      <label for="example-text-input" class="col-4 col-form-label">Image</label>
+      <div class="col-6">
+        <img [src]="edithostlist.image"  height="70" width="200">
+      </div>
+    </div>  
+  </form></div>
+  </div>
+
+</ng-template>
+
+ <ng-template #addcherrycontent let-c="close" let-d="dismiss" class="col-md-12">
+      <div class="modal-header">
+        <h6 class="modal-title text-uppercase" style="color:#eb7d34;"><b>Add Banner</b></h6>
+        <button type="button" *ngIf="dataLoader" (click)="restrictclose()" class="close" aria-label="Close" ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+         <button type="button" *ngIf="!dataLoader" (click)="d('Cross click')" class="close" aria-label="Close" ngbTooltip="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"  [ngClass]="{'loaders': dataLoader == true }">
+        <div class="common-border">
+          <form  autocomplete="off" (ngSubmit)="upload(countryflag,'insert')" #countryflag="ngForm">
+            <div class="form-group row">
+              <label for="example-text-input" class="col-6 col-form-label">Heading 1</label>
+              <div class="col-6">
+                <input type="text" class="form-control"  [(ngModel)] ="addhostlist.heading1" #heading1="ngModel" name="heading1" required />
+                 <div *ngIf="(heading1.invalid && addhostlist.submitted) || heading1.touched" class="txt-color">
+                  <span *ngIf="heading1.errors?.required">Heading1  is required</span> 
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-text-input" class="col-6 col-form-label">Heading2</label>
+              <div class="col-6">
+                <input type="text" class="form-control"  [(ngModel)] ="addhostlist.heading2" #heading2="ngModel" name="heading2" required />
+                 <div *ngIf="(heading2.invalid && countryflag.submitted) || heading2.touched" class="txt-color">
+                  <span *ngIf="heading2.errors?.required">Heading2 is required</span> 
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-text-input" class="col-6 col-form-label">Heading3</label>
+              <div class="col-6">
+                <input type="text" class="form-control"  [(ngModel)] ="addhostlist.heading3" #heading3="ngModel" name="heading3" required />
+                 <div *ngIf="(heading3.invalid && countryflag.submitted) || heading3.touched" class="txt-color">
+                  <span *ngIf="heading3.errors?.required">Heading3 is required</span> 
+                  </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="example-text-input" class="col-6 col-form-label">Button Text</label>
+              <div class="col-6">
+                <input type="text" class="form-control"  [(ngModel)] ="addhostlist.button_txt" #button_txt="ngModel" name="button_txt" required />
+                 <div *ngIf="(button_txt.invalid && countryflag.submitted) || button_txt.touched" class="txt-color">
+                  <span *ngIf="button_txt.errors?.required">Button Text is required</span> 
+                  </div>
+              </div>
+            </div>
+              <div class="form-group row">
+                <label for="example-text-input" class="col-6 col-form-label">Status </label>
+                <div class="col-6">
+                  <select class="form-control" name="status"  [(ngModel)] = "addhostlist.status" style=" font-size: 15px;color: #000;height: 39px !important;">
+                    <option class="dropdown-item" disabled selected value="undefined">Select an Option</option>
+                    <option value='0'>Active</option>
+                    <option value='1'>Deactive</option>
+                 </select>
+               </div>
+             </div>
+            <!--    <div class="form-group row">
+                <label for="example-text-input" class="col-6 col-form-label">Status </label>
+                <div class="col-6">
+                  <select class="form-control" name="status"  [(ngModel)] = "addhostlist.status" >
+                    <option class="dropdown-item" disabled selected value="undefined">Select an Option</option>
+                    <option value='0'>Active</option>
+                    <option value='1'>Deactive</option>
+                 </select>
+               </div>
+             </div> -->
+              <div class="form-group row" >
+              <label class="col-6 col-form-label" for="file-input">Image</label>
+              <div class="col-6" >
+                <input #fileinput id="file-input" name="file-input" type="file" 
+                (change)="fileChangeEvent($event)" placeholder="Upload a file..." single accept="image/gif,image/jpeg,image/jpg,image/png,"/>
+                </div>
+              <div *ngIf="addhostlist.currency_image">
+                <img src="{{addhostlist.currency_image}}" height="100px" width="100px" disabled/>
+              </div>
+              </div>
+            <div class="modal-footer">
+              <div> 
+                <button type="submit"  style="cursor: pointer; background-color:#349eeb;" [disabled] ="!countryflag.valid" class="btn btn-info cursorcls" >Submit</button>
+                <button type="button"  style="cursor: pointer;background-color:#eb3d34" class="btn btn-secondary cursorcls" (click)="c('Close click')" >Close</button>
+              </div> 
+            </div>
+          </form>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #edittoken let-c="close" let-d="dismiss">
+<div class="modal-header">
+ <h6 class="modal-title text-uppercase" style="color:#eb7d34;"><b>Edit Banner</b></h6>
+  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')" ngbTooltip="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <div class="common-border"><form  autocomplete="off" (ngSubmit)="upload(edit_tokenform,'edit')" #edit_tokenform="ngForm">
+
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Heading 1</label>
+    <div class="col-6">
+      <input type="text" class="form-control" [(ngModel)] ="edittoken_list.heading1" #heading1="ngModel" name="heading1" required />
+       <div *ngIf="(heading1.invalid && edit_tokenform.submitted) || heading1.touched" class="txt-color">
+                  <span *ngIf="heading1.errors?.required">Heading1 is required</span> 
+        </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">Heading 2</label>
+    <div class="col-6">
+      <input type="text" class="form-control"  [(ngModel)] ="edittoken_list.heading2" #heading2="ngModel"
+      name="heading2" required/>
+      <div *ngIf="(heading2.invalid && edit_tokenform.submitted) || heading2.touched" class="txt-color">
+                  <span *ngIf="heading2.errors?.required">Heading2 is required</span> 
+      </div>    
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">
+    Heading 3 </label>
+    <div class="col-6">
+      <input type="text"  class="form-control"  [(ngModel)] ="edittoken_list.heading3" #heading3="ngModel" name="heading3" required onkeydown="javascript: return event.keyCode == 69 ? false : true" (keypress)="descimalkey($event)" />
+      <div *ngIf="(heading3.invalid && edit_tokenform.submitted) || heading3.touched" class="txt-color">
+                  <span *ngIf="heading3.errors?.required">Heading3 is required</span> 
+      </div> 
+    </div>
+  </div>
+   <div class="form-group row">
+    <label for="example-text-input" class="col-4 col-form-label">
+    Button Text </label>
+    <div class="col-6">
+      <input type="text" class="form-control"  [(ngModel)] ="edittoken_list.button_txt" #button_txt="ngModel" name="button_txt" required/>
+       <div *ngIf="(button_txt.invalid && edit_tokenform.submitted) || button_txt.touched" class="txt-color">
+                  <span *ngIf="button_txt.errors?.required">Button Text is required</span> 
+      </div> 
+    </div>
+  </div>
+  <div class="form-group row" >
+              <label class="col-4 col-form-label" for="file-input">Image</label>
+              <div class="col-6" >
+                 <img  src="{{edittoken_list.image}}" style="height: 60px;width: 60px;" />
+                <input #fileinput id="file-input" name="file-input" type="file" 
+                (change)="fileChangeEvent($event)" placeholder="Upload a file..." single accept="image/gif,image/jpeg,image/jpg,image/png,"/>
+                </div>
+
+              </div>
+   <div class="modal-footer">
+              <div> 
+                <button type="submit"  style="cursor: pointer; background-color:#349eeb;" [disabled] ="!edit_tokenform.valid" class="btn btn-info cursorcls" >Submit</button>
+                <button type="button"  style="cursor: pointer;background-color:#eb3d34" class="btn btn-secondary cursorcls" (click)="c('Close click')" >Close</button>
+              </div> 
+              
+            </div>
+</form></div>
+</div>
+
+</ng-template>
+
+<ng-template #statusmodel let-c="close" let-d="dismiss">
+    <div class="modal-body" id="actiondialog">
+      <h6>Do you want to change the status of Banner?</h6>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success cursorcls"
+      (click)="changebannerStatus(bannersvalue);c('Close click')">Yes</button>
+      <button type="button" class="btn cursorcls"
+      (click)="c('Close click')">No</button>
+    </div>
+</ng-template>

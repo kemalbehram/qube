@@ -1,0 +1,88 @@
+.footer-bg{
+    background: #142821;
+    a{
+        display: block;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 13px;
+        line-height: 16px;
+        letter-spacing: 0.015em;
+        text-transform: uppercase;
+        color: #53776B;
+        margin-bottom: 1rem;;
+    }
+    a:hover{
+        text-decoration: none;
+        color: #fff;
+        transition: all .5s;
+    }
+    h5{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 17px;
+        line-height: 21px;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+        color: #39CE9A;
+        margin-bottom: 1rem;;
+    }
+    .copy-div{
+        p{
+            font-style: normal;
+            font-weight: normal;
+            font-size: 11px;
+            line-height: 16px;
+            letter-spacing: 0.01em;
+            color: #78A998;
+        }
+        a{
+            font-style: normal;
+            font-weight: normal;
+            font-size: 11px;
+            line-height: 13px;
+            letter-spacing: 0.035em;
+            text-transform: uppercase;
+            color: #53776B;
+        }
+        a:hover{
+            text-decoration: none;
+            color: #fff;
+            transition: all .5s;
+        }
+    }
+    .soc-icons-div{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        margin: 2rem 0;
+        a{
+            margin-right: 20px;
+            margin-bottom: 0;;
+        }        
+    }
+    .subscribe-btn{
+        border: 2px solid rgba(37, 159, 118, 0.3);
+        border-radius: 37.5px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #39CE9A;
+        height: 40px;
+        background: transparent;       
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @media(max-width:575px){
+            height: 50px;
+            white-space: normal;
+        }
+    }
+    .subscribe-btn:hover{
+        background: rgba(37, 159, 118, 0.3);
+        color: #fff;
+        transition: all .5s;
+    }
+}
